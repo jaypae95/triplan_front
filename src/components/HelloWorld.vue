@@ -80,15 +80,39 @@
         </a>
       </li>
     </ul>
+    <button @click="onClickSendData">
+      Send Data
+    </button>
+      <router-link :to="{ path: routerTestURL }">
+        이동
+      </router-link>
   </div>
 </template>
 
 <script>
+import httpRequest from './httpRequest'
+
 export default {
   name: 'HelloWorld',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
+    }
+  },
+  methods: {
+    async onClickSendData () {
+      const data = {
+        email: 'test@test.test',
+        gender: 'male'
+      }
+      let res = await httpRequest.httpTest(this.$http, this.$env.apiUrl, data).catch((e) => { console.log(e) })
+      console.log(res.data['email'])
+      console.log(res.data['gender'])
+    }
+  },
+  computed: {
+    routerTestURL () {
+      return '/routertest'
     }
   }
 }
