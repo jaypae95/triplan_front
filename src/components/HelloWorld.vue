@@ -1,102 +1,65 @@
+<!--<script type="text/x-template" id="modal-template">-->
+<!--<transition name="modal">-->
+<!--  <div class="modal-mask">-->
+<!--    <div class="modal-wrapper">-->
+<!--      <div class="modal-containter">-->
+<!--        <div class ="modal-body">-->
+<!--          <slot name="id">-->
+<!--              id-->
+<!--          </slot>-->
+<!--          <slot name="password">-->
+<!--              password-->
+<!--          </slot>-->
+<!--          <button class="modal-default-button">-->
+<!--            ok-->
+<!--          </button>-->
+<!--        </div>-->
+<!--        <div class="modal-footer">-->
+<!--          <slot name="footer">-->
+<!--              find id/password-->
+<!--          </slot>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</transition>-->
+<!--</script>-->
+
 <template>
   <div class="hello">
+    <div id="lo1">
+      <button id="login" @click="showmodal=true">
+        <img id="loli" src="../assets/login.png">
+      </button>
+      <modal v-if="showmodal" @close="showmodal= false">
+        <h3 slot="header">login</h3>
+      </modal>
+    </div>
     <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li>
-        <a
-          href="https://vuejs.org"
-          target="_blank"
-        >
-          Core Docs
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://forum.vuejs.org"
-          target="_blank"
-        >
-          Forum
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://chat.vuejs.org"
-          target="_blank"
-        >
-          Community Chat
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://twitter.com/vuejs"
-          target="_blank"
-        >
-          Twitter
-        </a>
-      </li>
-      <br>
-      <li>
-        <a
-          href="http://vuejs-templates.github.io/webpack/"
-          target="_blank"
-        >
-          Docs for This Template
-        </a>
-      </li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li>
-        <a
-          href="http://router.vuejs.org/"
-          target="_blank"
-        >
-          vue-router
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vuex.vuejs.org/"
-          target="_blank"
-        >
-          vuex
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vue-loader.vuejs.org/"
-          target="_blank"
-        >
-          vue-loader
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-        >
-          awesome-vue
-        </a>
-      </li>
-    </ul>
-    <button @click="onClickSendData">
-      Send Data
-    </button>
-      <router-link :to="{ path: routerTestURL }">
-        이동
-      </router-link>
+    <li>
+      <button id="menu1" v-on:click="btn(e)">
+        <img id="illu1" src="../assets/menu1.png">
+      </button>
+      <button id="menu2">
+        <img id="illu2" src="../assets/menu2.png">
+      </button>
+      <button id="menu3">
+        <img id="illu3" src="../assets/menu3.png">
+      </button>
+    </li>
   </div>
 </template>
 
 <script>
 import httpRequest from './httpRequest'
+// import Vue from 'vue'
 
 export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Triplan!'
+      // showmodal:false
     }
   },
   methods: {
@@ -116,22 +79,117 @@ export default {
     }
   }
 }
+
+// Vue.component('modal',{
+//   tempate:'#modal-template'
+// })
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+  h1, h2 {
+    font-weight: normal;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  li {
+    display: inline-block;
+    margin: 0px 10px;
+  }
+  a {
+    color: #42b983;
+  }
+  #menu1, #menu2, #menu3{
+    width: 200px;
+    height: 200px;
+    border: 0;
+    margin: 3rem 5rem;
+    background-color: #ffffff;
+  }
+  #illu1, #illu2, #illu3{
+    width: 200px;
+    height:200px;
+  }
+  #lo1{
+    text-align: right;
+  }
+  #login{
+    width: 90px;
+    height: 33px;
+    border:0;
+    background-color: #ffffff;
+
+  }
+  #loli{
+    width: 80px;
+    height: 33px;
+    text-align: right;
+  }
+  /*.modal-mask {*/
+  /*  position: fixed;*/
+  /*  z-index: 9998;*/
+  /*  top: 0;*/
+  /*  left: 0;*/
+  /*  width: 100%;*/
+  /*  height: 100%;*/
+  /*  background-color: rgba(0, 0, 0, .5);*/
+  /*  display: table;*/
+  /*  transition: opacity .3s ease;*/
+  /*}*/
+
+  /*.modal-wrapper {*/
+  /*  display: table-cell;*/
+  /*  vertical-align: middle;*/
+  /*}*/
+
+  /*.modal-container {*/
+  /*  width: 300px;*/
+  /*  margin: 0px auto;*/
+  /*  padding: 20px 30px;*/
+  /*  background-color: #fff;*/
+  /*  border-radius: 2px;*/
+  /*  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);*/
+  /*  transition: all .3s ease;*/
+  /*  font-family: Helvetica, Arial, sans-serif;*/
+  /*}*/
+
+  /*.modal-header h3 {*/
+  /*  margin-top: 0;*/
+  /*  color: #42b983;*/
+  /*}*/
+
+  /*.modal-body {*/
+  /*  margin: 20px 0;*/
+  /*}*/
+
+  /*.modal-default-button {*/
+  /*  float: right;*/
+  /*}*/
+
+  /*!**/
+  /* * The following styles are auto-applied to elements with*/
+  /* * transition="modal" when their visibility is toggled*/
+  /* * by Vue.js.*/
+  /* **/
+  /* * You can easily play with the modal transition by editing*/
+  /* * these styles.*/
+  /* *!*/
+
+  /*.modal-enter {*/
+  /*  opacity: 0;*/
+  /*}*/
+
+  /*.modal-leave-active {*/
+  /*  opacity: 0;*/
+  /*}*/
+
+  /*.modal-enter .modal-container,*/
+  /*.modal-leave-active .modal-container {*/
+  /*  -webkit-transform: scale(1.1);*/
+  /*  transform: scale(1.1);*/
+  /*}*/
+
 </style>
