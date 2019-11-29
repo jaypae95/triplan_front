@@ -2,9 +2,9 @@
   <div class="MaingPage">
     <div id="lo1">
         <li>
-      <button id="login" @click="showmodal=true">
+      <router-link to='/LogIn'>
         <img id="loli" src="../assets/login.png">
-      </button>
+      </router-link>
        <button id="login" @click="showmodal=true">
         <img id="loli" src="../assets/add.png">
       </button>
@@ -22,13 +22,11 @@
       </button>
     </li>
   </div>
-</template>*/
+</template>
 
 <script>
 export default {
   name: 'MainPage',
-  data () {
-  },
   methods: {
   },
   computed: {
