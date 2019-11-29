@@ -27,6 +27,26 @@ export default new Router({
       path: '/MyPage',
       name: 'MyPage',
       component: () => import('../views/MyPage.vue')
+    },
+    {
+      path: '/Attraction',
+      name: 'Attraction',
+      component: () => import('../views/AttractionList.vue')
+    },
+    {
+      path: '/MakePlan',
+      name: 'MakePlan',
+      component: () => import('../views/MakePlan.vue')
+    },
+    {
+      path: '/SharePlan',
+      name: 'SharePlan',
+      component: () => import('../views/SharePlan.vue')
+    },
+    {
+      path: '/SignUp',
+      name: 'SignUp',
+      component: () => import('../views/SignUp.vue')
     }
   ]
 })

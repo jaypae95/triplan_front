@@ -5,21 +5,21 @@
       <router-link to='/LogIn'>
         <img id="loli" src="../assets/login.png">
       </router-link>
-       <button id="login" @click="showmodal=true">
+       <router-link to='/SignUp'>
         <img id="loli" src="../assets/add.png">
-      </button>
+       </router-link>
         </li>
     </div>
     <li>
-      <button id="menu1">
+      <router-link to="/Attraction" id="menu1">
         <img id="illu1" src="../assets/menu1.png">
-      </button>
-      <button id="menu2">
+      </router-link>
+      <router-link to="/MakePlan" id="menu2">
         <img id="illu2" src="../assets/menu2.png">
-      </button>
-      <button id="menu3">
+      </router-link>
+      <router-link to="/SharePlan" id="menu3">
         <img id="illu3" src="../assets/menu3.png">
-      </button>
+      </router-link>
     </li>
     <br>
     <router-link to="/MyPage">Go To MyPage</router-link><br>
