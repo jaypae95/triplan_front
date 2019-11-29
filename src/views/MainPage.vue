@@ -21,6 +21,8 @@
         <img id="illu3" src="../assets/menu3.png">
       </button>
     </li>
+    <br>
+    <router-link to="/MyPage">Go To MyPage</router-link><br>
   </div>
 </template>
 

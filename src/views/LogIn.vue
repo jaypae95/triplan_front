@@ -1,6 +1,6 @@
 <template>
 <div id="LogIn">
-    <p>login!</p>
-    <router-link to='/'>in</router-link>
+    <p>This is LogIn Page</p>
+    <router-link to='/'>Go To Main</router-link>
 </div>
 </template>
