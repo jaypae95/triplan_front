@@ -1,9 +1,14 @@
 <template>
   <div class="MaingPage">
     <div id="lo1">
+        <li>
       <button id="login" @click="showmodal=true">
         <img id="loli" src="../assets/login.png">
       </button>
+       <button id="login" @click="showmodal=true">
+        <img id="loli" src="../assets/add.png">
+      </button>
+        </li>
     </div>
     <li>
       <button id="menu1">
