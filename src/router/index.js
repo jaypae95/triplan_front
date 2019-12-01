@@ -47,6 +47,11 @@ export default new Router({
       path: '/SignUp',
       name: 'SignUp',
       component: () => import('../views/SignUp.vue')
+    },
+    {
+      path: '/ConfirmPlan',
+      name: 'ConfirmPlan',
+      component: () => import('../views//ConfirmPlan.vue')
     }
   ]
 })

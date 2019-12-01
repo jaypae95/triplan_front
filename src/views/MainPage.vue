@@ -1,5 +1,5 @@
 <template>
-  <div class="MaingPage">
+  <div class="MainPage">
     <div id="lo1">
         <li>
       <router-link to='/LogIn'>
@@ -22,7 +22,10 @@
       </router-link>
     </li>
     <br>
-    <router-link to="/MyPage">Go To MyPage</router-link><br>
+    <br>
+    <router-link to="/MyPage">Go To MyPage</router-link><br><br>
+    <router-link to="/ConfirmPlan">Go To ConfirmPlan Page</router-link><br>
+
   </div>
 </template>
 
