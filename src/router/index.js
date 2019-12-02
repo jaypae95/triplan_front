@@ -29,8 +29,8 @@ export default new Router({
       component: () => import('../views/MyPage.vue')
     },
     {
-      path: '/Attraction',
-      name: 'Attraction',
+      path: '/AttractionList',
+      name: 'AttractionList',
       component: () => import('../views/AttractionList.vue')
     },
     {

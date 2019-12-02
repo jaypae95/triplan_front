@@ -11,7 +11,7 @@
         </li>
     </div>
     <li>
-      <router-link to="/Attraction" id="menu1">
+      <router-link to="/AttractionList" id="menu1">
         <img id="illu1" src="../assets/menu1.png">
       </router-link>
       <router-link to="/MakePlan" id="menu2">
