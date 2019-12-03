@@ -25,6 +25,7 @@
     <br>
     <router-link to="/MyPage">Go To MyPage</router-link><br><br>
     <router-link to="/ConfirmPlan">Go To ConfirmPlan Page</router-link><br>
+    <router-link to="/modaltest">Modal Test</router-link><br>
 
   </div>
 </template>

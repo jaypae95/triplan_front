@@ -52,6 +52,11 @@ export default new Router({
       path: '/ConfirmPlan',
       name: 'ConfirmPlan',
       component: () => import('../views//ConfirmPlan.vue')
+    },
+    {
+      path: '/modaltest',
+      name: 'modaltest',
+      component: () => import('../views//modaltest.vue')
     }
   ]
 })

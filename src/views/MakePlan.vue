@@ -1,6 +1,5 @@
 <template>
   <div class="App"/>
-<!--  <div id="makeplan"></div>-->
 </template>
 
 <script>
@@ -31,7 +30,7 @@ export default {
         map.fitBounds(results[0].geometry.viewport)
       })
       const markerClickHandler = (marker) => {
-        map.setZoom(13)
+        map.setZoom(24)
         map.setCenter(marker.getPosition())
       }
       const markers = locations

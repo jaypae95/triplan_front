@@ -11,7 +11,7 @@
     </router-link>
 </div>
 </template>
-  
+
 <style>
 #illu, #illu1, #bu1{
     width: 80px;
