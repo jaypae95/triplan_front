@@ -14,32 +14,46 @@
       <router-link to="/AttractionList" id="menu1">
         <img id="illu1" src="../assets/menu1.png">
       </router-link>
-      <router-link to="/MakePlan" id="menu2">
-        <img id="illu2" src="../assets/menu2.png">
-      </router-link>
+
+        <img id="illu2" src="../assets/menu2.png" @click="showModal = true">
+        <modal v-if="showModal" @close="showModal = false">
+          <h3 slot="header">Select your trip date</h3>
+        </modal>
+
       <router-link to="/SharePlan" id="menu3">
         <img id="illu3" src="../assets/menu3.png">
       </router-link>
     </li>
     <br>
     <br>
+
     <router-link to="/MyPage">Go To MyPage</router-link><br><br>
     <router-link to="/ConfirmPlan">Go To ConfirmPlan Page</router-link><br>
-    <router-link to="/modaltest">Modal Test</router-link><br>
 
   </div>
 </template>
 
 <script>
+import Modal from '../components/MyModal.vue'
+
 export default {
   name: 'MainPage',
+  data () {
+    return {
+      showModal: false
+    }
+  },
   methods: {
   },
   computed: {
+  },
+  components: {
+    Modal: Modal
   }
 }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style scoped>
   h1, h2 {
     font-weight: normal;
