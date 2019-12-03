@@ -29,8 +29,8 @@ export default new Router({
       component: () => import('../views/MyPage.vue')
     },
     {
-      path: '/Attraction',
-      name: 'Attraction',
+      path: '/AttractionList',
+      name: 'AttractionList',
       component: () => import('../views/AttractionList.vue')
     },
     {
@@ -47,6 +47,11 @@ export default new Router({
       path: '/SignUp',
       name: 'SignUp',
       component: () => import('../views/SignUp.vue')
+    },
+    {
+      path: '/ConfirmPlan',
+      name: 'ConfirmPlan',
+      component: () => import('../views//ConfirmPlan.vue')
     }
   ]
 })

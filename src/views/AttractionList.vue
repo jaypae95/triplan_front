@@ -1,6 +1,6 @@
 <template>
 <div>
-    <p>Attraction</p>
+    <p>Attraction List Page</p>
      <router-link to="/">Go To Main</router-link><br>
 </div>
 </template>

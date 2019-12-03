@@ -1,5 +1,5 @@
 <template>
-  <div class="MaingPage">
+  <div class="MainPage">
     <div id="lo1">
         <li>
       <router-link to='/LogIn'>
@@ -11,7 +11,7 @@
         </li>
     </div>
     <li>
-      <router-link to="/Attraction" id="menu1">
+      <router-link to="/AttractionList" id="menu1">
         <img id="illu1" src="../assets/menu1.png">
       </router-link>
       <router-link to="/MakePlan" id="menu2">
@@ -22,7 +22,10 @@
       </router-link>
     </li>
     <br>
-    <router-link to="/MyPage">Go To MyPage</router-link><br>
+    <br>
+    <router-link to="/MyPage">Go To MyPage</router-link><br><br>
+    <router-link to="/ConfirmPlan">Go To ConfirmPlan Page</router-link><br>
+
   </div>
 </template>
 
