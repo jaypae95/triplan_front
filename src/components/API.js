@@ -6,7 +6,16 @@ function httpTest ($http, host, data) {
   })
 }
 
+function loginAPI ($http, host, data) {
+  return $http({
+    method: 'post',
+    url: host + '/users/login',
+    data
+  })
+}
+
 // noinspection JSUnusedGlobalSymbols
 export default {
-  httpTest
+  httpTest,
+  loginAPI
 }
