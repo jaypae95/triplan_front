@@ -2,6 +2,13 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import RouterTest from '@/components/RouterTest'
 import MainPage from '@/views/MainPage'
+import Login from '@/views/LogIn'
+import MyPage from '@/views/MyPage'
+import AttractionList from '../views/AttractionList'
+import MakePlan from '@/views/MakePlan'
+import SharePlan from '@/views/SharePlan'
+import SignUp from '@/views/SignUp'
+import ConfirmPlan from '@/views//ConfirmPlan'
 
 Vue.use(Router)
 
@@ -19,44 +26,39 @@ export default new Router({
       props: true
     },
     {
-      path: '/LogIn',
+      path: '/login',
       name: 'LogIn',
-      component: () => import('../views/LogIn.vue')
+      component: Login
     },
     {
-      path: '/MyPage',
+      path: '/mypage',
       name: 'MyPage',
-      component: () => import('../views/MyPage.vue')
+      component: MyPage
     },
     {
-      path: '/AttractionList',
+      path: '/attractionlist',
       name: 'AttractionList',
-      component: () => import('../views/AttractionList.vue')
+      component: AttractionList
     },
     {
-      path: '/MakePlan',
+      path: '/makeplan',
       name: 'MakePlan',
-      component: () => import('../views/MakePlan.vue')
+      component: MakePlan
     },
     {
-      path: '/SharePlan',
+      path: '/shareplan',
       name: 'SharePlan',
-      component: () => import('../views/SharePlan.vue')
+      component: SharePlan
     },
     {
-      path: '/SignUp',
+      path: '/signup',
       name: 'SignUp',
-      component: () => import('../views/SignUp.vue')
+      component: SignUp
     },
     {
-      path: '/ConfirmPlan',
+      path: '/confirmplan',
       name: 'ConfirmPlan',
-      component: () => import('../views//ConfirmPlan.vue')
+      component: ConfirmPlan
     }
-    // {
-    //   path: '/modaltest',
-    //   name: 'modaltest',
-    //   component: () => import('../views//modaltest.vue')
-    // }
   ]
 })
