@@ -3,16 +3,16 @@
     <div id="lo1">
       <li>
         <span v-if="isLoggedIn"> | <a @click="logout">Logout</a></span>
-        <router-link to='/LogIn'>
+        <router-link to='/logIn'>
           <img class="loli" src="../assets/login.png">
         </router-link>
-        <router-link to='/SignUp'>
+        <router-link to='/signup'>
           <img class="loli" src="../assets/add.png">
         </router-link>
       </li>
     </div>
-    <li>
-      <router-link to="/AttractionList" id="menu1">
+    <li>s
+      <router-link to="/attractionlist" id="menu1">
         <img id="illu1" src="../assets/menu1.png">
       </router-link>
 
@@ -28,9 +28,9 @@
     <br>
     <br>
 
-    <router-link to="/MyPage">Go To MyPage</router-link>
+    <router-link to="/mypage">Go To MyPage</router-link>
     <br><br>
-    <router-link to="/ConfirmPlan">Go To ConfirmPlan Page</router-link>
+    <router-link to="/confirmplan">Go To ConfirmPlan Page</router-link>
     <br>
 
   </div>

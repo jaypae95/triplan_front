@@ -27,7 +27,7 @@
           <input type="text" placeholder="MM"><br>
           <input type="text" placeholder="DD"><br><br>
 
-          <router-link to="/MakePlan" tag="button" class="modal-default-button">Make Plan!</router-link>
+          <router-link to="/makeplan" tag="button" class="modal-default-button">Make Plan!</router-link>
           <button class="modal-default-button" @click="$emit('close')">
             Close
           </button>
