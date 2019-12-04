@@ -31,7 +31,6 @@ export default new Vuex.Store({
   },
   actions: {
     login ({commit}, user) {
-      console.log(env.apiUrl)
       return new Promise((resolve, reject) => {
         commit('auth_request')
         API.loginAPI(axios, env.apiUrl, user)
