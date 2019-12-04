@@ -13,6 +13,8 @@
   </div>
 </template>
 <script>
+import API from '../components/API'
+
 export default {
   data () {
     return {
@@ -26,13 +28,18 @@ export default {
         user_id: this.user_id,
         user_password: this.user_password
       }
-      this.$store.dispatch('login', data)
+      API.loginAPI(this.$http, this.$env.apiUrl, data)
         .then(res => {
-          localStorage.setItem('user', JSON.stringify(res.data.user))
-          localStorage.setItem('token', res.data.token)
+          const token = res.data.token
+          const user = res.data.user
+          this.$http.defaults.headers.common['Authorization'] = token
+          this.$store.commit('saveUser', user)
+          this.$store.commit('saveToken', token)
           this.$router.push('/')
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+          console.log(err)
+        })
     }
   }
 }

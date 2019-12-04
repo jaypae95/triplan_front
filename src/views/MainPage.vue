@@ -2,8 +2,8 @@
   <div class="MainPage">
     <div id="lo1">
       <li>
-        <span v-if="isLoggedIn"> | <a @click="logout">Logout</a></span>
-        <router-link to='/logIn'>
+        <span v-if="isLoggedIn"><a @click="logout">Logout</a></span>
+        <router-link to='/login'>
           <img class="loli" src="../assets/login.png">
         </router-link>
         <router-link to='/signup'>
@@ -11,7 +11,7 @@
         </router-link>
       </li>
     </div>
-    <li>s
+    <li>
       <router-link to="/attractionlist" id="menu1">
         <img id="illu1" src="../assets/menu1.png">
       </router-link>
@@ -48,13 +48,16 @@ export default {
   },
   methods: {
     logout: function () {
-      this.$store.dispatch('logout')
-        .then(() => this.$router.push('/login'))
+      this.$store.commit('removeUser')
     }
   },
   computed: {
     isLoggedIn: function () {
-      return this.$store.getters.isLoggedIn
+      console.log(this.$store.state.user)
+      console.log(this.$store.state.token)
+      if (this.$store.state.user === undefined) {
+        return false
+      } else { return true }
     }
   },
   components: {
