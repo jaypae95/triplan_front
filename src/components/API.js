@@ -14,8 +14,17 @@ function loginAPI ($http, host, data) {
   })
 }
 
+function registerAPI ($http, host, data) {
+  return $http({
+    method: 'post',
+    url: host + '/users/signup',
+    data
+  })
+}
+
 // noinspection JSUnusedGlobalSymbols
 export default {
   httpTest,
-  loginAPI
+  loginAPI,
+  registerAPI
 }
