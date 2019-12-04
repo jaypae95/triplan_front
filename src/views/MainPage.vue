@@ -53,8 +53,6 @@ export default {
   },
   computed: {
     isLoggedIn: function () {
-      console.log(this.$store.state.user)
-      console.log(this.$store.state.token)
       if (this.$store.state.user === undefined) {
         return false
       } else { return true }
