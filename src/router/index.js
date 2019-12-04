@@ -12,7 +12,7 @@ import ConfirmPlan from '@/views//ConfirmPlan'
 
 Vue.use(Router)
 
-export default new Router({
+let router = new Router({
   mode: 'history',
   routes: [
     {
@@ -33,7 +33,10 @@ export default new Router({
     {
       path: '/mypage',
       name: 'MyPage',
-      component: MyPage
+      component: MyPage,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/attractionlist',
@@ -43,12 +46,18 @@ export default new Router({
     {
       path: '/makeplan',
       name: 'MakePlan',
-      component: MakePlan
+      component: MakePlan,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/shareplan',
       name: 'SharePlan',
-      component: SharePlan
+      component: SharePlan,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/signup',
@@ -58,7 +67,28 @@ export default new Router({
     {
       path: '/confirmplan',
       name: 'ConfirmPlan',
-      component: ConfirmPlan
+      component: ConfirmPlan,
+      meta: {
+        requiresAuth: true
+      }
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    console.log(localStorage.getItem('token'))
+    if (localStorage.getItem('token') == null) {
+      next({
+        path: '/login',
+        params: {nextUrl: to.fullPath}
+      })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
+})
+
+export default router

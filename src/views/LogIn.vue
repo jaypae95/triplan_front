@@ -27,7 +27,11 @@ export default {
         user_password: this.user_password
       }
       this.$store.dispatch('login', data)
-        .then(() => this.$router.push('/'))
+        .then(res => {
+          localStorage.setItem('user', JSON.stringify(res.data.user))
+          localStorage.setItem('token', res.data.token)
+          this.$router.push('/')
+        })
         .catch(err => console.log(err))
     }
   }
