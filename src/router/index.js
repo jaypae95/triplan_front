@@ -8,7 +8,8 @@ import AttractionList from '../views/AttractionList'
 import MakePlan from '@/views/MakePlan'
 import SharePlan from '@/views/SharePlan'
 import SignUp from '@/views/SignUp'
-import ConfirmPlan from '@/views//ConfirmPlan'
+import ConfirmPlan from '@/views/ConfirmPlan'
+import store from '@/store/index'
 
 Vue.use(Router)
 
@@ -77,7 +78,7 @@ let router = new Router({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (localStorage.getItem('token') == null) {
+    if (store.state.token === undefined) {
       next({
         path: '/login',
         params: {nextUrl: to.fullPath}

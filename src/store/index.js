@@ -1,85 +1,29 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
-import API from '../components/API'
-import env from '../../static/settings-local'
+import createPersist from 'vuex-localstorage'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    status: '',
-    token: localStorage.getItem('token') || '',
-    user: {}
+    token: undefined,
+    user: undefined
   },
   mutations: {
-    auth_request (state) {
-      state.status = 'loading'
-    },
-    auth_success (state, token, user) {
-      state.status = 'success'
-      state.token = token
+    saveUser (state, user) {
       state.user = user
     },
-    auth_error (state) {
-      state.status = 'error'
+    saveToken (state, token) {
+      state.token = token
     },
-    logout (state) {
-      state.status = ''
-      state.token = ''
+    removeUser (state) {
+      state.user = undefined
+      state.token = undefined
     }
   },
-  actions: {
-    login ({commit}, user) {
-      return new Promise((resolve, reject) => {
-        commit('auth_request')
-        API.loginAPI(axios, env.apiUrl, user)
-          .then(resp => {
-            const token = resp.data.token
-            const user = resp.data.user
-            localStorage.setItem('token', token)
-            axios.defaults.headers.common['Authorization'] = token
-            commit('auth_success', token, user)
-            resolve(resp)
-          })
-          .catch(err => {
-            commit('auth_error')
-            localStorage.removeItem('token')
-            reject(err)
-          })
-      })
-    },
-    register ({commit}, user) {
-      return new Promise((resolve, reject) => {
-        commit('auth_request')
-        axios({url: 'http://localhost:3000/register', data: user, method: 'POST'})
-          .then(resp => {
-            const token = resp.data.token
-            const user = resp.data.user
-            localStorage.setItem('token', token)
-            axios.defaults.headers.common['Authorization'] = token
-            commit('auth_success', token, user)
-            resolve(resp)
-          })
-          .catch(err => {
-            commit('auth_error', err)
-            localStorage.removeItem('token')
-            reject(err)
-          })
-      })
-    },
-    logout ({commit}) {
-      return new Promise((resolve, reject) => {
-        commit('logout')
-        localStorage.removeItem('token')
-        delete axios.defaults.headers.common['Authorization']
-        resolve()
-      })
-    }
-  },
-  modules: {},
-  getters: {
-    isLoggedIn: state => !!state.token,
-    authStatus: state => state.status
-  }
+  plugins: [createPersist({
+    namespace: 'triplan',
+    initialState: {},
+    expires: 7 * 24 * 60 * 60 * 1000 // a week
+  })]
 })
