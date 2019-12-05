@@ -22,9 +22,17 @@ function registerAPI ($http, host, data) {
   })
 }
 
+function checkingOverlap ($http, host, data) {
+  return $http({
+    method: 'post',
+    url: host + '/users/signup',
+    data
+  })
+}
 // noinspection JSUnusedGlobalSymbols
 export default {
   httpTest,
   loginAPI,
-  registerAPI
+  registerAPI,
+  checkingOverlap
 }
