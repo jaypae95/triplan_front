@@ -2,10 +2,12 @@
   <div class="MainPage">
     <div id="lo1">
       <li>
-        <span v-if="isLoggedIn"><a @click="logout">Logout</a></span>
+        <span v-if="isLoggedIn"><a @click="logout"><img class="loli" src="../assets/logout.png"></a></span>
+        <span v-else>
         <router-link to='/login'>
           <img class="loli" src="../assets/login.png">
         </router-link>
+        </span>
         <router-link to='/signup'>
           <img class="loli" src="../assets/add.png">
         </router-link>
