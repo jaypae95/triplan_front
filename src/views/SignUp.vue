@@ -47,6 +47,7 @@ export default {
       }
       if (!this.empty()) {
         alert('비어있는 값이 있습니다.')
+        return
       }
       if (!this.validatePassword()) {
         alert('패스워드가 다릅니다.')
@@ -75,9 +76,12 @@ export default {
         this.user_id === '' &&
         this.user_name === '' &&
         this.user_password === '' &&
+        this.user_password_confirm === '' &&
         this.user_gender === '' &&
         this.user_phone === '') {
         return false
+      } else {
+        return true
       }
     },
     overlap () {
