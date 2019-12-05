@@ -7,10 +7,10 @@
         <router-link to='/login'>
           <img class="loli" src="../assets/login.png">
         </router-link>
-        </span>
         <router-link to='/signup'>
           <img class="loli" src="../assets/add.png">
         </router-link>
+        </span>
       </li>
     </div>
     <li>
