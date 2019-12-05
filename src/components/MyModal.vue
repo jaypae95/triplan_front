@@ -23,11 +23,10 @@
             </slot>
           </div>
 
-          <input type="text" placeholder="YYYY"><br>
-          <input type="text" placeholder="MM"><br>
-          <input type="text" placeholder="DD"><br><br>
-
-          <router-link to="/makeplan" tag="button" class="modal-default-button">Make Plan!</router-link>
+          <input v-model="year" type="text" placeholder="YYYY"><br>
+          <input v-model="month" type="text" placeholder="MM"><br>
+          <input v-model="date" type="text" placeholder="DD"><br><br>
+          <button class="modal-default-button" v-on:click="clickMakePlan()">Make Plan!</button>
           <button class="modal-default-button" @click="$emit('close')">
             Close
           </button>
@@ -38,11 +37,45 @@
     </div>
   </transition>
 </template>
+<script>
+import API from '../components/API'
 
+export default {
+  name: 'mymodal',
+  data () {
+    return {
+      year: '',
+      month: '',
+      date: '',
+      long: '',
+      lat: ''
+    }
+  },
+  methods: {
+    async clickMakePlan () {
+      const data = {
+        country_id: 2
+      }
+      const res = await API.getCountryPositionAPI(this.$http, this.$env.apiUrl, data).catch(() => {})
+      console.log(res)
+      const department = {
+        year: this.year,
+        month: this.month,
+        date: this.date
+      }
+      this.$store.commit('saveDepartmentInfo', department)
+      this.$store.commit('saveCountryPosition', res.data)
+      this.$router.push('/makeplan')
+    }
+  }
+}
+
+</script>
 <style lang="css">
   .closeModalBtn {
     color: #62acde;
   }
+
   .modal-mask {
     position: fixed;
     z-index: 9998;
@@ -54,10 +87,12 @@
     display: table;
     transition: opacity .3s ease;
   }
+
   .modal-wrapper {
     display: table-cell;
     vertical-align: middle;
   }
+
   .modal-container {
     width: 300px;
     margin: 0px auto;
@@ -68,16 +103,20 @@
     transition: all .3s ease;
     font-family: Helvetica, Arial, sans-serif;
   }
+
   .modal-header h3 {
     margin-top: 0;
     color: #62acde;
   }
+
   .modal-body {
     margin: 20px 0;
   }
+
   .modal-default-button {
     float: right;
   }
+
   /*
    * The following styles are auto-applied to elements with
    * transition="modal" when their visibility is toggled
@@ -89,9 +128,11 @@
   .modal-enter {
     opacity: 0;
   }
+
   .modal-leave-active {
     opacity: 0;
   }
+
   .modal-enter .modal-container,
   .modal-leave-active .modal-container {
     -webkit-transform: scale(1.1);
