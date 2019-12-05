@@ -25,7 +25,7 @@ function registerAPI ($http, host, data) {
 function checkingOverlap ($http, host, data) {
   return $http({
     method: 'post',
-    url: host + '/users/signup',
+    url: host + '/users/overlap',
     data
   })
 }
