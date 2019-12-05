@@ -6,18 +6,25 @@
 import MarkerClusterer from '@google/markerclusterer'
 import gmapsInit from '../utils/gmaps'
 
-const locations = [
-  {
-    position: {
-      lat: 37.282949,
-      lng: 127.045006
-    }
-  }
-]
-
 export default {
   name: `App`,
+  data () {
+    return {
+      position: {
+        lat: '',
+        long: ''
+      }
+    }
+  },
   async mounted () {
+    const locations = [
+      {
+        position: {
+          lat: this.$store.state.position[0].country_lat,
+          lng: this.$store.state.position[0].country_long
+        }
+      }
+    ]
     try {
       const google = await gmapsInit()
       const geocoder = new google.maps.Geocoder()

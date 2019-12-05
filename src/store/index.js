@@ -7,7 +7,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     token: undefined,
-    user: undefined
+    user: undefined,
+    department: undefined,
+    position: undefined
   },
   mutations: {
     saveUser (state, user) {
@@ -19,6 +21,16 @@ export default new Vuex.Store({
     removeUser (state) {
       state.user = undefined
       state.token = undefined
+    },
+    saveDepartmentInfo (state, department) {
+      state.department = department
+    },
+    saveCountryPosition (state, position) {
+      state.position = position
+    },
+    removeModal (state) {
+      state.department = undefined
+      state.position = undefined
     }
   },
   plugins: [createPersist({

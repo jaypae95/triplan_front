@@ -29,10 +29,19 @@ function checkingOverlap ($http, host, data) {
     data
   })
 }
+
+function getCountryPositionAPI ($http, host, data) {
+  return $http({
+    method: 'post',
+    url: host + '/trip_plan/makeplan',
+    data
+  })
+}
 // noinspection JSUnusedGlobalSymbols
 export default {
   httpTest,
   loginAPI,
   registerAPI,
-  checkingOverlap
+  checkingOverlap,
+  getCountryPositionAPI
 }
