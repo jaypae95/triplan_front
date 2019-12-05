@@ -45,24 +45,18 @@
   </div>
 </template>
 <script>
-  import API from '../components/API'
-
-  export default {
-    data() {
-      return {
-        tour_type: '',
-        idPlan: ''
-      }
-    },
-    methods:
-      {
-        search: function () {
-          const tour_type = this.tour_type;
-        }
-
-
-      }
+export default {
+  data () {
+    return {
+      tour_type: '',
+      idPlan: ''
+    }
+  },
+  methods: {
+    search: function () {
+    }
   }
+}
 </script>
 
 <style>
