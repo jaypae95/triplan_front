@@ -32,7 +32,8 @@ export default {
       user_password: '',
       user_password_confirm: '',
       user_gender: '',
-      user_phone: ''
+      user_phone: '',
+      btn: ''
     }
   },
   methods: {
@@ -53,6 +54,10 @@ export default {
         alert('패스워드가 다릅니다.')
         this.user_password = ''
         this.user_password_confirm = ''
+        return
+      }
+      if (this.btn === '') {
+        alert('Id 중복확인을 하지 않으셨습니다\n')
         return
       }
       API.registerAPI(this.$http, this.$env.apiUrl, data).then(res => {
@@ -85,7 +90,11 @@ export default {
       }
     },
     overlap () {
-      API.checkingOverlap(this.$http, this.$env.apiUrl, this.user_id).then(res => {
+      this.btn = '1'
+      const data = {
+        user_id: this.user_id
+      }
+      API.checkingOverlap(this.$http, this.$env.apiUrl, data).then(res => {
         console.log(res)
         if (res.data.is_exist === true) {
           this.user_id = ''
