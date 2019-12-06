@@ -95,7 +95,6 @@ export default {
       API.getCountryAPI(this.$http, this.$env.apiUrl, idContinent).then(res => {
         this.checkContinent = true
         res.data.forEach(this.pushCountries)
-        console.log(this.countries)
       }).catch(err => {
         console.log(err)
       })
@@ -104,7 +103,7 @@ export default {
       this.cities = []
       const idxCountry = this.countries.findIndex(e => e.country_name === event.target.value)
       const idCountry = this.countries[idxCountry].idCountry
-
+      console.log(idxCountry)
       API.getCityAPI(this.$http, this.$env.apiUrl, idCountry).then(res => {
         this.checkCountry = true
         res.data.forEach(this.pushCities)

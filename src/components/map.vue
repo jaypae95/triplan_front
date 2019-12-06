@@ -7,23 +7,31 @@
 import MarkerClusterer from '@google/markerclusterer'
 import gmapsInit from '../utils/gmaps'
 
-const locations = [
-  {
-    position: {
-      lat: 37.282949,
-      lng: 127.045006
-    }
-  }
-]
-
 export default {
   name: `Apple`,
+  data () {
+    return {
+      lat2: '',
+      lng2: ''
+    }
+  },
   async mounted () {
     try {
+      const locations = [
+        {
+          position: {
+            lat: this.$store.state.country.lat,
+            lng: this.$store.state.country.long
+          }
+        }
+      ]
       const google = await gmapsInit()
       const geocoder = new google.maps.Geocoder()
       const map = new google.maps.Map(this.$el)
-      geocoder.geocode({ address: `South Korea` }, (results, status) => {
+      const newLat = this.$store.state.country.lat
+      const newLog = this.$store.state.country.long
+      console.log(newLat)
+      geocoder.geocode({location: new google.maps.LatLng(newLat, newLog)}, (results, status) => {
         if (status !== `OK` || !results[0]) {
           throw new Error(status)
         }
