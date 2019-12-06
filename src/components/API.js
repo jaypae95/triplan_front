@@ -45,6 +45,7 @@ function getCountryPositionAPI ($http, host, data) {
     data
   })
 }
+
 function getCountryTourList ($http, host, data) {
   return $http({
     method: 'get',
@@ -52,6 +53,28 @@ function getCountryTourList ($http, host, data) {
     data
   })
 }
+
+function getCountryAPI ($http, host, id) {
+  return $http({
+    method: 'get',
+    url: host + `/trip_list/continent/${id}`
+  })
+}
+
+function getCityAPI ($http, host, id) {
+  return $http({
+    method: 'get',
+    url: host + `/trip_list/country/${id}`
+  })
+}
+
+function getPlaceAPI ($http, host, id) {
+  return $http({
+    method: 'get',
+    url: host + `/trip_list/place/${id}`
+  })
+}
+
 // noinspection JSUnusedGlobalSymbols
 export default {
   httpTest,
@@ -60,5 +83,8 @@ export default {
   checkingOverlap,
   getCountry,
   getCountryTourList,
-  getCountryPositionAPI
+  getCountryPositionAPI,
+  getCountryAPI,
+  getCityAPI,
+  getPlaceAPI
 }
