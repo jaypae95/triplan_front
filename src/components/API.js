@@ -75,18 +75,23 @@ function getPlaceAPI ($http, host, id) {
   })
 }
 
-function searchTourAPI ($http, host, data) {
-  return $http({
-    method: 'post',
-    url: host + '/share_plan',
-    data
-  })
-}
-
 function getMyPlanAPI ($http, host) {
   return $http({
     method: 'get',
     url: host + '/users/myplan'
+  })
+}
+function searchTourAPI ($http, host, data) {
+  return $http({
+    method: 'post',
+    url: host + `/share_plan`,
+    data
+  })
+}
+function detailTourAPI ($http, host, id) {
+  return $http({
+    method: 'get',
+    url: host + `/detail_tour/${id}`
   })
 }
 
@@ -103,5 +108,6 @@ export default {
   getCityAPI,
   getPlaceAPI,
   searchTourAPI,
-  getMyPlanAPI
+  getMyPlanAPI,
+  detailTourAPI
 }
