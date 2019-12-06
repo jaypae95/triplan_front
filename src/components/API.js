@@ -37,11 +37,28 @@ function getCountryPositionAPI ($http, host, data) {
     data
   })
 }
+
+function getContinent ($http, host, name) {
+  return $http({
+    method: 'get',
+    url: host + `/trip_list/continent/${name}`
+  })
+}
+
+function getCountry ($http, host, id) {
+  return $http({
+    method: 'get',
+    url: host + `/trip_list/country/${id}`
+  })
+}
+
 // noinspection JSUnusedGlobalSymbols
 export default {
   httpTest,
   loginAPI,
   registerAPI,
   checkingOverlap,
-  getCountryPositionAPI
+  getCountryPositionAPI,
+  getContinent,
+  getCountry
 }
