@@ -24,11 +24,15 @@
           </div>
           <vue-hotel-datepicker
             :value="date"
-            @confirm="getDate" />
+            @confirm="getDate"/>
           <input type="text" v-model="title" placeholder="title"><br>
-          <input v-model="country_id" type="text" placeholder="Country">
           <br>
           <br>
+          <select-option
+            :until-country=true
+            @select-country="getCountryInfo"
+            />
+          <br><br>
           <button class="modal-default-button" v-on:click="clickMakePlan()">Make Plan!</button>
           <button class="modal-default-button" @click="$emit('close')">close
           </button>
@@ -41,11 +45,13 @@
 <script>
 import API from '../components/API'
 import VueHotelDatepicker from '@northwalker/vue-hotel-datepicker'
+import SelectOption from '../components/SelectOption'
 
 export default {
   name: 'mymodal',
   components: {
-    'vue-hotel-datepicker': VueHotelDatepicker
+    'vue-hotel-datepicker': VueHotelDatepicker,
+    'select-option': SelectOption
   },
   data () {
     return {
@@ -65,14 +71,25 @@ export default {
       date.end = date.end.replace('/', '-')
       this.date = date
     },
+    getCountryInfo (data) {
+      this.country_id = data
+    },
     async clickMakePlan () {
       const data = {
         country_id: this.country_id
       }
-      const res = await API.getCountryPositionAPI(this.$http, this.$env.apiUrl, data).catch(() => {})
-      console.log(res)
+      const res = await API.getCountryPositionAPI(this.$http, this.$env.apiUrl, data).catch(() => {
+      })
+
+      const countryInfo = {
+        country_id: this.country_id,
+        lat: res.data.country_lat,
+        long: res.data.country_long
+      }
+
+      this.$store.commit('saveTitle', this.title)
       this.$store.commit('saveDateInfo', this.date)
-      this.$store.commit('saveCountryPosition', res.data)
+      this.$store.commit('saveCountryPosition', countryInfo)
       this.$router.push('/makeplan')
     }
   }
