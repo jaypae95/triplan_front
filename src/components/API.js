@@ -71,7 +71,7 @@ function getCityAPI ($http, host, id) {
 function getPlaceAPI ($http, host, id) {
   return $http({
     method: 'get',
-    url: host + `/trip_list/place/${id}`
+    url: host + `/trip_list/city/${id}`
   })
 }
 

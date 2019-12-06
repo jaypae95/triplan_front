@@ -29,18 +29,16 @@
     <br>
 
     <div v-if="checkCity">
-      <select @change="selectPlace($event)" name="place">
-        <option></option>
-      <!--        <option disabled value="">Select Place</option>-->
-        <option v-for="place in places" v-bind:key="place.id">{{place}}</option>
-      </select>
+      <ul>
+        <li v-for="place in places" v-bind:key="place.id">{{place}}</li>
+      </ul>
     </div>
     <br>
 
-    <div v-if="checkPlace">
-      <p>Your Selection : </p>
-    </div>
-    <br>
+<!--    <div v-if="checkPlace">-->
+<!--      <p>Your Selection : </p>-->
+<!--    </div>-->
+<!--    <br>-->
 
     <button v-on:click="reset">초기화</button>
 
@@ -56,7 +54,6 @@ export default {
       checkContinent: false,
       checkCountry: false,
       checkCity: false,
-      checkPlace: false,
       continents: ['아시아', '유럽', '북아메리카'],
       countries: [],
       cities: [],
@@ -94,6 +91,8 @@ export default {
 
       API.getCountryAPI(this.$http, this.$env.apiUrl, idContinent).then(res => {
         this.checkContinent = true
+        this.checkCountry = false
+        this.checkCity = false
         res.data.forEach(this.pushCountries)
         console.log(this.countries)
       }).catch(err => {
@@ -107,6 +106,8 @@ export default {
 
       API.getCityAPI(this.$http, this.$env.apiUrl, idCountry).then(res => {
         this.checkCountry = true
+        this.checkCity = false
+
         res.data.forEach(this.pushCities)
       }).catch(err => {
         console.log(err)
