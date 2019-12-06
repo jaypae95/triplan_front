@@ -37,7 +37,7 @@ export default {
     return {
       checkContinent: false,
       checkCountry: false,
-      continents: ['a', 'b', 'c'],
+      continents: ['아시아', '유럽', '북아메리카'],
       countries: [],
       cities: []
     }
@@ -45,7 +45,7 @@ export default {
 
   methods: {
     selectContinent () {
-      API.getContinent(this.$http, this.$env.apiUrl, 'asia').then(res => {
+      API.getContinent(this.$http, this.$env.apiUrl, '1').then(res => {
         console.log(res)
         this.checkContinent = true
         this.continents.push(res.data.country_name)
