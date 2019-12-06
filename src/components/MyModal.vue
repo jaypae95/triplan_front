@@ -49,8 +49,6 @@ export default {
   },
   data () {
     return {
-      year: '',
-      month: '',
       date: '',
       long: '',
       lat: '',
@@ -61,12 +59,11 @@ export default {
   },
   methods: {
     getDate (date) {
-      console.log(date)
       date.start = date.start.replace('/', '-')
       date.start = date.start.replace('/', '-')
       date.end = date.end.replace('/', '-')
       date.end = date.end.replace('/', '-')
-      console.log(date)
+      this.date = date
     },
     async clickMakePlan () {
       const data = {
@@ -74,12 +71,7 @@ export default {
       }
       const res = await API.getCountryPositionAPI(this.$http, this.$env.apiUrl, data).catch(() => {})
       console.log(res)
-      const department = {
-        year: this.year,
-        month: this.month,
-        date: this.date
-      }
-      this.$store.commit('saveDepartmentInfo', department)
+      this.$store.commit('saveDateInfo', this.date)
       this.$store.commit('saveCountryPosition', res.data)
       this.$router.push('/makeplan')
     }
