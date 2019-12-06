@@ -83,6 +83,13 @@ function searchTourAPI ($http, host, data) {
   })
 }
 
+function getMyPlanAPI ($http, host) {
+  return $http({
+    method: 'get',
+    url: host + '/users/myplan'
+  })
+}
+
 // noinspection JSUnusedGlobalSymbols
 export default {
   httpTest,
@@ -95,5 +102,6 @@ export default {
   getCountryAPI,
   getCityAPI,
   getPlaceAPI,
-  searchTourAPI
+  searchTourAPI,
+  getMyPlanAPI
 }
