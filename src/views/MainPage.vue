@@ -23,7 +23,7 @@
         <h3 slot="header">Select your trip date</h3>
       </modal>
 
-      <router-link to="/SharePlan" id="menu3">
+      <router-link to="/shareplan" id="menu3">
         <img id="illu3" src="../assets/menu3.png">
       </router-link>
     </li>
