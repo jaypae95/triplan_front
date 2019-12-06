@@ -9,7 +9,8 @@ export default new Vuex.Store({
     token: undefined,
     user: undefined,
     date: undefined,
-    position: undefined
+    country: undefined,
+    title: undefined
   },
   mutations: {
     saveUser (state, user) {
@@ -25,11 +26,15 @@ export default new Vuex.Store({
     saveDateInfo (state, date) {
       state.date = date
     },
-    saveCountryPosition (state, position) {
-      state.position = position
+    saveCountryPosition (state, country) {
+      state.country = country
+    },
+    saveTitle (state, title) {
+      state.title = title
     },
     removeModal (state) {
-      state.department = undefined
+      state.title = undefined
+      state.country = undefined
       state.position = undefined
     }
   },
