@@ -23,6 +23,21 @@
         <td>연락처</td>
         <td>{{user.user_phone}}</td>
       </tr>
+      <tr>
+        <td colspan="2">
+          <div class="centered" v-for="tour in tours" :key="tour.idPlan">
+            <div style="border: 3px solid #4cbaa8;; border-radius: 10%; margin:10px; padding: 10px">
+              <router-link :to="{ name: 'DetailTour', params: { id: tour.idPlan }}">
+                {{tour.title}}
+                <br><br>
+                {{tour.depart_day}} ~ {{tour.arrive_day}}
+                <br><br>
+                {{tour.country_name}}
+              </router-link>
+            </div>
+          </div>
+        </td>
+      </tr>
     </table>
     <button v-on:click="haha"></button>
     <router-link to='/'>Go To Main</router-link>
@@ -32,11 +47,12 @@
 
 <script>
 import API from '../components/API'
+
 export default {
   data () {
     return {
       user: this.$store.state.user,
-      plan: ''
+      tours: ''
     }
   },
   methods: {
@@ -46,7 +62,8 @@ export default {
   },
   created () {
     API.getMyPlanAPI(this.$http, this.$env.apiUrl).then(res => {
-      this.plan = res
+      this.tours = res.data
+      console.log(this.tours)
     }).catch(err => {
       console.log(err)
     })
