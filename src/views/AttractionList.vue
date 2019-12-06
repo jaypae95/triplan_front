@@ -2,37 +2,10 @@
   <div id="app">
     <p>Attraction List Page</p>
     <router-link to="/">Go To Main</router-link><br><br>
-
-    <span>Select Continents : </span>
-    <select class="sel" @change="selectContinent($event)" name="continent">
-<!--      <option disabled value="">Select Continent</option>-->
-      <option></option>
-      <option v-for="continent in continents" :key="continent.id">{{continent}}</option>
-    </select>
-    <br><br>
-
-    <div v-if="checkContinent">
-      <span>Select Country : </span>
-      <select class="sel" @change="selectCountry($event)" name="country">
-<!--      <option disabled value="">Select Country</option>-->
-      <option></option>
-      <option v-for="country in countries" :key="country.id">{{country.country_name}}</option>
-    </select>
-  </div>
-    <br>
-
-    <div  v-if="checkCountry">
-      <span>Select City : </span>
-    <select class="sel" @change="selectCity($event)" name="city">
-<!--      <option disabled value="">Select City</option>-->
-      <option></option>
-      <option v-for="city in cities" v-bind:key="city.id">{{city.city_name}}</option>
-    </select>
-  </div>
-    <br>
-
-    <button id="btn" v-on:click="reset">초기화</button>
-
+    <select-option
+      :until-country=false
+      @select-city="getPlaceInfo"
+      @is-no-list="isNoList"/>
     <div v-if="checkCity">
       <div v-if="noList">
         <p id="noAttr">No Attraction!</p>
@@ -48,87 +21,29 @@
 </template>
 
 <script>
-import API from '../components/API'
+import SelectOption from '../components/SelectOption'
 
 export default {
   data () {
     return {
       noList: false,
-      checkContinent: false,
-      checkCountry: false,
       checkCity: false,
-      continents: ['아시아', '유럽', '남태평양', '북아메리카', '남아메리'],
-      countries: [],
       cities: [],
       places: []
     }
   },
+  components: {
+    'select-option': SelectOption
+  },
   methods: {
-    reset () {
-      // eslint-disable-next-line
-      this.checkContinent = false,
-      this.checkCountry = false,
-      this.checkCity = false
+    getPlaceInfo (pp) {
+      this.checkCity = true
+      this.places = pp
     },
-    pushCountries (item) {
-      this.countries.push({
-        idCountry: item.idCountry,
-        country_name: item.country_name
-      })
-    },
-    pushCities (item) {
-      this.cities.push({
-        idCity: item.idCity,
-        city_name: item.city_name
-      })
-    },
-    pushPlaces (item) {
-      this.places.push(item.place_name)
-    },
-
-    selectContinent (event) {
-      this.countries = []
-      const idContinent = this.continents.findIndex(e => e === event.target.value) + 1
-
-      API.getCountryAPI(this.$http, this.$env.apiUrl, idContinent).then(res => {
-        this.checkContinent = true
-        this.checkCountry = false
-        this.checkCity = false
-        res.data.forEach(this.pushCountries)
-      }).catch(err => {
-        console.log(err)
-      })
-    },
-    selectCountry (event) {
-      this.cities = []
-      const idxCountry = this.countries.findIndex(e => e.country_name === event.target.value)
-      const idCountry = this.countries[idxCountry].idCountry
-
-      API.getCityAPI(this.$http, this.$env.apiUrl, idCountry).then(res => {
-        this.checkCountry = true
-        this.checkCity = false
-
-        res.data.forEach(this.pushCities)
-      }).catch(err => {
-        console.log(err)
-      })
-    },
-    selectCity (event) {
-      this.places = []
-      const idxCity = this.cities.findIndex(e => e.city_name === event.target.value)
-      const idCity = this.cities[idxCity].idCity
-
-      API.getPlaceAPI(this.$http, this.$env.apiUrl, idCity).then(res => {
-        this.checkCity = true
-        res.data.forEach(this.pushPlaces)
-        if (this.places.length === 0) this.noList = true
-      }).catch(err => {
-        console.log(err)
-      })
+    isNoList (nn) {
+      this.noList = nn
     }
-
   }
-
 }
 </script>
 

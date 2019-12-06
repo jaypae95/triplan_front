@@ -30,8 +30,7 @@
           <br>
           <select-option
             :until-country=true
-            @select-country="getCountryInfo"
-            />
+            @select-country="getCountryInfo"/>
           <br><br>
           <button class="modal-default-button" v-on:click="clickMakePlan()">Make Plan!</button>
           <button class="modal-default-button" @click="$emit('close')">close
