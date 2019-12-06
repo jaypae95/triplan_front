@@ -3,15 +3,17 @@
     <p>Attraction List Page</p>
     <router-link to="/">Go To Main</router-link><br><br>
 
-    <select @change="selectContinent($event)" name="continent">
+    <span>Select Continents : </span>
+    <select id="sel" @change="selectContinent($event)" name="continent">
 <!--      <option disabled value="">Select Continent</option>-->
       <option></option>
       <option v-for="continent in continents" :key="continent.id">{{continent}}</option>
     </select>
     <br><br>
 
-  <div v-if="checkContinent">
-    <select @change="selectCountry($event)" name="country">
+    <div v-if="checkContinent">
+      <span>Select Country : </span>
+      <select id="sel" @change="selectCountry($event)" name="country">
 <!--      <option disabled value="">Select Country</option>-->
       <option></option>
       <option v-for="country in countries" :key="country.id">{{country.country_name}}</option>
@@ -20,7 +22,8 @@
     <br>
 
     <div  v-if="checkCountry">
-    <select @change="selectCity($event)" name="city">
+      <span>Select City : </span>
+    <select id="sel" @change="selectCity($event)" name="city">
 <!--      <option disabled value="">Select City</option>-->
       <option></option>
       <option v-for="city in cities" v-bind:key="city.id">{{city.city_name}}</option>
@@ -28,15 +31,16 @@
   </div>
     <br>
 
-    <button v-on:click="reset">초기화</button>
+    <button id="btn" v-on:click="reset">초기화</button>
 
     <div v-if="checkCity">
-      <ul>
+      <div v-if="noList">
+        <p id="noAttr">No Attraction!</p>
+      </div>
         <ul v-for="place in places" v-bind:key="place.id"><b>{{place}}</b><br>
 <!--          Image url here, NEED TO BE UPDATED-->
-        <img id="ii" src="https://img-wishbeen.akamaized.net/plan/1453194127890_%ED%81%AC%EA%B8%B0%EB%B3%80%ED%99%98_KQ7A1270.jpg"><br><br><br>
+        <img id="ii" src="https://img-wishbeen.akamaized.net/plan/1453194127890_%ED%81%AC%EA%B8%B0%EB%B3%80%ED%99%98_KQ7A1270.jpg"><br><hr>
         </ul>
-      </ul>
     </div>
     <br>
 
@@ -49,6 +53,7 @@ import API from '../components/API'
 export default {
   data () {
     return {
+      noList: false,
       checkContinent: false,
       checkCountry: false,
       checkCity: false,
@@ -119,6 +124,7 @@ export default {
       API.getPlaceAPI(this.$http, this.$env.apiUrl, idCity).then(res => {
         this.checkCity = true
         res.data.forEach(this.pushPlaces)
+        if (this.places.length === 0) this.noList = true
       }).catch(err => {
         console.log(err)
       })
@@ -133,5 +139,21 @@ export default {
   #ii{
     width:400px;
     height:200px;
+  }
+  #btn{
+  color: #fff;
+    background-color: #64b99f;
+    font-size: 26px;
+    font-family: monospace;
+    border-radius: 8px;
+  }
+  #sel{
+    padding: 3px;
+    font-size: 20px;
+    border-radius: 6px;
+    box-sizing: content-box;
+  }
+  #noAttr{
+    font-size: 26px;
   }
 </style>
