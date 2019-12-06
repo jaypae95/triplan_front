@@ -25,7 +25,7 @@
           <vue-hotel-datepicker
             :value="date"
             @confirm="getDate" />
-          <input type="text" v-model="tit" placeholder="title"><br>
+          <input type="text" v-model="title" placeholder="title"><br>
           <input v-model="country_id" type="text" placeholder="Country">
           <br>
           <br>
@@ -55,7 +55,8 @@ export default {
       long: '',
       lat: '',
       tmpdata: '',
-      country_id: ''
+      country_id: '',
+      title: ''
     }
   },
   methods: {
