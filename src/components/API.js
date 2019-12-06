@@ -74,6 +74,19 @@ function getPlaceAPI ($http, host, id) {
     url: host + `/trip_list/place/${id}`
   })
 }
+function searchTourAPI ($http, host, data) {
+  return $http({
+    method: 'post',
+    url: host + `/share_plan`,
+    data
+  })
+}
+function detailTourAPI ($http, host, id) {
+  return $http({
+    method: 'get',
+    url: host + `/detail_tour/${id}`
+  })
+}
 
 // noinspection JSUnusedGlobalSymbols
 export default {
@@ -86,5 +99,7 @@ export default {
   getCountryPositionAPI,
   getCountryAPI,
   getCityAPI,
-  getPlaceAPI
+  getPlaceAPI,
+  searchTourAPI,
+  detailTourAPI
 }

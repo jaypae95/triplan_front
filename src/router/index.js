@@ -10,6 +10,7 @@ import SharePlan from '@/views/SharePlan'
 import SignUp from '@/views/SignUp'
 import ConfirmPlan from '@/views/ConfirmPlan'
 import store from '@/store/index'
+import DetailTour from '@/views/DetailTour'
 
 Vue.use(Router)
 
@@ -59,6 +60,11 @@ let router = new Router({
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: '/detailtour',
+      name: 'DetailTour',
+      component: DetailTour
     },
     {
       path: '/signup',
