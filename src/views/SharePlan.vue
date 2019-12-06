@@ -46,6 +46,7 @@
       <div class="centered" v-for="tour in tours" :key="tour.idPlan">
         <div style="border: 3px solid #4cbaa8;; border-radius: 10%; margin:10px; padding: 10px">
           <router-link :to="{ name: 'DetailTour', params: { id: tour.idPlan }}">
+            {{tour.idPlan}}
             {{tour.title}}
             <br><br>
             {{tour.depart_day}} ~ {{tour.arrive_day}}
