@@ -28,19 +28,16 @@
   </div>
     <br>
 
+    <button v-on:click="reset">초기화</button>
+
     <div v-if="checkCity">
       <ul>
-        <li v-for="place in places" v-bind:key="place.id">{{place}}</li>
+        <ul v-for="place in places" v-bind:key="place.id"><b>{{place}}</b><br>
+        <img id="ii" src="https://img-wishbeen.akamaized.net/plan/1453194127890_%ED%81%AC%EA%B8%B0%EB%B3%80%ED%99%98_KQ7A1270.jpg"><br><br><br>
+        </ul>
       </ul>
     </div>
     <br>
-
-<!--    <div v-if="checkPlace">-->
-<!--      <p>Your Selection : </p>-->
-<!--    </div>-->
-<!--    <br>-->
-
-    <button v-on:click="reset">초기화</button>
 
   </div>
 </template>
@@ -66,8 +63,7 @@ export default {
       // eslint-disable-next-line
       this.checkContinent = false,
       this.checkCountry = false,
-      this.checkCity = false,
-      this.checkPlace = false
+      this.checkCity = false
     },
     pushCountries (item) {
       this.countries.push({
@@ -125,11 +121,16 @@ export default {
       }).catch(err => {
         console.log(err)
       })
-    },
-    selectPlace () {
-      this.checkPlace = true
     }
+
   }
 
 }
 </script>
+
+<style>
+  #ii{
+    width:400px;
+    height:200px;
+  }
+</style>
