@@ -22,10 +22,10 @@
 
             </slot>
           </div>
-          <input type="text" v-model="tit" placeholder="title"><br>
-          <input v-model="year" type="text" placeholder="YYYY"><br>
-          <input v-model="month" type="text" placeholder="MM"><br>
-          <input v-model="date" type="text" placeholder="DD"><br>
+          <vue-hotel-datepicker
+            :value="date"
+            @confirm="getDate" />
+          <input type="text" v-model="title" placeholder="title"><br>
           <input v-model="country_id" type="text" placeholder="Country">
           <br>
           <br>
@@ -40,9 +40,13 @@
 </template>
 <script>
 import API from '../components/API'
+import VueHotelDatepicker from '@northwalker/vue-hotel-datepicker'
 
 export default {
   name: 'mymodal',
+  components: {
+    'vue-hotel-datepicker': VueHotelDatepicker
+  },
   data () {
     return {
       year: '',
@@ -50,10 +54,20 @@ export default {
       date: '',
       long: '',
       lat: '',
-      country_id: ''
+      tmpdata: '',
+      country_id: '',
+      title: ''
     }
   },
   methods: {
+    getDate (date) {
+      console.log(date)
+      date.start = date.start.replace('/', '-')
+      date.start = date.start.replace('/', '-')
+      date.end = date.end.replace('/', '-')
+      date.end = date.end.replace('/', '-')
+      console.log(date)
+    },
     async clickMakePlan () {
       const data = {
         country_id: this.country_id
@@ -69,8 +83,6 @@ export default {
       this.$store.commit('saveCountryPosition', res.data)
       this.$router.push('/makeplan')
     }
-  },
-  components: {
   }
 }
 
