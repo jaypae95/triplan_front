@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="app">
     <p>Attraction List Page</p>
     <router-link to="/">Go To Main</router-link><br><br>
 
@@ -33,6 +33,7 @@
     <div v-if="checkCity">
       <ul>
         <ul v-for="place in places" v-bind:key="place.id"><b>{{place}}</b><br>
+<!--          Image url here, NEED TO BE UPDATED-->
         <img id="ii" src="https://img-wishbeen.akamaized.net/plan/1453194127890_%ED%81%AC%EA%B8%B0%EB%B3%80%ED%99%98_KQ7A1270.jpg"><br><br><br>
         </ul>
       </ul>
