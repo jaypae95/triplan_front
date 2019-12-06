@@ -30,9 +30,24 @@ function checkingOverlap ($http, host, data) {
   })
 }
 
+function getCountry ($http, host, data) {
+  return $http({
+    method: 'get',
+    url: host + '/trip_plan',
+    data
+  })
+}
+
 function getCountryPositionAPI ($http, host, data) {
   return $http({
     method: 'post',
+    url: host + '/trip_plan/makeplan',
+    data
+  })
+}
+function getCountryTourList ($http, host, data) {
+  return $http({
+    method: 'get',
     url: host + '/trip_plan/makeplan',
     data
   })
@@ -43,5 +58,7 @@ export default {
   loginAPI,
   registerAPI,
   checkingOverlap,
+  getCountry,
+  getCountryTourList,
   getCountryPositionAPI
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="App">
+  <div class="Apple">
   </div>
 </template>
 
@@ -17,7 +17,7 @@ const locations = [
 ]
 
 export default {
-  name: `App`,
+  name: `Apple`,
   async mounted () {
     try {
       const google = await gmapsInit()
@@ -37,7 +37,9 @@ export default {
       const markers = locations
         .map((location) => {
           const marker = new google.maps.Marker({ ...location, map })
-          marker.addListener(`click`, () => markerClickHandler(marker))
+          marker.addListener(`click`, () => {
+            markerClickHandler(marker)
+          })
           return marker
         })
         // eslint-disable-next-line no-new
@@ -58,8 +60,9 @@ export default {
     margin: 0;
     padding: 0;
   }
-  .App {
-    width: 100vw;
+  .Apple {
+    width: 57%;
     height: 100vh;
+    float: left;
   }
 </style>
