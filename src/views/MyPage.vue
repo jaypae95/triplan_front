@@ -33,13 +33,15 @@
                 {{tour.depart_day}} ~ {{tour.arrive_day}}
                 <br><br>
                 {{tour.country_name}}
+                <br><br>
               </router-link>
+              <button v-if="tour.is_shared===0" @click="clickToggleShare(tour.idPlan)">공유하기</button>
+              <button v-else @click="clickToggleShare(tour.idPlan)">공유 취소하기</button>
             </div>
           </div>
         </td>
       </tr>
     </table>
-    <button v-on:click="haha"></button>
     <router-link to='/'>Go To Main</router-link>
   </div>
 
@@ -56,8 +58,11 @@ export default {
     }
   },
   methods: {
-    haha () {
-      console.log(this.$store.state.user)
+    clickToggleShare (id) {
+      const data = {
+        idPlan: id
+      }
+      API.toggleSharePlanAPI(this.$http, this.$env.apiUrl, data).catch(() => {})
     }
   },
   created () {

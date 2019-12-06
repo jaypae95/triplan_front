@@ -95,6 +95,13 @@ function detailTourAPI ($http, host, id) {
   })
 }
 
+function toggleSharePlanAPI ($http, host, data) {
+  return $http({
+    method: 'post',
+    url: host + '/share_plan/toggleshare',
+    data
+  })
+}
 // noinspection JSUnusedGlobalSymbols
 export default {
   httpTest,
@@ -109,5 +116,6 @@ export default {
   getPlaceAPI,
   searchTourAPI,
   getMyPlanAPI,
-  detailTourAPI
+  detailTourAPI,
+  toggleSharePlanAPI
 }
