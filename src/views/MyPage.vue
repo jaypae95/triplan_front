@@ -31,18 +31,25 @@
 </template>
 
 <script>
+import API from '../components/API'
 export default {
   data () {
     return {
-      user: this.$store.state.user
+      user: this.$store.state.user,
       plan: ''
     }
   },
   methods: {
     haha () {
       console.log(this.$store.state.user)
-    },
-
+    }
+  },
+  created () {
+    API.getMyPlanAPI(this.$http, this.$env.apiUrl).then(res => {
+      this.plan = res
+    }).catch(err => {
+      console.log(err)
+    })
   }
 }
 </script>
