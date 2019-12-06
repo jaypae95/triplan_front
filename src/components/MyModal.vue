@@ -22,7 +22,10 @@
 
             </slot>
           </div>
-
+          <VueHotelDatepicker>
+            :value="tmpdate"
+            v-on:dateChanged="getDate"
+          </VueHotelDatepicker>
           <input v-model="year" type="text" placeholder="YYYY"><br>
           <input v-model="month" type="text" placeholder="MM"><br>
           <input v-model="date" type="text" placeholder="DD"><br><br>
@@ -39,19 +42,27 @@
 </template>
 <script>
 import API from '../components/API'
+import VueHotelDatepicker from '@northwalker/vue-hotel-datepicker'
 
 export default {
   name: 'mymodal',
+  components: {
+    VueHotelDatepicker
+  },
   data () {
     return {
       year: '',
       month: '',
       date: '',
       long: '',
-      lat: ''
+      lat: '',
+      tmpdata: ''
     }
   },
   methods: {
+    getDate (v) {
+      console.log(v)
+    },
     async clickMakePlan () {
       const data = {
         country_id: 2
