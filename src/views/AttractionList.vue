@@ -42,7 +42,6 @@
 
 <script>
 import API from '../components/API'
-
 export default {
   data () {
     return {
