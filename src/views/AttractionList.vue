@@ -4,14 +4,16 @@
     <router-link to="/">Go To Main</router-link><br><br>
 
     <select @change="selectContinent($event)" name="continent">
-      <option disabled value="">Select Continent</option>
+<!--      <option disabled value="">Select Continent</option>-->
+      <option></option>
       <option v-for="continent in continents" :key="continent.id">{{continent}}</option>
     </select>
-    <br>
+    <br><br>
 
   <div v-if="checkContinent">
     <select @change="selectCountry($event)" name="country">
-      <option disabled value="">Select Country</option>
+<!--      <option disabled value="">Select Country</option>-->
+      <option></option>
       <option v-for="country in countries" :key="country.id">{{country.country_name}}</option>
     </select>
   </div>
@@ -19,15 +21,17 @@
 
     <div  v-if="checkCountry">
     <select @change="selectCity($event)" name="city">
-      <option disabled value="">Select City</option>
+<!--      <option disabled value="">Select City</option>-->
+      <option></option>
       <option v-for="city in cities" v-bind:key="city.id">{{city.city_name}}</option>
     </select>
   </div>
     <br>
 
     <city v-if="checkCity">
-      <select>
-<!--        <option disabled value="">Select Place</option>-->
+      <select @change="selectPlace($event)" name="place">
+        <option></option>
+      <!--        <option disabled value="">Select Place</option>-->
         <option v-for="place in places" v-bind:key="place.id">{{place}}</option>
       </select>
     </city>
@@ -36,6 +40,9 @@
     <place v-if="checkPlace">
       <p>Your Selection : </p>
     </place>
+    <br>
+
+    <button v-on:click="reset">초기화</button>
 
   </div>
 </template>
@@ -58,6 +65,13 @@ export default {
   },
 
   methods: {
+    reset () {
+      // eslint-disable-next-line
+      this.checkContinent = false,
+      this.checkCountry = false,
+      this.checkCity = false,
+      this.checkPlace = false
+    },
     pushCountries (item) {
       this.countries.push({
         idCountry: item.idCountry,
@@ -77,6 +91,7 @@ export default {
     selectContinent (event) {
       this.countries = []
       const idContinent = this.continents.findIndex(e => e === event.target.value) + 1
+
       API.getCountryAPI(this.$http, this.$env.apiUrl, idContinent).then(res => {
         this.checkContinent = true
         res.data.forEach(this.pushCountries)
@@ -89,6 +104,7 @@ export default {
       this.cities = []
       const idxCountry = this.countries.findIndex(e => e.country_name === event.target.value)
       const idCountry = this.countries[idxCountry].idCountry
+
       API.getCityAPI(this.$http, this.$env.apiUrl, idCountry).then(res => {
         this.checkCountry = true
         res.data.forEach(this.pushCities)
@@ -96,13 +112,21 @@ export default {
         console.log(err)
       })
     },
-    selectCity () {
-      API.getPlaceAPI(this.$http, this.$env.apiUrl, '1').then(res => {
+    selectCity (event) {
+      this.places = []
+      const idxCity = this.cities.findIndex(e => e.city_name === event.target.value)
+      const idCity = this.cities[idxCity].idCity
+      console.log(idxCity)
+
+      API.getPlaceAPI(this.$http, this.$env.apiUrl, idCity).then(res => {
         this.checkCity = true
         res.data.forEach(this.pushPlaces)
       }).catch(err => {
         console.log(err)
       })
+    },
+    selectPlace () {
+      this.checkPlace = true
     }
   }
 
