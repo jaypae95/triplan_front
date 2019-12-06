@@ -30,6 +30,14 @@ function checkingOverlap ($http, host, data) {
   })
 }
 
+function getCountry ($http, host, data) {
+  return $http({
+    method: 'get',
+    url: host + '/trip_plan',
+    data
+  })
+}
+
 function getCountryPositionAPI ($http, host, data) {
   return $http({
     method: 'post',
@@ -37,11 +45,46 @@ function getCountryPositionAPI ($http, host, data) {
     data
   })
 }
+
+function getCountryTourList ($http, host, data) {
+  return $http({
+    method: 'get',
+    url: host + '/trip_plan/makeplan',
+    data
+  })
+}
+
+function getCountryAPI ($http, host, id) {
+  return $http({
+    method: 'get',
+    url: host + `/trip_list/continent/${id}`
+  })
+}
+
+function getCityAPI ($http, host, id) {
+  return $http({
+    method: 'get',
+    url: host + `/trip_list/country/${id}`
+  })
+}
+
+function getPlaceAPI ($http, host, id) {
+  return $http({
+    method: 'get',
+    url: host + `/trip_list/place/${id}`
+  })
+}
+
 // noinspection JSUnusedGlobalSymbols
 export default {
   httpTest,
   loginAPI,
   registerAPI,
   checkingOverlap,
-  getCountryPositionAPI
+  getCountry,
+  getCountryTourList,
+  getCountryPositionAPI,
+  getCountryAPI,
+  getCityAPI,
+  getPlaceAPI
 }

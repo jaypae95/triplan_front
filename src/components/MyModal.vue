@@ -25,12 +25,14 @@
           <vue-hotel-datepicker
             :value="date"
             @confirm="getDate" />
+          <input type="text" v-model="tit" placeholder="title"><br>
+          <input v-model="country_id" type="text" placeholder="Country">
+          <br>
+          <br>
           <button class="modal-default-button" v-on:click="clickMakePlan()">Make Plan!</button>
-          <button class="modal-default-button" @click="$emit('close')">
-            Close
+          <button class="modal-default-button" @click="$emit('close')">close
           </button>
           <br>
-
         </div>
       </div>
     </div>
@@ -52,7 +54,8 @@ export default {
       date: '',
       long: '',
       lat: '',
-      tmpdata: ''
+      tmpdata: '',
+      country_id: ''
     }
   },
   methods: {
@@ -66,7 +69,7 @@ export default {
     },
     async clickMakePlan () {
       const data = {
-        country_id: 2
+        country_id: this.country_id
       }
       const res = await API.getCountryPositionAPI(this.$http, this.$env.apiUrl, data).catch(() => {})
       console.log(res)
