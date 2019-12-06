@@ -28,18 +28,18 @@
   </div>
     <br>
 
-    <city v-if="checkCity">
+    <div v-if="checkCity">
       <select @change="selectPlace($event)" name="place">
         <option></option>
       <!--        <option disabled value="">Select Place</option>-->
         <option v-for="place in places" v-bind:key="place.id">{{place}}</option>
       </select>
-    </city>
+    </div>
     <br>
 
-    <place v-if="checkPlace">
+    <div v-if="checkPlace">
       <p>Your Selection : </p>
-    </place>
+    </div>
     <br>
 
     <button v-on:click="reset">초기화</button>
