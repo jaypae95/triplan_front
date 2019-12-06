@@ -3,26 +3,26 @@
     <p>Attraction List Page</p>
     <router-link to="/">Go To Main</router-link><br><br>
 
-    <select @change="selectContinent($event)" name="conti">
+    <select @change="selectContinent($event)" name="continent">
       <option disabled value="">Select Continent</option>
-      <option v-for="conti in continents" v-bind:key="conti.id">{{conti}}</option>
+      <option v-for="continent in continents" :key="continent.id">{{continent}}</option>
     </select>
     <br>
 
-  <conti v-if="checkContinent">
-    <select @change="selectCountry($event)" name="coun">
+  <div v-if="checkContinent">
+    <select @change="selectCountry($event)" name="country">
       <option disabled value="">Select Country</option>
-      <option v-for="coun in countries" v-bind:id="coun.idCountry" v-bind:key="coun.idCountry">{{coun.country_name}}</option>
+      <option v-for="country in countries" :key="country.id">{{country.country_name}}</option>
     </select>
-  </conti>
+  </div>
     <br>
 
-    <coun v-if="checkCountry">
-    <select @change="selectCity($event)">
+    <div  v-if="checkCountry">
+    <select @change="selectCity($event)" name="city">
       <option disabled value="">Select City</option>
-      <option v-for="city in cities" v-bind:key="city.index">{{city}}</option>
+      <option v-for="city in cities" v-bind:key="city.id">{{city.city_name}}</option>
     </select>
-  </coun>
+  </div>
     <br>
 
     <city v-if="checkCity">
@@ -65,15 +65,19 @@ export default {
       })
     },
     pushCities (item) {
-      this.cities.push(item.city_name)
+      this.cities.push({
+        idCity: item.idCity,
+        city_name: item.city_name
+      })
     },
     pushPlaces (item) {
       this.places.push(item.place_name)
     },
 
-    selectContinent () {
-      API.getCountryAPI(this.$http, this.$env.apiUrl, '1').then(res => {
-        console.log(res)
+    selectContinent (event) {
+      this.countries = []
+      const idContinent = this.continents.findIndex(e => e === event.target.value) + 1
+      API.getCountryAPI(this.$http, this.$env.apiUrl, idContinent).then(res => {
         this.checkContinent = true
         res.data.forEach(this.pushCountries)
         console.log(this.countries)
@@ -82,9 +86,10 @@ export default {
       })
     },
     selectCountry (event) {
-      console.log(event.target.value)
-      API.getCityAPI(this.$http, this.$env.apiUrl, '1').then(res => {
-        console.log(res)
+      this.cities = []
+      const idxCountry = this.countries.findIndex(e => e.country_name === event.target.value)
+      const idCountry = this.countries[idxCountry].idCountry
+      API.getCityAPI(this.$http, this.$env.apiUrl, idCountry).then(res => {
         this.checkCountry = true
         res.data.forEach(this.pushCities)
       }).catch(err => {
@@ -93,7 +98,6 @@ export default {
     },
     selectCity () {
       API.getPlaceAPI(this.$http, this.$env.apiUrl, '1').then(res => {
-        console.log(res)
         this.checkCity = true
         res.data.forEach(this.pushPlaces)
       }).catch(err => {
