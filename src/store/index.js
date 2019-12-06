@@ -8,7 +8,7 @@ export default new Vuex.Store({
   state: {
     token: undefined,
     user: undefined,
-    department: undefined,
+    date: undefined,
     position: undefined
   },
   mutations: {
@@ -22,8 +22,8 @@ export default new Vuex.Store({
       state.user = undefined
       state.token = undefined
     },
-    saveDepartmentInfo (state, department) {
-      state.department = department
+    saveDateInfo (state, date) {
+      state.date = date
     },
     saveCountryPosition (state, position) {
       state.position = position
