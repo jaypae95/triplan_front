@@ -2,36 +2,36 @@
   <div class="example ex1">
     <h1>Share plan</h1>
     <label class="radio red">
-      <input type="radio" name="group1" v-model="tour_type" value=0/>
+      <input type="radio" name="group1" v-model="tour_type" value="0"/>
       <span>혼자서</span>
     </label>
     <label class="radio blue">
-      <input type="radio" name="group1" v-model="tour_type" value=1/>
+      <input type="radio" name="group1" v-model="tour_type" value="1"/>
       <span>친구들</span>
     </label>
     <label class="radio orange">
-      <input type="radio" name="group1" v-model="tour_type" value=2/>
+      <input type="radio" name="group1" v-model="tour_type" value="2"/>
       <span>가족</span>
     </label>
     <label class="radio orange">
-      <input type="radio" name="group1" v-model="tour_type" value=3/>
+      <input type="radio" name="group1" v-model="tour_type" value="3"/>
       <span>연인</span>
     </label>
     <br><br>
     <label class="radio red">
-      <input type="radio" name="group2"/>
+      <input type="radio" name="group2" v-model="season" value="0"/>
       <span>봄</span>
     </label>
     <label class="radio blue">
-      <input type="radio" name="group2"/>
+      <input type="radio" name="group2" v-model="season" value="1"/>
       <span>여름</span>
     </label>
     <label class="radio orange">
-      <input type="radio" name="group2"/>
+      <input type="radio" name="group2" v-model="season" value="2"/>
       <span>가을</span>
     </label>
     <label class="radio orange">
-      <input type="radio" name="group2"/>
+      <input type="radio" name="group2" v-model="season" value="3"/>
       <span>겨울</span>
     </label>
     <br><br>
@@ -42,18 +42,48 @@
     <router-link to='/'>
       <img id="illu" src="../assets/gotoHome.png">
     </router-link>
+    <div id="tour_list" v-if="clickedSearch==true">
+      <div class="centered" v-for="tour in tours" :key="tour.idPlan">
+        <div style="border: 3px solid #4cbaa8;; border-radius: 10%; margin:10px; padding: 10px">
+          <router-link :to="{ name: 'DetailTour', params: { id: tour.idPlan }}">
+            {{tour.title}}
+            <br><br>
+            {{tour.depart_day}} ~ {{tour.arrive_day}}
+            <br><br>
+            {{tour.country_name}}
+          </router-link>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
+import API from '../components/API'
 export default {
   data () {
     return {
+      tours: [],
       tour_type: '',
-      idPlan: ''
+      season: '',
+      idPlan: '',
+      clickedSearch: false
     }
   },
   methods: {
     search: function () {
+      const data = {
+        tour_type: this.tour_type,
+        season: this.season
+      }
+      API.searchTourAPI(this.$http, this.$env.apiUrl, data).then(res => {
+        this.clickedSearch = true
+        this.tours = res.data
+        if (res.data.success === true) {
+          this.$router.push('/')
+        }
+      }).catch(err => {
+        console.log(err)
+      })
     }
   }
 }
@@ -138,5 +168,10 @@ export default {
 
   .ex1 .orange input:checked + span:before {
     background-color: orange;
+  }
+  article{
+    margin: 10px;
+    border-radius: 5px;
+    border-color: #42b983;
   }
 </style>
