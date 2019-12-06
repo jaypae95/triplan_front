@@ -1,13 +1,15 @@
 <template>
   <div>
-    <select @change="selectContinent($event)" name="continent">
+    <span>Select Continents : </span>
+    <select class="sel" @change="selectContinent($event)" name="continent">
       <option></option>
       <option v-for="continent in continents" :key="continent.id">{{continent}}</option>
     </select>
     <br><br>
 
     <div v-if="checkContinent">
-      <select @change="selectCountry($event)" name="country">
+      <span>Select Country : </span>
+      <select class="sel" @change="selectCountry($event)" name="country">
         <option></option>
         <option v-for="country in countries" :key="country.id">{{country.country_name}}</option>
       </select>
@@ -16,24 +18,14 @@
 
     <div v-if="untilCountry === false">
       <div v-if="checkCountry">
-        <select @change="selectCity($event)" name="city">
+        <span>Select City : </span>
+        <select class="sel" @change="selectCity($event)" name="city">
           <option></option>
           <option v-for="city in cities" v-bind:key="city.id">{{city.city_name}}</option>
         </select>
       </div>
       <br>
-
-      <div v-if="checkCity">
-        <select @change="selectPlace($event)" name="place">
-          <option></option>
-          <option v-for="place in places" v-bind:key="place.id">{{place}}</option>
-        </select>
-      </div>
-      <br>
-
-      <div v-if="checkPlace">
-        <p>Your Selection : </p>
-      </div>
+      <button id="btn" v-on:click="reset">초기화</button>
     </div>
     <br>
   </div>
@@ -45,11 +37,12 @@ import API from '../components/API'
 export default {
   data () {
     return {
+      noList: false,
       checkContinent: false,
       checkCountry: false,
       checkCity: false,
       checkPlace: false,
-      continents: ['아시아', '유럽', '북아메리카'],
+      continents: ['아시아', '유럽', '남태평양', '북아메리카', '남아메리카'],
       countries: [],
       cities: [],
       places: []
@@ -63,8 +56,7 @@ export default {
       // eslint-disable-next-line
       this.checkContinent = false,
       this.checkCountry = false,
-      this.checkCity = false,
-      this.checkPlace = false
+      this.checkCity = false
     },
     pushCountries (item) {
       this.countries.push({
@@ -88,6 +80,8 @@ export default {
 
       API.getCountryAPI(this.$http, this.$env.apiUrl, idContinent).then(res => {
         this.checkContinent = true
+        this.checkCountry = false
+        this.checkCity = false
         res.data.forEach(this.pushCountries)
       }).catch(err => {
         console.log(err)
@@ -102,6 +96,7 @@ export default {
       } else {
         API.getCityAPI(this.$http, this.$env.apiUrl, idCountry).then(res => {
           this.checkCountry = true
+          this.checkCity = false
           res.data.forEach(this.pushCities)
         }).catch(err => {
           console.log(err)
@@ -116,12 +111,12 @@ export default {
       API.getPlaceAPI(this.$http, this.$env.apiUrl, idCity).then(res => {
         this.checkCity = true
         res.data.forEach(this.pushPlaces)
+        if (this.places.length === 0) this.noList = true
+        this.$emit('select-city', this.places)
+        this.$emit('is-no-list', this.noList)
       }).catch(err => {
         console.log(err)
       })
-    },
-    selectPlace () {
-      this.checkPlace = true
     }
   }
 
