@@ -4,7 +4,7 @@
     <router-link to="/">Go To Main</router-link><br><br>
 
     <span>Select Continents : </span>
-    <select id="sel" @change="selectContinent($event)" name="continent">
+    <select class="sel" @change="selectContinent($event)" name="continent">
 <!--      <option disabled value="">Select Continent</option>-->
       <option></option>
       <option v-for="continent in continents" :key="continent.id">{{continent}}</option>
@@ -13,7 +13,7 @@
 
     <div v-if="checkContinent">
       <span>Select Country : </span>
-      <select id="sel" @change="selectCountry($event)" name="country">
+      <select class="sel" @change="selectCountry($event)" name="country">
 <!--      <option disabled value="">Select Country</option>-->
       <option></option>
       <option v-for="country in countries" :key="country.id">{{country.country_name}}</option>
@@ -23,7 +23,7 @@
 
     <div  v-if="checkCountry">
       <span>Select City : </span>
-    <select id="sel" @change="selectCity($event)" name="city">
+    <select class="sel" @change="selectCity($event)" name="city">
 <!--      <option disabled value="">Select City</option>-->
       <option></option>
       <option v-for="city in cities" v-bind:key="city.id">{{city.city_name}}</option>
@@ -57,13 +57,12 @@ export default {
       checkContinent: false,
       checkCountry: false,
       checkCity: false,
-      continents: ['아시아', '유럽', '북아메리카'],
+      continents: ['아시아', '유럽', '남태평양', '북아메리카', '남아메리'],
       countries: [],
       cities: [],
       places: []
     }
   },
-
   methods: {
     reset () {
       // eslint-disable-next-line
@@ -96,7 +95,6 @@ export default {
         this.checkCountry = false
         this.checkCity = false
         res.data.forEach(this.pushCountries)
-        console.log(this.countries)
       }).catch(err => {
         console.log(err)
       })
@@ -119,7 +117,6 @@ export default {
       this.places = []
       const idxCity = this.cities.findIndex(e => e.city_name === event.target.value)
       const idCity = this.cities[idxCity].idCity
-      console.log(idxCity)
 
       API.getPlaceAPI(this.$http, this.$env.apiUrl, idCity).then(res => {
         this.checkCity = true
@@ -147,7 +144,7 @@ export default {
     font-family: monospace;
     border-radius: 8px;
   }
-  #sel{
+  .sel{
     padding: 3px;
     font-size: 20px;
     border-radius: 6px;
