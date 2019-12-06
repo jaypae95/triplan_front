@@ -61,6 +61,7 @@ export default {
       date.start = date.start.replace('/', '-')
       date.start = date.start.replace('/', '-')
       date.end = date.end.replace('/', '-')
+      date.end = date.end.replace('/', '-')
       console.log(date)
     },
     async clickMakePlan () {
