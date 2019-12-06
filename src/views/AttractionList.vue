@@ -44,21 +44,27 @@ export default {
   },
 
   methods: {
+    pushCountries (item) {
+      this.countries.push(item.country_name)
+    },
+    pushCities (item) {
+      this.cities.push(item.city_name)
+    },
     selectContinent () {
-      API.getContinent(this.$http, this.$env.apiUrl, '1').then(res => {
+      API.getCountryAPI(this.$http, this.$env.apiUrl, '1').then(res => {
         console.log(res)
         this.checkContinent = true
-        this.continents.push(res.data.country_name)
+        res.data.forEach(this.pushCountries)
+        console.log(this.countries)
       }).catch(err => {
         console.log(err)
       })
     },
-
     selectCountry () {
-      API.getCountry(this.$http, this.$env.apiUrl, '13').then(res => {
+      API.getCityAPI(this.$http, this.$env.apiUrl, '13').then(res => {
         console.log(res)
         this.checkCountry = true
-        this.countries.push(res.data)
+        res.data.forEach(this.pushCities)
       }).catch(err => {
         console.log(err)
       })
