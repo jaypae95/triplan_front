@@ -75,6 +75,14 @@ function getPlaceAPI ($http, host, id) {
   })
 }
 
+function searchTourAPI ($http, host, data) {
+  return $http({
+    method: 'post',
+    url: host + '/share_plan',
+    data
+  })
+}
+
 // noinspection JSUnusedGlobalSymbols
 export default {
   httpTest,
@@ -86,5 +94,6 @@ export default {
   getCountryPositionAPI,
   getCountryAPI,
   getCityAPI,
-  getPlaceAPI
+  getPlaceAPI,
+  searchTourAPI
 }
