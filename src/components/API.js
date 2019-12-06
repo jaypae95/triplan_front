@@ -38,10 +38,10 @@ function getCountryPositionAPI ($http, host, data) {
   })
 }
 
-function getCountryAPI ($http, host, name) {
+function getCountryAPI ($http, host, id) {
   return $http({
     method: 'get',
-    url: host + `/trip_list/continent/${name}`
+    url: host + `/trip_list/continent/${id}`
   })
 }
 
@@ -49,6 +49,13 @@ function getCityAPI ($http, host, id) {
   return $http({
     method: 'get',
     url: host + `/trip_list/country/${id}`
+  })
+}
+
+function getPlaceAPI ($http, host, id) {
+  return $http({
+    method: 'get',
+    url: host + `/trip_list/place/${id}`
   })
 }
 
@@ -60,5 +67,6 @@ export default {
   checkingOverlap,
   getCountryPositionAPI,
   getCountryAPI,
-  getCityAPI
+  getCityAPI,
+  getPlaceAPI
 }
