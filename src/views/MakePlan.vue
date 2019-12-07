@@ -2,13 +2,21 @@
   <div class="makePlan">
     <h1>Make Plan</h1>
     <div id="div0">
-    <div v-bind:key="item" v-for="item in newDays">
+    <div v-for="item in dayplan" v-bind:key='item'>
       <ul id="uli">
       <button id="addDay">
-        Day {{item}}
+        Day {{item.day}}
       </button>
       <div v-if="item%10==0"><br></div>
       </ul>
+    </div>
+    <button v-on:click="cl1">고르기</button>
+   <div v-if="showM" @close="showM=false">
+     <select @change="selectCity($event)" name="city">
+<!--      <option disabled value="">Select City</option>-->
+      <option></option>
+      <option v-for="city in cities" v-bind:key="city.id">{{city.city_name}}</option>
+    </select>
     </div>
      <button id="addBtn" v-on:click="newAdd">+</button>
      </div>
@@ -18,8 +26,8 @@
         <p id="w1"> 관광지</p>
       </div>
       <br>
-      <div v-bind:key="tour" v-for ="tour in tours">
-        {{tour}}
+      <div v-for ="idx in places" v-bind:key='idx'>
+        <button v-on:click="makeTour(idx)">{{idx.place_name}}</button>
         <br>
       </div>
     </div>
@@ -29,38 +37,80 @@
       <div id="tourList">
         <p id="w1"> 코스</p>
       </div>
-      <div id="show" v-bind:key="pl" v-for="pl in newPls">
-        <div>
-
+      <div id="show" v-for="pl in tours" v-bind:key='pl'>
+        <div id="div_tour"> {{pl.place_name}}
         </div>
       </div>
-      <button class="btn" >저장</button>
+      <button class="btn" v-on:click="storage()" >저장</button>
     </div>
   </div>
 </template>
 
 <script>
 import mapping from '../components/map'
+import API from '../components/API'
 var number = 0
 export default {
   name: 'makePlan',
   data () {
     return {
+      showM: false,
       tours: [],
-      newDays: [],
-      newPls: [],
-      city_id: '',
-      place_id: []
+      dayplan: [],
+      country_id: '',
+      cities: [],
+      places: [],
+      checkCity: ''
     }
   },
   methods: {
-    place () {
-    // const res=await API.getCountryTourList( this.$http, this.$env.apiUrl, data)
+    pushCities (item) {
+      this.cities.push({
+        idCity: item.idCity,
+        city_name: item.city_name
+      })
+    },
+    pushPlaces (item) {
+      this.places.push({
+        place_name: item.place_name,
+        place_id: item.place_id})
+    },
+    cl1 () {
+      this.showM = true
+      this.country_id = this.$store.state.country.country_id
+      API.getCityAPI(this.$http, this.$env.apiUrl, this.country_id).then(res => {
+        res.data.forEach(this.pushCities)
+      }).catch(err => {
+        console.log(err)
+      })
     },
     newAdd () {
-      console.log(this.newDays.length)
+      const data = {
+        tour: this.tours,
+        day: number
+      }
+      if (number !== 0) {
+        this.dayplan.push(data)
+        const len = this.tours.length
+        this.tours.splice(len)
+        console.log(this.tours)
+      }
       number++
-      this.newDays.push(number)
+    },
+    selectCity (event) {
+      this.places = []
+      const idxCity = this.cities.findIndex(e => e.city_name === event.target.value)
+      const idCity = this.cities[idxCity].idCity
+
+      API.getPlaceAPI(this.$http, this.$env.apiUrl, idCity).then(res => {
+        this.checkCity = true
+        res.data.forEach(this.pushPlaces)
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    makeTour (idx) {
+      this.tours.push(idx)
     }
   },
   components: {
@@ -69,8 +119,7 @@ export default {
 }
 </script>
 <style>
-div{
-}
+
 #uli{
   white-space: nowrap;
 }
@@ -99,7 +148,7 @@ h1{
   font-family: "DX경필고딕"
 }
 #show{
-  height: 80%;
+
 }
 .btn{
   position: relative;
@@ -115,5 +164,8 @@ h1{
   border: solid 3px #3d3b3b;
   border-radius: 7px;
   color: #ffffff;
+}
+#div_tour{
+  height: auto;
 }
 </style>
