@@ -43,59 +43,59 @@
   </transition>
 </template>
 <script>
-    import API from '../components/API'
-    import VueHotelDatepicker from '@northwalker/vue-hotel-datepicker'
-    import SelectOption from '../components/SelectOption'
+import API from '../components/API'
+import VueHotelDatepicker from '@northwalker/vue-hotel-datepicker'
+import SelectOption from '../components/SelectOption'
 
-    export default {
-        name: 'mymodal',
-        components: {
-            'vue-hotel-datepicker': VueHotelDatepicker,
-            'select-option': SelectOption
-        },
-        data () {
-            return {
-                date: '',
-                long: '',
-                lat: '',
-                tmpdata: '',
-                country_id: '',
-                title: '',
-                checkCountry: false
-            }
-        },
-        methods: {
-            getDate (date) {
-                date.start = date.start.replace('/', '-')
-                date.start = date.start.replace('/', '-')
-                date.end = date.end.replace('/', '-')
-                date.end = date.end.replace('/', '-')
-                this.date = date
-            },
-            getCountryInfo (data) {
-                this.country_id = data
-                this.checkCountry = true
-            },
-            async clickMakePlan () {
-                const data = {
-                    country_id: this.country_id
-                }
-                const res = await API.getCountryPositionAPI(this.$http, this.$env.apiUrl, data).catch(() => {
-                })
-
-                const countryInfo = {
-                    country_id: this.country_id,
-                    lat: res.data.country_lat,
-                    long: res.data.country_long
-                }
-
-                this.$store.commit('saveTitle', this.title)
-                this.$store.commit('saveDateInfo', this.date)
-                this.$store.commit('saveCountryPosition', countryInfo)
-                this.$router.push('/makeplan')
-            }
-        }
+export default {
+  name: 'mymodal',
+  components: {
+    'vue-hotel-datepicker': VueHotelDatepicker,
+    'select-option': SelectOption
+  },
+  data () {
+    return {
+      date: '',
+      long: '',
+      lat: '',
+      tmpdata: '',
+      country_id: '',
+      title: '',
+      checkCountry: false
     }
+  },
+  methods: {
+    getDate (date) {
+      date.start = date.start.replace('/', '-')
+      date.start = date.start.replace('/', '-')
+      date.end = date.end.replace('/', '-')
+      date.end = date.end.replace('/', '-')
+      this.date = date
+    },
+    getCountryInfo (data) {
+      this.country_id = data
+      this.checkCountry = true
+    },
+    async clickMakePlan () {
+      const data = {
+        country_id: this.country_id
+      }
+      const res = await API.getCountryPositionAPI(this.$http, this.$env.apiUrl, data).catch(() => {
+      })
+
+      const countryInfo = {
+        country_id: this.country_id,
+        lat: res.data.country_lat,
+        long: res.data.country_long
+      }
+
+      this.$store.commit('saveTitle', this.title)
+      this.$store.commit('saveDateInfo', this.date)
+      this.$store.commit('saveCountryPosition', countryInfo)
+      this.$router.push('/makeplan')
+    }
+  }
+}
 
 </script>
 <style lang="css">
