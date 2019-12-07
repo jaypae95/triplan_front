@@ -31,8 +31,8 @@
     <br>
     <br>
 
-<!--    <router-link to="/mypage">Go To MyPage</router-link>-->
-<!--    <br><br>-->
+    <!--    <router-link to="/mypage">Go To MyPage</router-link>-->
+    <!--    <br><br>-->
     <router-link to="/confirmplan">Go To ConfirmPlan Page</router-link>
     <br>
 
@@ -40,31 +40,31 @@
 </template>
 
 <script>
-import Modal from '../components/MyModal.vue'
+    import Modal from '../components/MyModal.vue'
 
-export default {
-  name: 'MainPage',
-  data () {
-    return {
-      showModal: false
+    export default {
+        name: 'MainPage',
+        data () {
+            return {
+                showModal: false
+            }
+        },
+        methods: {
+            logout: function () {
+                this.$store.commit('removeUser')
+            }
+        },
+        computed: {
+            isLoggedIn: function () {
+                if (this.$store.state.user === undefined) {
+                    return false
+                } else { return true }
+            }
+        },
+        components: {
+            Modal: Modal
+        }
     }
-  },
-  methods: {
-    logout: function () {
-      this.$store.commit('removeUser')
-    }
-  },
-  computed: {
-    isLoggedIn: function () {
-      if (this.$store.state.user === undefined) {
-        return false
-      } else { return true }
-    }
-  },
-  components: {
-    Modal: Modal
-  }
-}
 </script>
 
 <style scoped>
@@ -96,6 +96,7 @@ export default {
   #illu1, #illu2, #illu3 {
     width: 200px;
     height: 200px;
+    cursor: pointer;
   }
 
   #lo1 {
@@ -107,7 +108,6 @@ export default {
     height: 33px;
     border: 0;
     background-color: #ffffff;
-
   }
 
   .loli {
