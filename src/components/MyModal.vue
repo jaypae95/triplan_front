@@ -97,7 +97,7 @@ export default {
 </script>
 <style lang="css">
   .closeModalBtn {
-    color: #62acde;
+    color: #64b99f;
   }
 
   .modal-mask {
@@ -130,7 +130,7 @@ export default {
 
   .modal-header h3 {
     margin-top: 0;
-    color: #62acde;
+    color: #64b99f;
   }
 
   .modal-body {
