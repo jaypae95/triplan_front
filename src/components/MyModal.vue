@@ -32,7 +32,8 @@
             :until-country=true
             @select-country="getCountryInfo"/>
           <br><br>
-          <button class="modal-default-button" v-on:click="clickMakePlan()">Make Plan!</button>
+          <div v-if="checkCountry"><button class="modal-default-button" v-on:click="clickMakePlan()">Make Plan!
+          </button></div>
           <button class="modal-default-button" @click="$emit('close')">Close
           </button>
           <br>
@@ -42,62 +43,64 @@
   </transition>
 </template>
 <script>
-import API from '../components/API'
-import VueHotelDatepicker from '@northwalker/vue-hotel-datepicker'
-import SelectOption from '../components/SelectOption'
+    import API from '../components/API'
+    import VueHotelDatepicker from '@northwalker/vue-hotel-datepicker'
+    import SelectOption from '../components/SelectOption'
 
-export default {
-  name: 'mymodal',
-  components: {
-    'vue-hotel-datepicker': VueHotelDatepicker,
-    'select-option': SelectOption
-  },
-  data () {
-    return {
-      date: '',
-      long: '',
-      lat: '',
-      tmpdata: '',
-      country_id: '',
-      title: ''
+    export default {
+        name: 'mymodal',
+        components: {
+            'vue-hotel-datepicker': VueHotelDatepicker,
+            'select-option': SelectOption
+        },
+        data () {
+            return {
+                date: '',
+                long: '',
+                lat: '',
+                tmpdata: '',
+                country_id: '',
+                title: '',
+                checkCountry: false
+            }
+        },
+        methods: {
+            getDate (date) {
+                date.start = date.start.replace('/', '-')
+                date.start = date.start.replace('/', '-')
+                date.end = date.end.replace('/', '-')
+                date.end = date.end.replace('/', '-')
+                this.date = date
+            },
+            getCountryInfo (data) {
+                this.country_id = data
+                this.checkCountry = true
+            },
+            async clickMakePlan () {
+                const data = {
+                    country_id: this.country_id
+                }
+                const res = await API.getCountryPositionAPI(this.$http, this.$env.apiUrl, data).catch(() => {
+                })
+
+                const countryInfo = {
+                    country_id: this.country_id,
+                    lat: res.data.country_lat,
+                    long: res.data.country_long
+                }
+
+                this.$store.commit('saveTitle', this.title)
+                this.$store.commit('saveDateInfo', this.date)
+                this.$store.commit('saveCountryPosition', countryInfo)
+                this.$router.push('/makeplan')
+            }
+        }
     }
-  },
-  methods: {
-    getDate (date) {
-      date.start = date.start.replace('/', '-')
-      date.start = date.start.replace('/', '-')
-      date.end = date.end.replace('/', '-')
-      date.end = date.end.replace('/', '-')
-      this.date = date
-    },
-    getCountryInfo (data) {
-      this.country_id = data
-    },
-    async clickMakePlan () {
-      const data = {
-        country_id: this.country_id
-      }
-      const res = await API.getCountryPositionAPI(this.$http, this.$env.apiUrl, data).catch(() => {
-      })
-
-      const countryInfo = {
-        country_id: this.country_id,
-        lat: res.data.country_lat,
-        long: res.data.country_long
-      }
-
-      this.$store.commit('saveTitle', this.title)
-      this.$store.commit('saveDateInfo', this.date)
-      this.$store.commit('saveCountryPosition', countryInfo)
-      this.$router.push('/makeplan')
-    }
-  }
-}
 
 </script>
 <style lang="css">
   .closeModalBtn {
-    color: #64b99f;
+    color: #62acde;
   }
 
   .modal-mask {
@@ -130,7 +133,7 @@ export default {
 
   .modal-header h3 {
     margin-top: 0;
-    color: #64b99f;
+    color: #62acde;
   }
 
   .modal-body {
@@ -138,10 +141,10 @@ export default {
   }
 
   .modal-default-button {
-    float: right;
     color: #fff;
+    float: right;
     background-color: #64b99f;
-    font-size: 16px;
+    font-size: 20px;
     border-radius: 8px;
   }
 
