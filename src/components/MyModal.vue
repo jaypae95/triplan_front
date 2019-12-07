@@ -25,7 +25,7 @@
           <vue-hotel-datepicker
             :value="date"
             @confirm="getDate"/>
-          <input type="text" v-model="title" placeholder="title"><br>
+          <input type="text" v-model="title" placeholder="Your Trip Title"><br>
           <br>
           <br>
           <select-option
@@ -33,7 +33,7 @@
             @select-country="getCountryInfo"/>
           <br><br>
           <button class="modal-default-button" v-on:click="clickMakePlan()">Make Plan!</button>
-          <button class="modal-default-button" @click="$emit('close')">close
+          <button class="modal-default-button" @click="$emit('close')">Close
           </button>
           <br>
         </div>
@@ -139,6 +139,10 @@ export default {
 
   .modal-default-button {
     float: right;
+    color: #fff;
+    background-color: #64b99f;
+    font-size: 16px;
+    border-radius: 8px;
   }
 
   /*
