@@ -56,16 +56,24 @@ export default {
   color: #fff;
     background-color: #64b99f;
     font-size: 26px;
-    font-family: monospace;
     border-radius: 8px;
   }
   .sel{
     padding: 3px;
     font-size: 20px;
+    color: #64b99f;
+    border: 2px solid #64b99f;
     border-radius: 6px;
     box-sizing: content-box;
   }
   #noAttr{
     font-size: 26px;
+  }
+  hr{
+    border: none;
+    border-top: 3px dotted #64b99f;
+    color: #fff;
+    height: 1px;
+    width: 70%;
   }
 </style>
