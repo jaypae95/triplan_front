@@ -142,9 +142,7 @@ export default {
       })
     },
     makeTour (idx) {
-      this.tours.push({
-        place_id: idx.place_id
-      })
+      this.tours.push(idx.place_id)
       this.placeNames.push({
         place_name: idx.place_name
       })
@@ -152,7 +150,7 @@ export default {
     addTour () {
       const data = {
         city_id: cc,
-        place_id: this.tours,
+        place_id: this.tours
       }
       const data2 = {
         day: dayNum,
