@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <p id="title" class="display-3">{{tours.title}}</p>
+    <p id="title" class="display-4">{{tours.title}}</p>
     <p id="date" >{{tours.depart_day}} ~ {{tours.arrive_day}}</p>
     <button class="btn btn-outline-info" v-if="tours.tour_type==0">
       혼자여행
@@ -107,8 +107,12 @@ export default {
 </script>
 
 <style scoped>
+  @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+  #app {
+    margin: 15% auto auto auto
+  }
   *{
-    font-family: "DX경필고딕";
+    font-family: 'Jeju Gothic', sans-serif;
   }
 section{
   width:150px;

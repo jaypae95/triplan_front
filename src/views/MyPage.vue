@@ -91,6 +91,7 @@ export default {
 }
 </script>
 <style>
+  @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
   *{
     color:#000000;
   }
@@ -101,7 +102,7 @@ export default {
     margin: auto;
     padding:30px;
     text-align: center;
-    font-family: 'Nanum Pen Script', cursive !important;
+    font-family: 'Jeju Gothic', sans-serif !important;
     width: 40px;
   }
   td {
