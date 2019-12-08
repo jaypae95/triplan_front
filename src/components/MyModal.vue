@@ -32,8 +32,9 @@
             :until-country=true
             @select-country="getCountryInfo"/>
           <br><br>
-          <div v-if="checkCountry"><button class="modal-default-button" v-on:click="clickMakePlan()">Make Plan!
-          </button></div>
+          <div v-if="checkCountry">
+            <button class="modal-default-button" v-on:click="clickMakePlan()">Make Plan!</button>
+          </div>
           <button class="modal-default-button" @click="$emit('close')">Close
           </button>
           <br>
@@ -99,6 +100,7 @@ export default {
       this.$store.commit('saveTitle', this.title)
       this.$store.commit('saveDateInfo', this.date)
       this.$store.commit('saveCountryPosition', countryInfo)
+      this.$store.commit('savePlanId', res.data.idPlan)
       this.$router.push('/makeplan')
     }
   }

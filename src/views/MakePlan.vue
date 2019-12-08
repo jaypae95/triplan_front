@@ -2,16 +2,15 @@
   <div class="makePlan">
     <h1>Make Plan</h1>
     <div id="div0">
-      <button id="addBtn" v-on:click="newAdd">+</button>
       <div v-for="item in Days" v-bind:key='item.idx'>
-        <ul id="uli">
-          <button v-on:click="showTour(item.idx)">
+          <button id="btnDay" v-on:click="showTour(item.idx)">
             Day {{item.idx}}
             <br>
             {{item.st}}
           </button>
-        </ul>
       </div>
+      <button id="addBtn" v-on:click="newAdd">+</button>
+      <br>
       <button v-on:click="cl1">고르기</button>
       <div v-if="showM" @close="showM=false">
         <select @change="selectCity($event)" name="city">
@@ -23,8 +22,8 @@
     </div>
     <br>
     <div id="div1">
-      <div clas="tourList">
-        <p class="w1"> 관광지</p>
+      <div class="tourList">
+        <p class="w1">관광지</p>
       </div>
       <br>
       <div v-for="idx in places" v-bind:key='idx.place_id'>
@@ -43,7 +42,7 @@
         </div>
       </div>
       <button class="btn" v-on:click="addTour">저장</button>
-      <button class="btn" v-on:click="addTour">최종 저장</button>
+      <button class="btn" v-on:click="sendResult">최종 저장</button>
     </div>
   </div>
 </template>
@@ -54,6 +53,7 @@ import API from '../components/API'
 
 var number = 1
 var dayNum = 0
+var cc = ''
 export default {
   name: 'makePlan',
   data () {
@@ -64,7 +64,6 @@ export default {
       country_id: '',
       cities: [],
       places: [],
-      checkCity: '',
       Days: [],
       checking: []
     }
@@ -135,9 +134,8 @@ export default {
       this.places = []
       const idxCity = this.cities.findIndex(e => e.city_name === event.target.value)
       const idCity = this.cities[idxCity].idCity
-
+      cc = idCity
       API.getPlaceAPI(this.$http, this.$env.apiUrl, idCity).then(res => {
-        this.checkCity = true
         res.data.forEach(this.pushPlaces)
       }).catch(err => {
         console.log(err)
@@ -151,8 +149,9 @@ export default {
     },
     addTour (d) {
       const data = {
-        tour: this.tours,
-        day: dayNum
+        place_id: this.tours,
+        day: dayNum,
+        city_id: cc
       }
       this.dayplan[data.day - 1] = data
       console.log(this.dayplan)
@@ -167,6 +166,19 @@ export default {
         const result = this.dayplan[idx - 1].tour
         this.tours = result
       }
+    },
+    sendResult () {
+      const idPlan = this.$store.state.idPlan
+      const data = {
+        idPlan: idPlan,
+        dayplan: this.dayplan
+      }
+      console.log('id: ' + idPlan)
+      API.getCompletePlan(this.$http, this.$env.apiUrl, data).then(res => {
+        if (res.success === true) { console.log('hello') }
+      }).catch(err => {
+        console.log(err)
+      })
     }
   },
   components: {
@@ -176,9 +188,13 @@ export default {
 </script>
 <style>
 
-  #uli {
-    white-space: nowrap;
-  }
+#btnDay{
+  float:left;
+  margin: 2px 5px;
+  background-color: #ffffff;
+  border: 2px dashed  #FF6D6A;
+
+}
 
   #div0 {
     text-align: right;
@@ -187,12 +203,14 @@ export default {
   #div1, #div2 {
     float: left;
     width: 20%;
-    height: 99vh;
+    height: 70vh;
     border: 4px solid #FF6D6A;
   }
-
+  #div1{
+    margin: 0px 0px 0px 10px
+  }
   h1 {
-    size: 50px;
+    size: 100px;
   }
 
   .tourList {
@@ -203,10 +221,6 @@ export default {
   .w1 {
     color: #ffffff;
     font-family: "DX경필고딕"
-  }
-
-  #show {
-
   }
 
   .btn {

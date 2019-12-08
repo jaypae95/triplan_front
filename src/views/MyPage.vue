@@ -23,7 +23,10 @@
         <td>연락처</td>
         <td>{{user.user_phone}}</td>
       </tr>
-      <tr>
+
+      <h3 style="margin-left: 170px;">내가 만든 일정 목록</h3>
+      <div v-if="tours.length===0" style="margin-left: 170px;">내가 만든 일정이 없습니다.</div>
+      <tr v-else>
         <td colspan="2">
           <div class="centered" v-for="tour in tours" :key="tour.idPlan">
             <div style="border: 3px solid #4cbaa8;; border-radius: 10%; margin:10px; padding: 10px">
@@ -43,12 +46,9 @@
     </table>
     <router-link to='/'>Go To Main</router-link>
   </div>
-
 </template>
-
 <script>
 import API from '../components/API'
-
 export default {
   data () {
     return {
@@ -92,9 +92,11 @@ export default {
   table {
     margin: auto;
     text-align: center;
+    border : 4px solid #d6fff3;
+    border-radius: 5px;
   }
-
   td {
     padding: 10px;
+    background-color: #d6fff3;
   }
 </style>

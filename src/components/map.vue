@@ -69,7 +69,7 @@ export default {
   }
   .Apple {
     width: 57%;
-    height: 100vh;
+    height: 70vh;
     float: left;
   }
 </style>

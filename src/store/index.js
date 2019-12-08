@@ -10,7 +10,8 @@ export default new Vuex.Store({
     user: undefined,
     date: undefined,
     country: undefined,
-    title: undefined
+    title: undefined,
+    idPlan: undefined
   },
   mutations: {
     saveUser (state, user) {
@@ -32,10 +33,14 @@ export default new Vuex.Store({
     saveTitle (state, title) {
       state.title = title
     },
+    savePlanId (state, idPlan) {
+      state.idPlan = idPlan
+    },
     removeModal (state) {
       state.title = undefined
       state.country = undefined
       state.position = undefined
+      state.idPlan = undefined
     }
   },
   plugins: [createPersist({

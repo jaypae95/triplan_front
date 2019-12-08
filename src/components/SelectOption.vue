@@ -25,9 +25,8 @@
         </select>
       </div>
       <br>
-      <button id="btn" v-on:click="reset">초기화</button>
+      <button id="btn" v-on:click="reset"><img id="illu" src="../assets/reset.png"> </button>
     </div>
-    <br>
   </div>
 </template>
 
@@ -56,7 +55,8 @@ export default {
       // eslint-disable-next-line
       this.checkContinent = false,
       this.checkCountry = false,
-      this.checkCity = false
+      this.checkCity = false,
+      this.noList = true
     },
     pushCountries (item) {
       this.countries.push({
@@ -71,7 +71,13 @@ export default {
       })
     },
     pushPlaces (item) {
-      this.places.push(item.place_name)
+      // this.places.push(item.place_name)
+      this.places.push({
+        idPlace: item.idPlace,
+        place_name: item.place_name,
+        place_img: item.place_img,
+        place_explanation: item.place_explanation
+      })
     },
 
     selectContinent (event) {
@@ -112,6 +118,7 @@ export default {
         this.checkCity = true
         res.data.forEach(this.pushPlaces)
         if (this.places.length === 0) this.noList = true
+        else this.noList = false
         this.$emit('select-city', this.places)
         this.$emit('is-no-list', this.noList)
       }).catch(err => {
@@ -119,6 +126,15 @@ export default {
       })
     }
   }
-
 }
 </script>
+<style>
+ #illu{
+    width: 80px;
+    height: 35px;
+  }
+  #btn{
+    background-color: #ffffff;
+    border: none;
+  }
+</style>
