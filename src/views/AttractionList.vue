@@ -6,7 +6,7 @@
       @select-city="getPlaceInfo"
       @is-no-list="isNoList"/>
       <router-link to='/'>
-      <img id="illu" src="../assets/gotoHome.png">
+      <img class="illu" src="../assets/gotoHome.png">
     </router-link><br>
     <div v-if="checkCity">
       <div v-if="noList">
@@ -14,9 +14,9 @@
       </div>
       <ul v-for="place in places" v-bind:key="place.id"><b>{{place}}</b><br>
         <!--          Image url here, NEED TO BE UPDATED-->
-        <img id="illu" src="https://img-wishbeen.akamaized.net/plan/1453194127890_%ED%81%AC%EA%B8%B0%EB%B3%80%ED%99%98_KQ7A1270.jpg"><br><hr>
+        <img class="illu" src="https://img-wishbeen.akamaized.net/plan/1453194127890_%ED%81%AC%EA%B8%B0%EB%B3%80%ED%99%98_KQ7A1270.jpg"><br><hr>
       </ul>
-      
+
     </div>
     <br>
   </div>
@@ -74,7 +74,7 @@ export default {
     height: 1px;
     width: 70%;
   }
-  #illu{
+  .illu{
     width: 80px;
     height: 35px;
   }

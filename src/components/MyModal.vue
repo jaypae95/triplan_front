@@ -100,7 +100,7 @@ export default {
       this.$store.commit('saveTitle', this.title)
       this.$store.commit('saveDateInfo', this.date)
       this.$store.commit('saveCountryPosition', countryInfo)
-      // this.$store.commit('savePlanId', res.data.idPlan)
+      this.$store.commit('savePlanId', res.data.idPlan)
       this.$router.push('/makeplan')
     }
   }

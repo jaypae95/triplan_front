@@ -149,9 +149,9 @@ export default {
     },
     addTour (d) {
       const data = {
-        place_id : this.tours,
+        place_id: this.tours,
         day: dayNum,
-        city_id : cc
+        city_id: cc
       }
       this.dayplan[data.day - 1] = data
       console.log(this.dayplan)
@@ -166,18 +166,16 @@ export default {
         const result = this.dayplan[idx - 1].tour
         this.tours = result
       }
-
     },
-    sendResult(){
+    sendResult () {
       const idPlan = this.$store.state.idPlan
       const data = {
-        idPlan : idPlan,
-        dayplan : this.dayplan
+        idPlan: idPlan,
+        dayplan: this.dayplan
       }
-      console.log("id: " + idPlan)
-      API.getCompletePlan(this.$http, this.$env.apiUrl, data).then(res=>{
-       if (res.success === true)
-       console.log('hello')
+      console.log('id: ' + idPlan)
+      API.getCompletePlan(this.$http, this.$env.apiUrl, data).then(res => {
+        if (res.success === true) { console.log('hello') }
       }).catch(err => {
         console.log(err)
       })
