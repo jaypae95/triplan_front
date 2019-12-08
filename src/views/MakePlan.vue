@@ -137,21 +137,21 @@ export default {
       const idCity = this.cities[idxCity].idCity
       cc = idCity
       API.getPlaceAPI(this.$http, this.$env.apiUrl, idCity).then(res => {
-        res.data.forEach(this.pushPlaces)       
+        res.data.forEach(this.pushPlaces)
       }).catch(err => {
         console.log(err)
       })
     },
     makeTour (idx) {
       console.log(idx)
-      console.log("next")
+      console.log('next')
       console.log(idx.place_id)
       this.tours.push({
         place_id: idx.place_id
       })
       console.log(this.tours)
       this.placeNames.push({
-        place_name : idx.place_name
+        place_name: idx.place_name
       })
     },
     addTour () {
@@ -159,10 +159,10 @@ export default {
         place_id: this.tours,
         day: dayNum,
         city_id: cc,
-        place_name : this.placeNames
+        place_name: this.placeNames
       }
       this.dayplan[data.day - 1] = data
-     // console.log(this.dayplan)
+      // console.log(this.dayplan)
       this.checking[dayNum] = 1
       this.placeNames = []
     },
