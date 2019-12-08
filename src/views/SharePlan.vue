@@ -185,4 +185,9 @@ export default {
     border-radius: 5px;
     border-color: #42b983;
   }
+  ul{
+    width:400px;
+    vertical-align: middle;
+    margin:auto;
+  }
 </style>

@@ -1,12 +1,12 @@
 <template>
   <div id="mypage">
     <h1>마이 페이지</h1>
-    <table>
+    <table class="table table-striped table-responsive-sm" style="width:400px">
       <tr>
         <td>이름</td>
         <td>{{user.user_name}}</td>
       </tr>
-      <tr>
+      <tr class="table-success">
         <td>아이디</td>
         <td>{{user.user_id}}</td>
       </tr>
@@ -14,7 +14,7 @@
         <td>이메일</td>
         <td>{{user.user_email}}</td>
       </tr>
-      <tr>
+      <tr class="table-success">
         <td>성별</td>
         <td v-if="user.user_gender">남</td>
         <td v-else>여</td>
@@ -23,22 +23,24 @@
         <td>연락처</td>
         <td>{{user.user_phone}}</td>
       </tr>
-
-      <h3 style="margin-left: 170px;">내가 만든 일정 목록</h3>
-      <div v-if="tours.length===0" style="margin-left: 170px;">내가 만든 일정이 없습니다.</div>
+    </table>
+    <h1>내가 만든 일정 목록</h1>
+    <table class="table table-striped table-responsive-sm" style="width:400px">
+      <div v-if="tours.length===0">내가 만든 일정이 없습니다.</div>
       <tr v-else>
         <td colspan="2">
           <div class="centered" v-for="tour in tours" :key="tour.idPlan">
-            <div style="border: 3px solid #4cbaa8;; border-radius: 10%; margin:10px; padding: 10px">
+            <div class="card mt-3">
               <router-link :to="{ name: 'DetailTour', params: { id: tour.idPlan }}">
-                {{tour.title}}
-                <br><br>
-                {{tour.depart_day}} ~ {{tour.arrive_day}}
-                <br><br>
-                {{tour.country_name}}
-                <br><br>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item" style="font-size:27px">{{tour.title}}</li>
+                  <li class="list-group-item">{{tour.depart_day}} ~ {{tour.arrive_day}}</li>
+                  <li class="list-group-item">{{tour.country_name}}</li>
+                </ul>
               </router-link>
-              <button @click="clickToggleShare($event, tour.idPlan)">{{shareButtonText(tour)}}</button>
+              <div class="card-body">
+                <button class="btn btn-outline-success" @click="clickToggleShare($event, tour.idPlan)">{{shareButtonText(tour)}}</button>
+              </div>
             </div>
           </div>
         </td>
@@ -89,17 +91,23 @@ export default {
 }
 </script>
 <style>
+  *{
+    color:#000000;
+  }
   #mypage {
     margin: 15% auto auto auto
   }
   table {
     margin: auto;
+    padding:30px;
     text-align: center;
-    border : 4px solid #d6fff3;
-    border-radius: 5px;
+    font-family: 'Nanum Pen Script', cursive !important;
+    width: 40px;
   }
   td {
     padding: 10px;
-    background-color: #d6fff3;
+  }
+  h1{
+      font-family: 'Nanum Pen Script', cursive !important;
   }
 </style>
