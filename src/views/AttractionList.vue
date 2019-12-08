@@ -13,7 +13,7 @@
         <p id="noAttr">No Attraction!</p>
       </div>
       <ul v-for="place in places" v-bind:key="place.place_name"><b>{{place.place_name}}</b><br>
-        <img :src=place.place_img>
+        <img class="img" :src=place.place_img>
         <p>{{place.place_explanation}}</p>
         <br><hr>
       </ul>
@@ -50,13 +50,7 @@ export default {
 </script>
 
 <style>
-  #btn{
-    color: #fff;
-    background-color: #64b99f;
-    font-size: 26px;
-    border-radius: 8px;
-  }
-  .sel{
+    .sel{
     padding: 3px;
     font-size: 20px;
     color: #64b99f;
@@ -74,8 +68,13 @@ export default {
     height: 1px;
     width: 70%;
   }
-  .illu{
-    width: 80px;
-    height: 35px;
+    .illu{
+      width: 80px;
+      height: 35px;
+    }
+
+    .img{
+    width: 550px;
+    height: auto;
   }
 </style>

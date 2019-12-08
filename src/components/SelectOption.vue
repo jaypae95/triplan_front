@@ -73,6 +73,7 @@ export default {
     pushPlaces (item) {
       // this.places.push(item.place_name)
       this.places.push({
+        idPlace: item.idPlace,
         place_name: item.place_name,
         place_img: item.place_img,
         place_explanation: item.place_explanation
