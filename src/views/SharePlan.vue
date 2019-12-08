@@ -104,7 +104,7 @@ export default {
   }
 
   .example {
-    margin: 20px;
+    margin: 15% auto auto auto
   }
 
   .example input {

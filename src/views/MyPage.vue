@@ -89,6 +89,9 @@ export default {
 }
 </script>
 <style>
+  #mypage {
+    margin: 15% auto auto auto
+  }
   table {
     margin: auto;
     text-align: center;
