@@ -1,5 +1,5 @@
 <template>
-  <div class="example ex1">
+  <div class="example ex1 myfont">
     <h1>검색할 태그를 선택하세요</h1>
     <label class="radio spring">
       <input type="radio" name="group1" v-model="tour_type" value="0"/>
@@ -35,12 +35,11 @@
       <span>겨울</span>
     </label>
     <br><br>
-    <button class="btn btn-success" v-on:click="search()"> search</button>
+    <button class="btn btn-outline-success" v-on:click="search()"> search</button>
     <br>
     {{idPlan}}
-    <br><br>
     <router-link to='/'>
-      <button class="btn btn-success">홈으로</button>
+      <button class="btn btn-outline-success">홈으로</button>
     </router-link>
     <div id="tour_list" v-if="clickedSearch==true">
       <div class="centered" v-for="tour in tours" :key="tour.idPlan">
@@ -94,8 +93,8 @@ export default {
 <style>
 
   h1 {
-    font-family: "DX경필고딕";
     size: 70px;
+    margin: 50px;
   }
 
   #illu {
@@ -189,5 +188,13 @@ export default {
     width:400px;
     vertical-align: middle;
     margin:auto;
+  }
+
+  button {
+    margin: 20px;
+  }
+
+  .myfont {
+    font-family: 'Nanum Pen Script', cursive !important;
   }
 </style>
