@@ -170,7 +170,6 @@ export default {
       dayNum = idx
       if (this.checking[dayNum] === 1) {
         const result = this.dayplan[idx - 1].place_name
-        console.log(result)
         this.placeNames = result
       }
     },
