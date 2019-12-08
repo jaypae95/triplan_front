@@ -158,6 +158,7 @@ export default {
       }
       this.dayplan[data2.day - 1] = data
       this.dayplanNames[data2.day - 1] = data2
+      this.tours = []
       this.checking[dayNum] = 1
       this.placeNames = []
     },
