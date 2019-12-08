@@ -67,7 +67,8 @@ export default {
       places: [],
       Days: [],
       checking: [],
-      placeNames: []
+      placeNames: [],
+      dayplanNames: []
     }
   },
   methods: {
@@ -150,20 +151,23 @@ export default {
     },
     addTour () {
       const data = {
-        place_id: this.tours,
-        day: dayNum,
         city_id: cc,
+        place_id: this.tours,
+      }
+      const data2 = {
+        day: dayNum,
         place_name: this.placeNames
       }
-      this.dayplan[data.day - 1] = data
+      this.dayplan[data2.day - 1] = data
+      this.dayplanNames[data2.day - 1] = data2
       this.checking[dayNum] = 1
       this.placeNames = []
     },
     showTour (idx) {
-      this.tours = []
+      this.placeNames = []
       dayNum = idx
       if (this.checking[dayNum] === 1) {
-        const result = this.dayplan[idx - 1].place_name
+        const result = this.dayplanNames[idx - 1].place_name
         this.placeNames = result
       }
     },
@@ -189,7 +193,7 @@ export default {
 
 #btnDay{
   float:left;
-  margin: 2px 5px;
+  margin:0px 5px;
   background-color: #ffffff;
   border: 2px dashed  #FF6D6A;
 
