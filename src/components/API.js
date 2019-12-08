@@ -53,7 +53,6 @@ function getCountryTourList ($http, host, data) {
     data
   })
 }
-
 function getCountryAPI ($http, host, id) {
   return $http({
     method: 'get',

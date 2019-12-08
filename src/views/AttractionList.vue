@@ -1,22 +1,24 @@
 <template>
   <div id="app">
-    <p>Attraction List Page</p>
-    <router-link to="/">Go To Main</router-link><br><br>
+    <h1>Attraction List Page</h1>
     <select-option
       :until-country=false
       @select-city="getPlaceInfo"
       @is-no-list="isNoList"/>
+      <router-link to='/'>
+      <img id="illu" src="../assets/gotoHome.png">
+    </router-link><br>
     <div v-if="checkCity">
       <div v-if="noList">
         <p id="noAttr">No Attraction!</p>
       </div>
       <ul v-for="place in places" v-bind:key="place.id"><b>{{place}}</b><br>
         <!--          Image url here, NEED TO BE UPDATED-->
-        <img id="ii" src="https://img-wishbeen.akamaized.net/plan/1453194127890_%ED%81%AC%EA%B8%B0%EB%B3%80%ED%99%98_KQ7A1270.jpg"><br><hr>
+        <img id="illu" src="https://img-wishbeen.akamaized.net/plan/1453194127890_%ED%81%AC%EA%B8%B0%EB%B3%80%ED%99%98_KQ7A1270.jpg"><br><hr>
       </ul>
+      
     </div>
     <br>
-
   </div>
 </template>
 
@@ -48,10 +50,6 @@ export default {
 </script>
 
 <style>
-  #ii{
-    width:400px;
-    height:200px;
-  }
   #btn{
     color: #fff;
     background-color: #64b99f;
@@ -75,5 +73,9 @@ export default {
     color: #fff;
     height: 1px;
     width: 70%;
+  }
+  #illu{
+    width: 80px;
+    height: 35px;
   }
 </style>
