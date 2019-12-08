@@ -1,57 +1,56 @@
 <template>
   <div class="example ex1">
-    <h1>Share plan</h1>
-    <label class="radio red">
+    <h1>검색할 태그를 선택하세요</h1>
+    <label class="radio spring">
       <input type="radio" name="group1" v-model="tour_type" value="0"/>
       <span>혼자서</span>
     </label>
-    <label class="radio blue">
+    <label class="radio summer">
       <input type="radio" name="group1" v-model="tour_type" value="1"/>
       <span>친구들</span>
     </label>
-    <label class="radio orange">
+    <label class="radio fall">
       <input type="radio" name="group1" v-model="tour_type" value="2"/>
       <span>가족</span>
     </label>
-    <label class="radio orange">
+    <label class="radio winter">
       <input type="radio" name="group1" v-model="tour_type" value="3"/>
       <span>연인</span>
     </label>
     <br><br>
-    <label class="radio red">
+    <label class="radio spring">
       <input type="radio" name="group2" v-model="season" value="0"/>
       <span>봄</span>
     </label>
-    <label class="radio blue">
+    <label class="radio summer">
       <input type="radio" name="group2" v-model="season" value="1"/>
       <span>여름</span>
     </label>
-    <label class="radio orange">
+    <label class="radio fall">
       <input type="radio" name="group2" v-model="season" value="2"/>
       <span>가을</span>
     </label>
-    <label class="radio orange">
+    <label class="radio winter">
       <input type="radio" name="group2" v-model="season" value="3"/>
       <span>겨울</span>
     </label>
     <br><br>
-    <button v-on:click="search()"> search</button>
+    <button class="btn btn-success" v-on:click="search()"> search</button>
     <br>
     {{idPlan}}
     <br><br>
     <router-link to='/'>
-      <img id="illu" src="../assets/gotoHome.png">
+      <button class="btn btn-success">홈으로</button>
     </router-link>
     <div id="tour_list" v-if="clickedSearch==true">
       <div class="centered" v-for="tour in tours" :key="tour.idPlan">
-        <div style="border: 3px solid #4cbaa8;; border-radius: 10%; margin:10px; padding: 10px">
+        <div style="padding:10px">
           <router-link :to="{ name: 'DetailTour', params: { id: tour.idPlan }}">
-            {{tour.idPlan}}
-            {{tour.title}}
-            <br><br>
-            {{tour.depart_day}} ~ {{tour.arrive_day}}
-            <br><br>
-            {{tour.country_name}}
+            <ul class="list-group">
+            <li class="list-group-item list-group-item-success">{{tour.title}}</li>
+            <li class="list-group-item list-group-item-light">{{tour.depart_day}} ~ {{tour.arrive_day}}</li>
+            <li class="list-group-item list-group-item-light">{{tour.country_name}}</li>
+            </ul>
           </router-link>
         </div>
       </div>
@@ -61,6 +60,8 @@
 <script>
 import API from '../components/API'
 export default {
+  created: function () {
+  },
   data () {
     return {
       tours: [],
@@ -144,31 +145,40 @@ export default {
     box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
   }
 
-  .ex1 .red input:checked + span {
-    color: red;
-    border-color: red;
+  .ex1 .spring input:checked + span {
+    color: #35ff59;
+    border: 3px solid #35ff59;
   }
 
-  .ex1 .red input:checked + span:before {
-    background-color: red;
+  .ex1 .spring input:checked + span:before {
+    background-color: #35ff59;
   }
 
-  .ex1 .blue input:checked + span {
-    color: blue;
-    border-color: blue;
+  .ex1 .summer input:checked + span {
+    color: #5c72ff;
+    border-color: #5c72ff;
   }
 
-  .ex1 .blue input:checked + span:before {
-    background-color: blue;
+  .ex1 .summer input:checked + span:before {
+    background-color: #5c72ff;
   }
 
-  .ex1 .orange input:checked + span {
-    color: orange;
-    border-color: orange;
+  .ex1 .fall input:checked + span {
+    color: #ff682e;
+    border-color: #ff682e;
   }
 
-  .ex1 .orange input:checked + span:before {
-    background-color: orange;
+  .ex1 .fall input:checked + span:before {
+    background-color: #ff682e;
+  }
+
+  .ex1 .winter input:checked + span {
+    color: #6cf0ff;
+    border-color: #6cf0ff;
+  }
+
+  .ex1 .winter input:checked + span:before {
+    background-color: #6cf0ff;
   }
   article{
     margin: 10px;

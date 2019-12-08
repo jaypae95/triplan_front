@@ -1,44 +1,45 @@
 <template>
   <div id="app">
-    <p id="title">{{tours.title}}</p>
-    <p id="date">{{tours.depart_day}} ~ {{tours.arrive_day}}</p>
-    <b v-if="tours.tour_type==0">
+    <p id="title" class="display-3">{{tours.title}}</p>
+    <p id="date" >{{tours.depart_day}} ~ {{tours.arrive_day}}</p>
+    <button class="btn btn-outline-info" v-if="tours.tour_type==0">
       혼자여행
-    </b>
-    <b v-else-if="tours.tour_type==1">
+    </button>
+    <button class="btn btn-outline-info" v-else-if="tours.tour_type==1">
       친구와 여행
-    </b>
-    <b v-else-if="tours.tour_type==2">
+    </button>
+    <button class="btn btn-outline-info" v-else-if="tours.tour_type==2">
       가족과 여행
-    </b>
-    <b v-else-if="tours.tour_type==3">
+    </button>
+    <button class="btn btn-outline-info" v-else-if="tours.tour_type==3">
       연인과 여행
-    </b>
-    <b v-if="tours.season==0">
+    </button>
+    <button class="btn btn-outline-info" v-if="tours.season==0">
       봄
-    </b>
-    <b v-else-if="tours.season==1">
+    </button>
+    <button class="btn btn-outline-info" v-else-if="tours.season==1">
       여름
-    </b>
-    <b v-else-if="tours.season==2">
+    </button>
+    <button class="btn btn-outline-info" v-else-if="tours.season==2">
       가을
-    </b>
-    <b v-else-if="tours.season==3">
+    </button>
+    <button class="btn btn-outline-info" v-else-if="tours.season==3">
       겨울
-    </b>
-    <p>{{tours.country_name}}</p>
+    </button>
+    <br><br>
+    <p id="country" class="alert alert-success">{{tours.country_name}}</p>
     <div class= "sec" v-for="(day,index) in tours.dayplan" :key="day.dayplan_id">
       <table>
         <tr>
           <td>
-            <p>Day {{index+1}} {{day.city_name}}</p>
+            <p class="tourList list-group-item-warning">Day {{index+1}} {{day.city_name}}</p>
           </td>
         </tr>
         <tr>
           <td>
-            <div v-for="place in day.place" :key="place.place_name" style="display: table-cell">
-              <section v-on:mouseover="doMouseOver($event)" v-on:mouseleave="doMouseLeave($event)">
-                <p class="nohover">{{place.place_name}}</p>
+            <div v-for="place in day.place" :key="place.place_name" style="display: table-cell;padding: 20px">
+              <section v-on:mouseover="doMouseOver($event)" v-on:mouseleave="doMouseLeave($event)" v-bind:style="{'backgroundImage': `url(${place.place_img}`}" >
+                <p class="nohover badge badge-pill badge-success">{{place.place_name}}</p>
               </section>
             </div>
           </td>
@@ -88,15 +89,15 @@ export default {
       })
 
       let article = document.createElement('article')
-      article.setAttribute('style', 'position:absolute;background:#D8F6CE;width:200px;height:200px;left:' + x + 'px;top:' + y + 'px;')
+      article.setAttribute('style', 'position:absolute;background:#01DF74;width:200px;height:200px;left:' + x + 'px;top:' + y + 'px;color:#ffffff;fonr-size:larger')
       var obj = this.tours.dayplan[dayIndex].place[placeIndex]
-      article.innerHTML = ('<p>' + obj.place_name + '</p>')
-      article.innerHTML += '<img src="../assets/ready_img.png">'
+      article.innerHTML = ('<p style="font-size:x-large;">' + obj.place_name + '</p>')
       article.innerHTML += ('<p>' + obj.place_explanation + '</p>')
       document.getElementById('app').appendChild(article)
     },
     doMouseLeave (e) {
       var count = document.getElementById('app').childElementCount
+      console.log(count)
       for (var i = 0; i < count; i++) {
         document.getElementById('app').removeChild(document.getElementsByTagName('article')[i])
       }
@@ -119,13 +120,28 @@ section{
   align-content: center;
   align-items: center;
   vertical-align: middle;
-  margin: auto;
-  background-image: url('https://img-wishbeen.akamaized.net/plan/1453194127890_%ED%81%AC%EA%B8%B0%EB%B3%80%ED%99%98_KQ7A1270.jpg');
+  margin: 30px;
+  padding:30px
 }
   .nohover {
     pointer-events: none;
+    text-align: center;
+    align-content: center;
+    align-items: center;
+    vertical-align: middle;
   }
 table {
   margin: 0px auto
 }
+  #title{
+  }
+  #date{
+    font-size: 30px;
+  }
+  #country{
+    font-size: 30px;
+  }
+  b{
+
+  }
 </style>
