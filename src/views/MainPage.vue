@@ -2,7 +2,7 @@
   <div class="MainPage">
     <div id="lo1">
       <li>
-        <span v-if="isLoggedIn"><router-link to="/mypage" tag="button">MyPage</router-link></span>
+        <span v-if="isLoggedIn"><router-link to="/mypage"><img class="loli" src="../assets/myPage.png"></router-link></span>
         <span v-if="isLoggedIn"><a @click="logout"><img class="loli" src="../assets/logout.png"></a></span>
         <span v-else>
         <router-link to='/login'>
