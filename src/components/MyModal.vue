@@ -26,6 +26,11 @@
             :value="date"
             @confirm="getDate"/>
           <input type="text" v-model="title" placeholder="Your Trip Title"><br>
+          <input type="radio" v-model="tour_type" placeholder="writeType" name = "tourType" value=0> 혼자서
+           <input type="radio" v-model="tour_type" placeholder="writeType" name = "tourType" value=1> 친구들
+            <input type="radio" v-model="tour_type" placeholder="writeType" name = "tourType" value=2> 가족
+             <input type="radio" v-model="tour_type" placeholder="writeType" name = "tourType" value=3> 연인
+
           <br>
           <br>
           <select-option
@@ -80,14 +85,19 @@ export default {
       this.checkCountry = true
     },
     async clickMakePlan () {
+      if (this.date.start >= 3 && this.date.start <= 5) this.season = 0
+      else if (this.date.start >= 6 && this.date.start <= 8) this.season = 1
+      else if (this.date.start >= 9 && this.date.start <= 11) this.season = 2
+      else this.season = 3
       const data = {
         depart_day: this.date.start,
         arrive_day: this.date.end,
         title: this.title,
-        tour_type: 0,
-        season: 0,
+        tour_type: this.tour_type,
+        season: this.season,
         country_id: this.country_id
       }
+      console.log(data)
       const res = await API.getCountryPositionAPI(this.$http, this.$env.apiUrl, data).catch(() => {
       })
 
