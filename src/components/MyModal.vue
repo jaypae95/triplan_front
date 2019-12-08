@@ -25,15 +25,16 @@
           <vue-hotel-datepicker
             :value="date"
             @confirm="getDate"/>
-          <input type="text" v-model="title" placeholder="title"><br>
+          <input type="text" v-model="title" placeholder="Your Trip Title"><br>
           <br>
           <br>
           <select-option
             :until-country=true
             @select-country="getCountryInfo"/>
           <br><br>
-          <button class="modal-default-button" v-on:click="clickMakePlan()">Make Plan!</button>
-          <button class="modal-default-button" @click="$emit('close')">close
+          <div v-if="checkCountry"><button class="modal-default-button" v-on:click="clickMakePlan()">Make Plan!
+          </button></div>
+          <button class="modal-default-button" @click="$emit('close')">Close
           </button>
           <br>
         </div>
@@ -59,7 +60,8 @@ export default {
       lat: '',
       tmpdata: '',
       country_id: '',
-      title: ''
+      title: '',
+      checkCountry: false
     }
   },
   methods: {
@@ -72,6 +74,7 @@ export default {
     },
     getCountryInfo (data) {
       this.country_id = data
+      this.checkCountry = true
     },
     async clickMakePlan () {
       const data = {
@@ -138,7 +141,11 @@ export default {
   }
 
   .modal-default-button {
+    color: #fff;
     float: right;
+    background-color: #64b99f;
+    font-size: 20px;
+    border-radius: 8px;
   }
 
   /*
@@ -161,5 +168,14 @@ export default {
   .modal-leave-active .modal-container {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
+  }
+
+  input{
+    padding: 3px;
+    font-size: 20px;
+    color: #64b99f;
+    border: 2px solid #64b99f;
+    border-radius: 6px;
+    box-sizing: content-box;
   }
 </style>

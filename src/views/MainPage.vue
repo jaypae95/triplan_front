@@ -2,6 +2,7 @@
   <div class="MainPage">
     <div id="lo1">
       <li>
+        <span v-if="isLoggedIn"><router-link to="/mypage" tag="button">MyPage</router-link></span>
         <span v-if="isLoggedIn"><a @click="logout"><img class="loli" src="../assets/logout.png"></a></span>
         <span v-else>
         <router-link to='/login'>
@@ -30,8 +31,8 @@
     <br>
     <br>
 
-    <router-link to="/mypage">Go To MyPage</router-link>
-    <br><br>
+    <!--    <router-link to="/mypage">Go To MyPage</router-link>-->
+    <!--    <br><br>-->
     <router-link to="/confirmplan">Go To ConfirmPlan Page</router-link>
     <br>
 
@@ -84,7 +85,6 @@ export default {
   a {
     color: #42b983;
   }
-
   #menu1, #menu2, #menu3 {
     width: 200px;
     height: 200px;
@@ -96,6 +96,7 @@ export default {
   #illu1, #illu2, #illu3 {
     width: 200px;
     height: 200px;
+    cursor: pointer;
   }
 
   #lo1 {
@@ -107,7 +108,6 @@ export default {
     height: 33px;
     border: 0;
     background-color: #ffffff;
-
   }
 
   .loli {
