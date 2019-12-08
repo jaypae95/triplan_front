@@ -35,8 +35,7 @@
                 {{tour.country_name}}
                 <br><br>
               </router-link>
-              <button v-if="tour.is_shared===0" @click="clickToggleShare(tour.idPlan)">공유하기</button>
-              <button v-else @click="clickToggleShare(tour.idPlan)">공유 취소하기</button>
+              <button @click="clickToggleShare($event, tour.idPlan)">{{shareButtonText(tour)}}</button>
             </div>
           </div>
         </td>
@@ -58,11 +57,23 @@ export default {
     }
   },
   methods: {
-    clickToggleShare (id) {
+    clickToggleShare (event, id) {
+      if (event.target.innerText === '공유하기') {
+        event.target.innerHTML = '공유 취소하기'
+      } else {
+        event.target.innerText = '공유하기'
+      }
       const data = {
         idPlan: id
       }
       API.toggleSharePlanAPI(this.$http, this.$env.apiUrl, data).catch(() => {})
+    },
+    shareButtonText (tour) {
+      if (tour.is_shared === 0) {
+        return '공유하기'
+      } else {
+        return '공유 취소하기'
+      }
     }
   },
   created () {
@@ -72,6 +83,8 @@ export default {
     }).catch(err => {
       console.log(err)
     })
+  },
+  computed: {
   }
 }
 </script>
