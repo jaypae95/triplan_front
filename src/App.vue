@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="navbar navbar-expand-sm bg-light navbar-light">
+    <div class="navbar navbar-light navbar-expand-md fixed-top myfont" style="background-color: rgba(255, 255, 255, 0.50)">
       <a href="/" class="navbar-brand">TRIPLAN</a>
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
@@ -78,8 +78,8 @@ export default {
     text-align: center;
     color: #2c3e50;
   }
-
-  .nav-item {
-    font-family: "Kannada MN";
+  .myfont {
+    font-family: 'Nanum Pen Script', cursive !important;
+    font-size: 20px;
   }
 </style>
