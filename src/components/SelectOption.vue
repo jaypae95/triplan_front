@@ -55,7 +55,8 @@ export default {
       // eslint-disable-next-line
       this.checkContinent = false,
       this.checkCountry = false,
-      this.checkCity = false
+      this.checkCity = false,
+      this.noList = true
     },
     pushCountries (item) {
       this.countries.push({
@@ -70,7 +71,12 @@ export default {
       })
     },
     pushPlaces (item) {
-      this.places.push(item.place_name)
+      // this.places.push(item.place_name)
+      this.places.push({
+        place_name: item.place_name,
+        place_img: item.place_img,
+        place_explanation: item.place_explanation
+      })
     },
 
     selectContinent (event) {
@@ -111,6 +117,7 @@ export default {
         this.checkCity = true
         res.data.forEach(this.pushPlaces)
         if (this.places.length === 0) this.noList = true
+        else this.noList = false
         this.$emit('select-city', this.places)
         this.$emit('is-no-list', this.noList)
       }).catch(err => {

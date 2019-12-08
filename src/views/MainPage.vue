@@ -69,6 +69,9 @@ export default {
 </script>
 
 <style scoped>
+.MainPage{
+  height: 100vh;
+}
   h1, h2 {
     font-weight: normal;
   }

@@ -11,6 +11,13 @@
       </div>
       <button id="addBtn" v-on:click="newAdd">+</button>
       <br>
+    </div>
+    <br>
+    <div id="div1">
+      <div class="tourList">
+        <p class="w1">관광지</p>
+      </div>
+      <br>
       <button v-on:click="cl1">고르기</button>
       <div v-if="showM" @close="showM=false">
         <select @change="selectCity($event)" name="city">
@@ -19,15 +26,9 @@
           <option v-for="city in cities" v-bind:key="city.id">{{city.city_name}}</option>
         </select>
       </div>
-    </div>
-    <br>
-    <div id="div1">
-      <div class="tourList">
-        <p class="w1">관광지</p>
-      </div>
-      <br>
+      <br><br>
       <div v-for="idx in places" v-bind:key='idx.place_id'>
-        <button v-on:click="makeTour(idx.place_id, idx.place_name)">{{idx.place_name}}</button>
+        <button v-on:click="makeTour(idx)">{{idx.place_name}}</button>
         <br>
       </div>
     </div>
@@ -37,8 +38,8 @@
       <div class="tourList">
         <p class="w1"> 코스</p>
       </div>
-      <div id="show" v-for="pl in tours" v-bind:key='pl.place_id'>
-        <div id="div_tour"> {{pl.name}}
+      <div id="show" v-for="pl in placeNames" v-bind:key='pl.place_name'>
+        <div id="div_tour"> {{pl.place_name}}
         </div>
       </div>
       <button class="btn" v-on:click="addTour">저장</button>
@@ -65,7 +66,8 @@ export default {
       cities: [],
       places: [],
       Days: [],
-      checking: []
+      checking: [],
+      placeNames: []
     }
   },
   methods: {
@@ -76,13 +78,11 @@ export default {
       })
     },
     pushPlaces (item) {
-      const data = {
-        place_name: item.place_name,
-        place_id: item.place_id
-      }
       this.places.push({
-        ...data
+        place_id: item.idPlace,
+        place_name: item.place_name
       })
+      console.log(this.places)
     },
     cl1 () {
       this.showM = true
@@ -106,6 +106,7 @@ export default {
           idx: number
         }
         this.Days.push(data)
+        console.log(this.Days)
         if (start[0] === end[0] && start[1] === end[1] && start[2] === end[2]) break
         var check = 0
         start[2] += 1
@@ -136,34 +137,43 @@ export default {
       const idCity = this.cities[idxCity].idCity
       cc = idCity
       API.getPlaceAPI(this.$http, this.$env.apiUrl, idCity).then(res => {
-        res.data.forEach(this.pushPlaces)
+        res.data.forEach(this.pushPlaces)       
       }).catch(err => {
         console.log(err)
       })
     },
-    makeTour (id, name) {
+    makeTour (idx) {
+      console.log(idx)
+      console.log("next")
+      console.log(idx.place_id)
       this.tours.push({
-        place_id: id,
-        name: name
+        place_id: idx.place_id
+      })
+      console.log(this.tours)
+      this.placeNames.push({
+        place_name : idx.place_name
       })
     },
-    addTour (d) {
+    addTour () {
       const data = {
         place_id: this.tours,
         day: dayNum,
-        city_id: cc
+        city_id: cc,
+        place_name : this.placeNames
       }
       this.dayplan[data.day - 1] = data
-      console.log(this.dayplan)
+     // console.log(this.dayplan)
       this.checking[dayNum] = 1
-      this.tours = []
+      this.placeNames = []
     },
     showTour (idx) {
       this.tours = []
       dayNum = idx
+      console.log(idx)
       console.log(dayNum)
       if (this.checking[dayNum] === 1) {
-        const result = this.dayplan[idx - 1].tour
+        const result = this.dayplan[idx - 1].placeNames
+        console.log(result)
         this.tours = result
       }
     },
@@ -173,9 +183,8 @@ export default {
         idPlan: idPlan,
         dayplan: this.dayplan
       }
-      console.log('id: ' + idPlan)
       API.getCompletePlan(this.$http, this.$env.apiUrl, data).then(res => {
-        if (res.success === true) { console.log('hello') }
+        if (res.data.success === true) { console.log('hello') }
       }).catch(err => {
         console.log(err)
       })
