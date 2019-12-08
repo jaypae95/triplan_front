@@ -54,7 +54,7 @@ export default {
   methods: {
     reset () {
       // eslint-disable-next-line
-      this.checkContinent = false,
+                this.checkContinent = false,
       this.checkCountry = false,
       this.checkCity = false
     },
@@ -112,6 +112,7 @@ export default {
         this.checkCity = true
         res.data.forEach(this.pushPlaces)
         if (this.places.length === 0) this.noList = true
+        else this.noList = false
         this.$emit('select-city', this.places)
         this.$emit('is-no-list', this.noList)
       }).catch(err => {
