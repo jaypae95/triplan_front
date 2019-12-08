@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="attractionlist">
     <h1>Attraction List Page</h1>
     <select-option
       :until-country=false
@@ -60,6 +60,9 @@ export default {
   }
   #noAttr{
     font-size: 26px;
+  }
+  #attractionlist {
+    margin: 15% auto auto auto;
   }
   hr{
     border: none;
