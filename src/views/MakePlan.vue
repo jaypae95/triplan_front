@@ -28,7 +28,7 @@
       </div>
       <br><br>
       <div v-for="idx in places" v-bind:key='idx.place_id'>
-        <button v-on:click="makeTour(idx)">{{idx.place_name}}</button>
+        <button class="btn btn-outline-secondary" v-on:click="makeTour(idx.place_id, idx.place_name)">{{idx.place_name}}</button>
         <br>
       </div>
     </div>
@@ -235,7 +235,7 @@ export default {
   .btn {
     position: relative;
     bottom: 0;
-    background-color: #FF6D6A;
+    /*background-color: #FF6D6A;*/
   }
 
   #addDay {
