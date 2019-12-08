@@ -82,7 +82,6 @@ export default {
         place_id: item.idPlace,
         place_name: item.place_name
       })
-      console.log(this.places)
     },
     cl1 () {
       this.showM = true
@@ -106,7 +105,6 @@ export default {
           idx: number
         }
         this.Days.push(data)
-        console.log(this.Days)
         if (start[0] === end[0] && start[1] === end[1] && start[2] === end[2]) break
         var check = 0
         start[2] += 1
@@ -143,13 +141,9 @@ export default {
       })
     },
     makeTour (idx) {
-      console.log(idx)
-      console.log('next')
-      console.log(idx.place_id)
       this.tours.push({
         place_id: idx.place_id
       })
-      console.log(this.tours)
       this.placeNames.push({
         place_name: idx.place_name
       })
@@ -162,7 +156,6 @@ export default {
         place_name: this.placeNames
       }
       this.dayplan[data.day - 1] = data
-      // console.log(this.dayplan)
       this.checking[dayNum] = 1
       this.placeNames = []
     },
@@ -182,7 +175,7 @@ export default {
         dayplan: this.dayplan
       }
       API.getCompletePlan(this.$http, this.$env.apiUrl, data).then(res => {
-        if (res.data.success === true) { console.log('hello') }
+        if (res.data.success === true) {}
       }).catch(err => {
         console.log(err)
       })
