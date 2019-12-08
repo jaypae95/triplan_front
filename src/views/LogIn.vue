@@ -59,6 +59,6 @@ export default {
     border-radius: 40px;
     width: 500px;
     padding: 20px 20px;
-    margin: auto;
+    margin: 15% auto auto auto;
   }
 </style>

@@ -71,6 +71,6 @@ export default {
     height:100vh;
   }
   .triplan-li {
-    margin-top: 15%;
+    margin: 20% auto auto auto;
   }
 </style>
