@@ -2,32 +2,32 @@
   <div class="makePlan">
     <h1>Make Plan</h1>
     <div id="div0">
-    <button id="addBtn" v-on:click="newAdd">+</button>
-    <div v-for="item in Days" v-bind:key='item.idx'>
-      <ul id="uli">
-      <button v-on:click="showTour(item.idx)">
-        Day {{item.idx}}
-        <br>
-        {{item.st}}
-      </button>
-      </ul>
+      <button id="addBtn" v-on:click="newAdd">+</button>
+      <div v-for="item in Days" v-bind:key='item.idx'>
+        <ul id="uli">
+          <button v-on:click="showTour(item.idx)">
+            Day {{item.idx}}
+            <br>
+            {{item.st}}
+          </button>
+        </ul>
+      </div>
+      <button v-on:click="cl1">고르기</button>
+      <div v-if="showM" @close="showM=false">
+        <select @change="selectCity($event)" name="city">
+          <!--      <option disabled value="">Select City</option>-->
+          <option></option>
+          <option v-for="city in cities" v-bind:key="city.id">{{city.city_name}}</option>
+        </select>
+      </div>
     </div>
-    <button v-on:click="cl1">고르기</button>
-   <div v-if="showM" @close="showM=false">
-     <select @change="selectCity($event)" name="city">
-<!--      <option disabled value="">Select City</option>-->
-      <option></option>
-      <option v-for="city in cities" v-bind:key="city.id">{{city.city_name}}</option>
-    </select>
-    </div>
-     </div>
-     <br>
+    <br>
     <div id="div1">
-      <div id="tourList">
-        <p id="w1"> 관광지</p>
+      <div clas="tourList">
+        <p class="w1"> 관광지</p>
       </div>
       <br>
-      <div v-for ="idx in places" v-bind:key='idx.place_id'>
+      <div v-for="idx in places" v-bind:key='idx.place_id'>
         <button v-on:click="makeTour(idx.place_id, idx.place_name)">{{idx.place_name}}</button>
         <br>
       </div>
@@ -35,15 +35,15 @@
     <mapping>
     </mapping>
     <div id="div2">
-      <div id="tourList">
-        <p id="w1"> 코스</p>
+      <div class="tourList">
+        <p class="w1"> 코스</p>
       </div>
       <div id="show" v-for="pl in tours" v-bind:key='pl.place_id'>
         <div id="div_tour"> {{pl.name}}
         </div>
       </div>
-      <button class="btn" v-on:click="addTour" >저장</button>
-      <button class="btn" v-on:click="addTour" >최종 저장</button>
+      <button class="btn" v-on:click="addTour">저장</button>
+      <button class="btn" v-on:click="addTour">최종 저장</button>
     </div>
   </div>
 </template>
@@ -51,6 +51,7 @@
 <script>
 import mapping from '../components/map'
 import API from '../components/API'
+
 var number = 1
 var dayNum = 0
 export default {
@@ -114,8 +115,7 @@ export default {
             start[2] = 1
             check = 1
           }
-        }
-        else {
+        } else {
           if (start[2] > 30) {
             start[2] = 1
             check = 1
@@ -146,14 +146,15 @@ export default {
     makeTour (id, name) {
       this.tours.push({
         place_id: id,
-        name: name})
+        name: name
+      })
     },
     addTour (d) {
       const data = {
         tour: this.tours,
         day: dayNum
       }
-      this.dayplan[data.day-1] = data
+      this.dayplan[data.day - 1] = data
       console.log(this.dayplan)
       this.checking[dayNum] = 1
       this.tours = []
@@ -163,7 +164,7 @@ export default {
       dayNum = idx
       console.log(dayNum)
       if (this.checking[dayNum] === 1) {
-        const result = this.dayplan[idx-1].tour
+        const result = this.dayplan[idx - 1].tour
         this.tours = result
       }
     }
@@ -175,52 +176,58 @@ export default {
 </script>
 <style>
 
-#uli{
-  white-space: nowrap;
-}
-#div0{
-  text-align: right;
-}
-#div1, #div2{
-  float: left;
-  width: 20%;
-  height: 99vh;
-   border: 4px solid #FF6D6A;
-}
-h1{
-  size:50px;
-}
-#tourList{
-  border: 4px solid #FF6D6A;
-  background-color: #FF6D6A;
-}
-#seeing{
-  height: auto;
-}
-#w1{
-  color: #ffffff;
-  font-weight: #ffffff;
-  font-family: "DX경필고딕"
-}
-#show{
+  #uli {
+    white-space: nowrap;
+  }
 
-}
-.btn{
-  position: relative;
-  bottom: 0;
-  background-color: #FF6D6A;
-}
-#addDay{
-  display: inline-block;
-  float: left;
-}
-#addBtn{
-  background-color: #3d3b3b;
-  border: solid 3px #3d3b3b;
-  border-radius: 7px;
-  color: #ffffff;
-}
-#div_tour{
-  height: auto;
-}
+  #div0 {
+    text-align: right;
+  }
+
+  #div1, #div2 {
+    float: left;
+    width: 20%;
+    height: 99vh;
+    border: 4px solid #FF6D6A;
+  }
+
+  h1 {
+    size: 50px;
+  }
+
+  .tourList {
+    border: 4px solid #FF6D6A;
+    background-color: #FF6D6A;
+  }
+
+  .w1 {
+    color: #ffffff;
+    font-family: "DX경필고딕"
+  }
+
+  #show {
+
+  }
+
+  .btn {
+    position: relative;
+    bottom: 0;
+    background-color: #FF6D6A;
+  }
+
+  #addDay {
+    display: inline-block;
+    float: left;
+  }
+
+  #addBtn {
+    background-color: #3d3b3b;
+    border: solid 3px #3d3b3b;
+    border-radius: 7px;
+    color: #ffffff;
+  }
+
+  #div_tour {
+    height: auto;
+  }
 </style>
