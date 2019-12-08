@@ -162,7 +162,7 @@ export default {
         place_name: this.placeNames
       }
       this.dayplan[data.day - 1] = data
-      // console.log(this.dayplan)
+       console.log(this.dayplan)
       this.checking[dayNum] = 1
       this.placeNames = []
     },
