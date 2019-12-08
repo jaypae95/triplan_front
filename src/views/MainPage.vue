@@ -1,24 +1,9 @@
 <template>
   <div class="MainPage">
-    <div id="lo1">
-      <li>
-        <span v-if="isLoggedIn"><router-link to="/mypage" tag="button">MyPage</router-link></span>
-        <span v-if="isLoggedIn"><a @click="logout"><img class="loli" src="../assets/logout.png"></a></span>
-        <span v-else>
-        <router-link to='/login'>
-          <img class="loli" src="../assets/login.png">
-        </router-link>
-        <router-link to='/signup'>
-          <img class="loli" src="../assets/add.png">
-        </router-link>
-        </span>
-      </li>
-    </div>
     <li>
       <router-link to="/attractionlist" id="menu1">
         <img id="illu1" src="../assets/menu1.png">
       </router-link>
-
       <img id="illu2" src="../assets/menu2.png" @click="showModal = true">
       <modal v-if="showModal" @close="showModal = false">
         <h3 slot="header">Select your trip date</h3>
@@ -47,18 +32,6 @@ export default {
   data () {
     return {
       showModal: false
-    }
-  },
-  methods: {
-    logout: function () {
-      this.$store.commit('removeUser')
-    }
-  },
-  computed: {
-    isLoggedIn: function () {
-      if (this.$store.state.user === undefined) {
-        return false
-      } else { return true }
     }
   },
   components: {
@@ -97,22 +70,5 @@ export default {
     width: 200px;
     height: 200px;
     cursor: pointer;
-  }
-
-  #lo1 {
-    text-align: right;
-  }
-
-  #login {
-    width: 90px;
-    height: 33px;
-    border: 0;
-    background-color: #ffffff;
-  }
-
-  .loli {
-    width: 80px;
-    height: 33px;
-    text-align: right;
   }
 </style>
