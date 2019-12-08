@@ -59,35 +59,35 @@
   </div>
 </template>
 <script>
-    import API from '../components/API'
-    export default {
-        data () {
-            return {
-                tours: [],
-                tour_type: '',
-                season: '',
-                idPlan: '',
-                clickedSearch: false
-            }
-        },
-        methods: {
-            search: function () {
-                const data = {
-                    tour_type: this.tour_type,
-                    season: this.season
-                }
-                API.searchTourAPI(this.$http, this.$env.apiUrl, data).then(res => {
-                    this.clickedSearch = true
-                    this.tours = res.data
-                    if (res.data.success === true) {
-                        this.$router.push('/')
-                    }
-                }).catch(err => {
-                    console.log(err)
-                })
-            }
-        }
+import API from '../components/API'
+export default {
+  data () {
+    return {
+      tours: [],
+      tour_type: '',
+      season: '',
+      idPlan: '',
+      clickedSearch: false
     }
+  },
+  methods: {
+    search: function () {
+      const data = {
+        tour_type: this.tour_type,
+        season: this.season
+      }
+      API.searchTourAPI(this.$http, this.$env.apiUrl, data).then(res => {
+        this.clickedSearch = true
+        this.tours = res.data
+        if (res.data.success === true) {
+          this.$router.push('/')
+        }
+      }).catch(err => {
+        console.log(err)
+      })
+    }
+  }
+}
 </script>
 
 <style>

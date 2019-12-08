@@ -25,9 +25,8 @@
         </select>
       </div>
       <br>
-      <button id="btn" v-on:click="reset">초기화</button>
+      <button id="btn" v-on:click="reset"><img id="illu" src="../assets/reset.png"> </button>
     </div>
-    <br>
   </div>
 </template>
 
@@ -72,7 +71,12 @@ export default {
       })
     },
     pushPlaces (item) {
-      this.places.push(item.place_name)
+      // this.places.push(item.place_name)
+      this.places.push({
+        place_name: item.place_name,
+        place_img: item.place_img,
+        place_explanation: item.place_explanation
+      })
     },
 
     selectContinent (event) {
@@ -121,6 +125,15 @@ export default {
       })
     }
   }
-
 }
 </script>
+<style>
+ #illu{
+    width: 80px;
+    height: 35px;
+  }
+  #btn{
+    background-color: #ffffff;
+    border: none;
+  }
+</style>
