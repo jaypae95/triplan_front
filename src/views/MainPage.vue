@@ -59,7 +59,7 @@ export default {
     height: 200px;
     border: 0;
     margin: 3rem 5rem;
-    background-color: #ffffff;
+    background-color: none;
   }
 
   #illu1, #illu2, #illu3 {
