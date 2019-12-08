@@ -61,6 +61,8 @@ export default {
       tmpdata: '',
       country_id: '',
       title: '',
+      tour_type: '',
+      season: '',
       checkCountry: false
     }
   },
@@ -78,6 +80,11 @@ export default {
     },
     async clickMakePlan () {
       const data = {
+        depart_day: this.date.start,
+        arrive_day: this.date.end,
+        title: this.title,
+        tour_type: 0,
+        season: 0,
         country_id: this.country_id
       }
       const res = await API.getCountryPositionAPI(this.$http, this.$env.apiUrl, data).catch(() => {
