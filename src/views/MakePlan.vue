@@ -1,6 +1,8 @@
 <template>
   <div class="makePlan">
     <h1>Make Plan</h1>
+    <router-link to="/">Go To Main</router-link><br><br>
+
     <div id="div0">
     <button id="addBtn" v-on:click="newAdd">+</button>
     <div v-for="item in Days" v-bind:key='item.idx'>
@@ -42,6 +44,7 @@
         <div id="div_tour"> {{pl.name}}
         </div>
       </div>
+      <button class="btn" v-on:click="reset()" >초기화</button>
       <button class="btn" v-on:click="addTour" >저장</button>
       <button class="btn" v-on:click="addTour" >최종 저장</button>
     </div>
@@ -114,8 +117,7 @@ export default {
             start[2] = 1
             check = 1
           }
-        }
-        else {
+        } else {
           if (start[2] > 30) {
             start[2] = 1
             check = 1
@@ -130,6 +132,9 @@ export default {
         }
         number++
       }
+    },
+    reset () {
+      this.tours = []
     },
     selectCity (event) {
       this.places = []
@@ -153,7 +158,7 @@ export default {
         tour: this.tours,
         day: dayNum
       }
-      this.dayplan[data.day-1] = data
+      this.dayplan[data.day - 1] = data
       console.log(this.dayplan)
       this.checking[dayNum] = 1
       this.tours = []
@@ -163,7 +168,7 @@ export default {
       dayNum = idx
       console.log(dayNum)
       if (this.checking[dayNum] === 1) {
-        const result = this.dayplan[idx-1].tour
+        const result = this.dayplan[idx - 1].tour
         this.tours = result
       }
     }
