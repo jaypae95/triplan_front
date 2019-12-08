@@ -89,7 +89,7 @@ export default {
       })
 
       let article = document.createElement('article')
-      article.setAttribute('style', 'position:absolute;background:#01DF74;width:200px;height:200px;left:' + x + 'px;top:' + y + 'px;color:#ffffff;fonr-size:larger')
+      article.setAttribute('style', 'position:absolute;background-color:#000000;background: rgba(0, 0, 0, 0.5);width:200px;height:200px;left:' + x + 'px;top:' + y + 'px;color:#ffffff;fonr-size:larger')
       var obj = this.tours.dayplan[dayIndex].place[placeIndex]
       article.innerHTML = ('<p style="font-size:x-large;">' + obj.place_name + '</p>')
       article.innerHTML += ('<p>' + obj.place_explanation + '</p>')
