@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="navbar navbar-expand-sm bg-light navbar-light" style="margin-bottom: 60px">
+    <div class="navbar navbar-expand-sm bg-light navbar-light">
       <a href="/" class="navbar-brand">TRIPLAN</a>
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
