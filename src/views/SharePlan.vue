@@ -1,36 +1,36 @@
 <template>
   <div class="example ex1">
-    <h1>Share plan</h1>
-    <label class="radio red">
+    <h1>검색할 태그를 선택하세요</h1>
+    <label class="radio spring">
       <input type="radio" name="group1" v-model="tour_type" value="0"/>
       <span>혼자서</span>
     </label>
-    <label class="radio blue">
+    <label class="radio summer">
       <input type="radio" name="group1" v-model="tour_type" value="1"/>
       <span>친구들</span>
     </label>
-    <label class="radio orange">
+    <label class="radio fall">
       <input type="radio" name="group1" v-model="tour_type" value="2"/>
       <span>가족</span>
     </label>
-    <label class="radio orange">
+    <label class="radio winter">
       <input type="radio" name="group1" v-model="tour_type" value="3"/>
       <span>연인</span>
     </label>
     <br><br>
-    <label class="radio red">
+    <label class="radio spring">
       <input type="radio" name="group2" v-model="season" value="0"/>
       <span>봄</span>
     </label>
-    <label class="radio blue">
+    <label class="radio summer">
       <input type="radio" name="group2" v-model="season" value="1"/>
       <span>여름</span>
     </label>
-    <label class="radio orange">
+    <label class="radio fall">
       <input type="radio" name="group2" v-model="season" value="2"/>
       <span>가을</span>
     </label>
-    <label class="radio orange">
+    <label class="radio winter">
       <input type="radio" name="group2" v-model="season" value="3"/>
       <span>겨울</span>
     </label>
@@ -59,35 +59,35 @@
   </div>
 </template>
 <script>
-import API from '../components/API'
-export default {
-  data () {
-    return {
-      tours: [],
-      tour_type: '',
-      season: '',
-      idPlan: '',
-      clickedSearch: false
-    }
-  },
-  methods: {
-    search: function () {
-      const data = {
-        tour_type: this.tour_type,
-        season: this.season
-      }
-      API.searchTourAPI(this.$http, this.$env.apiUrl, data).then(res => {
-        this.clickedSearch = true
-        this.tours = res.data
-        if (res.data.success === true) {
-          this.$router.push('/')
+    import API from '../components/API'
+    export default {
+        data () {
+            return {
+                tours: [],
+                tour_type: '',
+                season: '',
+                idPlan: '',
+                clickedSearch: false
+            }
+        },
+        methods: {
+            search: function () {
+                const data = {
+                    tour_type: this.tour_type,
+                    season: this.season
+                }
+                API.searchTourAPI(this.$http, this.$env.apiUrl, data).then(res => {
+                    this.clickedSearch = true
+                    this.tours = res.data
+                    if (res.data.success === true) {
+                        this.$router.push('/')
+                    }
+                }).catch(err => {
+                    console.log(err)
+                })
+            }
         }
-      }).catch(err => {
-        console.log(err)
-      })
     }
-  }
-}
 </script>
 
 <style>
@@ -144,31 +144,40 @@ export default {
     box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
   }
 
-  .ex1 .red input:checked + span {
-    color: red;
-    border-color: red;
+  .ex1 .spring input:checked + span {
+    color: #35ff59;
+    border: 3px solid #35ff59;
   }
 
-  .ex1 .red input:checked + span:before {
-    background-color: red;
+  .ex1 .spring input:checked + span:before {
+    background-color: #35ff59;
   }
 
-  .ex1 .blue input:checked + span {
-    color: blue;
-    border-color: blue;
+  .ex1 .summer input:checked + span {
+    color: #5c72ff;
+    border-color: #5c72ff;
   }
 
-  .ex1 .blue input:checked + span:before {
-    background-color: blue;
+  .ex1 .summer input:checked + span:before {
+    background-color: #5c72ff;
   }
 
-  .ex1 .orange input:checked + span {
-    color: orange;
-    border-color: orange;
+  .ex1 .fall input:checked + span {
+    color: #ff682e;
+    border-color: #ff682e;
   }
 
-  .ex1 .orange input:checked + span:before {
-    background-color: orange;
+  .ex1 .fall input:checked + span:before {
+    background-color: #ff682e;
+  }
+
+  .ex1 .winter input:checked + span {
+    color: #6cf0ff;
+    border-color: #6cf0ff;
+  }
+
+  .ex1 .winter input:checked + span:before {
+    background-color: #6cf0ff;
   }
   article{
     margin: 10px;
