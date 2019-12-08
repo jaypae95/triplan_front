@@ -2,28 +2,25 @@
   <transition name="modal">
     <div class="modal-mask">
       <div class="modal-wrapper">
-        <div class="modal-container">
-
-          <div class="modal-header">
-            <slot name="header">
-              <!--              default header-->
-            </slot>
-          </div>
-          <vue-hotel-datepicker
+        <div class="modal-container" style="width:400px">
+          <h1 class="myfont">일정 만들기</h1>
+          <div style="margin:5%">
+            <vue-hotel-datepicker
             :value="date"
             @confirm="getDate"/>
-          <input type="text" v-model="title" placeholder="Your Trip Title"><br>
-          <input type="radio" v-model="tour_type" placeholder="writeType" name = "tourType" value=0> 혼자서
-           <input type="radio" v-model="tour_type" placeholder="writeType" name = "tourType" value=1> 친구들
-            <input type="radio" v-model="tour_type" placeholder="writeType" name = "tourType" value=2> 가족
-             <input type="radio" v-model="tour_type" placeholder="writeType" name = "tourType" value=3> 연인
-
-          <br>
-          <br>
+          </div>
+          <div style="margin:5%">
+            <input type="text" v-model="title" placeholder="Your Trip Title"><br>
+          </div>
+          <div style="margin:5%">
+            <input type="radio" v-model="tour_type" placeholder="writeType" name="tourType" value=0> 혼자서
+            <input type="radio" v-model="tour_type" placeholder="writeType" name="tourType" value=1> 친구들
+            <input type="radio" v-model="tour_type" placeholder="writeType" name="tourType" value=2> 가족
+            <input type="radio" v-model="tour_type" placeholder="writeType" name="tourType" value=3> 연인
+          </div>
           <select-option
             :until-country=true
             @select-country="getCountryInfo"/>
-          <br><br>
           <div v-if="checkCountry">
             <button class="modal-default-button" v-on:click="clickMakePlan()">Make Plan!</button>
           </div>
@@ -72,10 +69,15 @@ export default {
       this.checkCountry = true
     },
     async clickMakePlan () {
-      if (this.date.start >= 3 && this.date.start <= 5) this.season = 0
-      else if (this.date.start >= 6 && this.date.start <= 8) this.season = 1
-      else if (this.date.start >= 9 && this.date.start <= 11) this.season = 2
-      else this.season = 3
+      if (this.date.start >= 3 && this.date.start <= 5) {
+        this.season = 0
+      } else if (this.date.start >= 6 && this.date.start <= 8) {
+        this.season = 1
+      } else if (this.date.start >= 9 && this.date.start <= 11) {
+        this.season = 2
+      } else {
+        this.season = 3
+      }
       const data = {
         depart_day: this.date.start,
         arrive_day: this.date.end,
@@ -84,8 +86,8 @@ export default {
         season: this.season,
         country_id: this.country_id
       }
-      console.log(data)
-      const res = await API.getCountryPositionAPI(this.$http, this.$env.apiUrl, data).catch(() => {
+      const res = await API.getCountryPositionAPI(this.$http, this.$env.apiUrl, data).catch((e) => {
+        alert('모든 필드에 값을 채우세요.')
       })
 
       const countryInfo = {
@@ -176,7 +178,7 @@ export default {
     transform: scale(1.1);
   }
 
-  input{
+  input {
     padding: 3px;
     font-size: 20px;
     color: #64b99f;

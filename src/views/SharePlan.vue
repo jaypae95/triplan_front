@@ -104,7 +104,7 @@ export default {
   }
 
   .example {
-    margin: 20px;
+    margin: 15% auto auto auto
   }
 
   .example input {
@@ -184,5 +184,10 @@ export default {
     margin: 10px;
     border-radius: 5px;
     border-color: #42b983;
+  }
+  ul{
+    width:400px;
+    vertical-align: middle;
+    margin:auto;
   }
 </style>
