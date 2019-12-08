@@ -19,7 +19,7 @@
             <router-link to="/mypage" class="nav-link">MY PAGE</router-link>
           </li>
           <li class="nav-item">
-            <a @click="logout" class="nav-link">SIGN OUT</a>
+            <a @click="logout" class="nav-link" href="/">SIGN OUT</a>
           </li>
         </div>
         <div v-else class="navbar-nav">

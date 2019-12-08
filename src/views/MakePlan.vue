@@ -28,7 +28,7 @@
       </div>
       <br><br>
       <div v-for="idx in places" v-bind:key='idx.place_id'>
-        <button class="btn btn-outline-secondary" v-on:click="makeTour(idx.place_id, idx.place_name)">{{idx.place_name}}</button>
+        <button class="btn btn-outline-secondary" v-on:click="makeTour(idx)">{{idx.place_name}}</button>
         <br>
       </div>
     </div>
@@ -169,12 +169,10 @@ export default {
     showTour (idx) {
       this.tours = []
       dayNum = idx
-      console.log(idx)
-      console.log(dayNum)
       if (this.checking[dayNum] === 1) {
-        const result = this.dayplan[idx - 1].placeNames
+        const result = this.dayplan[idx - 1].place_name
         console.log(result)
-        this.tours = result
+        this.placeNames = result
       }
     },
     sendResult () {
