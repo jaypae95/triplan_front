@@ -71,7 +71,7 @@ export default {
       API.toggleSharePlanAPI(this.$http, this.$env.apiUrl, data).catch(() => {})
     },
     shareButtonText (tour) {
-      if (tour.is_shared === 0) {
+      if (tour.is_shared === 0 || tour.is_shared === '0') {
         return '공유하기'
       } else {
         return '공유 취소하기'
