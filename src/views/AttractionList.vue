@@ -6,10 +6,12 @@
       :until-country=false
       @select-city="getPlaceInfo"
       @is-no-list="isNoList"/>
+
     <div v-if="checkCity">
       <div v-if="noList">
         <p id="noAttr">No Attraction!</p>
       </div>
+
       <ul v-for="place in places" v-bind:key="place.id"><b>{{place}}</b><br>
         <!--          Image url here, NEED TO BE UPDATED-->
         <img id="ii" src="https://img-wishbeen.akamaized.net/plan/1453194127890_%ED%81%AC%EA%B8%B0%EB%B3%80%ED%99%98_KQ7A1270.jpg"><br><hr>
