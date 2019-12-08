@@ -1,6 +1,8 @@
 <template>
-  <div class="MainPage">
-    <li>
+  <div class="MainPage" style="background-image: url('https://i.imgur.com/p87gU8u.jpg');backgound-size:cover;-webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;">
+    <li class="triplan-li">
       <router-link to="/attractionlist" id="menu1">
         <img id="illu1" src="../assets/menu1.png">
       </router-link>
@@ -14,13 +16,6 @@
       </router-link>
     </li>
     <br>
-    <br>
-
-    <!--    <router-link to="/mypage">Go To MyPage</router-link>-->
-    <!--    <br><br>-->
-    <router-link to="/confirmplan">Go To ConfirmPlan Page</router-link>
-    <br>
-
   </div>
 
 </template>
@@ -71,5 +66,11 @@ export default {
     width: 200px;
     height: 200px;
     cursor: pointer;
+  }
+  .MainPage{
+    height:100vh;
+  }
+  .triplan-li {
+    margin-top: 15%;
   }
 </style>
