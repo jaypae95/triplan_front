@@ -35,23 +35,22 @@
       <span>겨울</span>
     </label>
     <br><br>
-    <button v-on:click="search()"> search</button>
+    <button class="btn btn-success" v-on:click="search()"> search</button>
     <br>
     {{idPlan}}
     <br><br>
     <router-link to='/'>
-      <img id="illu" src="../assets/gotoHome.png">
+      <button class="btn btn-success">홈으로</button>
     </router-link>
     <div id="tour_list" v-if="clickedSearch==true">
       <div class="centered" v-for="tour in tours" :key="tour.idPlan">
-        <div style="border: 3px solid #4cbaa8;; border-radius: 10%; margin:10px; padding: 10px">
+        <div style="padding:10px">
           <router-link :to="{ name: 'DetailTour', params: { id: tour.idPlan }}">
-            {{tour.idPlan}}
-            {{tour.title}}
-            <br><br>
-            {{tour.depart_day}} ~ {{tour.arrive_day}}
-            <br><br>
-            {{tour.country_name}}
+            <ul class="list-group">
+            <li class="list-group-item list-group-item-success">{{tour.title}}</li>
+            <li class="list-group-item list-group-item-light">{{tour.depart_day}} ~ {{tour.arrive_day}}</li>
+            <li class="list-group-item list-group-item-light">{{tour.country_name}}</li>
+            </ul>
           </router-link>
         </div>
       </div>
@@ -61,6 +60,8 @@
 <script>
 import API from '../components/API'
 export default {
+  created: function () {
+  },
   data () {
     return {
       tours: [],
