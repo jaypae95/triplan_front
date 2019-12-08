@@ -6,7 +6,6 @@
 <script>
 import MarkerClusterer from '@google/markerclusterer'
 import gmapsInit from '../utils/gmaps'
-
 export default {
   name: `Apple`,
   data () {

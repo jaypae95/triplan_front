@@ -2,12 +2,14 @@
   <div class="makePlan">
     <h1>Make Plan</h1>
     <div id="div0">
-    <div v-for="item in dayplan" v-bind:key='item'>
+    <button id="addBtn" v-on:click="newAdd">+</button>
+    <div v-for="item in Days" v-bind:key='item.idx'>
       <ul id="uli">
-      <button id="addDay">
-        Day {{item.day}}
+      <button v-on:click="showTour(item.idx)">
+        Day {{item.idx}}
+        <br>
+        {{item.st}}
       </button>
-      <div v-if="item%10==0"><br></div>
       </ul>
     </div>
     <button v-on:click="cl1">고르기</button>
@@ -18,7 +20,6 @@
       <option v-for="city in cities" v-bind:key="city.id">{{city.city_name}}</option>
     </select>
     </div>
-     <button id="addBtn" v-on:click="newAdd">+</button>
      </div>
      <br>
     <div id="div1">
@@ -26,8 +27,8 @@
         <p id="w1"> 관광지</p>
       </div>
       <br>
-      <div v-for ="idx in places" v-bind:key='idx'>
-        <button v-on:click="makeTour(idx)">{{idx.place_name}}</button>
+      <div v-for ="idx in places" v-bind:key='idx.place_id'>
+        <button v-on:click="makeTour(idx.place_id, idx.place_name)">{{idx.place_name}}</button>
         <br>
       </div>
     </div>
@@ -37,11 +38,12 @@
       <div id="tourList">
         <p id="w1"> 코스</p>
       </div>
-      <div id="show" v-for="pl in tours" v-bind:key='pl'>
-        <div id="div_tour"> {{pl.place_name}}
+      <div id="show" v-for="pl in tours" v-bind:key='pl.place_id'>
+        <div id="div_tour"> {{pl.name}}
         </div>
       </div>
-      <button class="btn" v-on:click="storage()" >저장</button>
+      <button class="btn" v-on:click="addTour" >저장</button>
+      <button class="btn" v-on:click="addTour" >최종 저장</button>
     </div>
   </div>
 </template>
@@ -49,7 +51,8 @@
 <script>
 import mapping from '../components/map'
 import API from '../components/API'
-var number = 0
+var number = 1
+var dayNum = 0
 export default {
   name: 'makePlan',
   data () {
@@ -60,7 +63,9 @@ export default {
       country_id: '',
       cities: [],
       places: [],
-      checkCity: ''
+      checkCity: '',
+      Days: [],
+      checking: []
     }
   },
   methods: {
@@ -71,9 +76,13 @@ export default {
       })
     },
     pushPlaces (item) {
-      this.places.push({
+      const data = {
         place_name: item.place_name,
-        place_id: item.place_id})
+        place_id: item.place_id
+      }
+      this.places.push({
+        ...data
+      })
     },
     cl1 () {
       this.showM = true
@@ -85,17 +94,42 @@ export default {
       })
     },
     newAdd () {
-      const data = {
-        tour: this.tours,
-        day: number
+      const start = this.$store.state.date.start.split('-')
+      const end = this.$store.state.date.end.split('-')
+      for (var i = 0; i < 3; i++) {
+        start[i] *= 1
+        end[i] *= 1
       }
-      if (number !== 0) {
-        this.dayplan.push(data)
-        const len = this.tours.length
-        this.tours.splice(len)
-        console.log(this.tours)
+      while (1) {
+        const data = {
+          st: start.toString(),
+          idx: number
+        }
+        this.Days.push(data)
+        if (start[0] === end[0] && start[1] === end[1] && start[2] === end[2]) break
+        var check = 0
+        start[2] += 1
+        if ((start[1] < 8 && start[1] % 2 === 1) || (start[1] >= 8 && start[1] % 2 === 0)) {
+          if (start[2] > 31) {
+            start[2] = 1
+            check = 1
+          }
+        }
+        else {
+          if (start[2] > 30) {
+            start[2] = 1
+            check = 1
+          }
+        }
+        if (check === 1) {
+          start[1] += 1
+          if (start[1] > 12) {
+            start[1] = 1
+            start[0] += 1
+          }
+        }
+        number++
       }
-      number++
     },
     selectCity (event) {
       this.places = []
@@ -109,8 +143,29 @@ export default {
         console.log(err)
       })
     },
-    makeTour (idx) {
-      this.tours.push(idx)
+    makeTour (id, name) {
+      this.tours.push({
+        place_id: id,
+        name: name})
+    },
+    addTour (d) {
+      const data = {
+        tour: this.tours,
+        day: dayNum
+      }
+      this.dayplan[data.day-1] = data
+      console.log(this.dayplan)
+      this.checking[dayNum] = 1
+      this.tours = []
+    },
+    showTour (idx) {
+      this.tours = []
+      dayNum = idx
+      console.log(dayNum)
+      if (this.checking[dayNum] === 1) {
+        const result = this.dayplan[idx-1].tour
+        this.tours = result
+      }
     }
   },
   components: {
