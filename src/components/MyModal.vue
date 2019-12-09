@@ -22,9 +22,9 @@
             :until-country=true
             @select-country="getCountryInfo"/>
           <div v-if="checkCountry">
-            <button class="modal-default-button" v-on:click="clickMakePlan()"><img id="illu" src="../assets/makePlan.png">!</button>
+            <button class="modal-default-button" v-on:click="clickMakePlan()"><img class="illu" src="../assets/makePlan.png">!</button>
           </div>
-          <button class="modal-default-button" @click="$emit('close')"><img id="illu" src="../assets/close.png">
+          <button class="modal-default-button" @click="$emit('close')"><img class="illu" src="../assets/close.png">
           </button>
           <br>
         </div>
@@ -110,7 +110,7 @@ export default {
   .closeModalBtn {
     color: #62acde;
   }
-  #illu {
+  .illu {
     width: 80px;
     height: 35px;
   }
