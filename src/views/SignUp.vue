@@ -6,8 +6,8 @@
     <button v-on:click="overlap()">중복확인</button>
     <br><br>
     <input required v-model='user_name' placeholder="NAME"><br><br>
-    <input required v-model='user_password' placeholder="PASSWORD"><br><br>
-    <input required v-model="user_password_confirm" placeholder="PASSWORD CONFIRM"><br><br>
+    <input required type="password" v-model='user_password' placeholder="PASSWORD"><br><br>
+    <input required type="password" v-model="user_password_confirm" placeholder="PASSWORD CONFIRM"><br><br>
     <input type="radio" v-model="user_gender" name="user_gender" value="1">Male
     <input type="radio" v-model="user_gender" name="user_gender" value="0">Female<br><br>
     <input required v-model='user_phone' placeholder="PHONE"><br><br>
