@@ -69,11 +69,14 @@ export default {
       this.checkCountry = true
     },
     async clickMakePlan () {
-      if (this.date.start >= 3 && this.date.start <= 5) {
+      const planDate = new Date(this.date.start)
+      const month = planDate.getMonth() + 1
+      console.log(month)
+      if (month >= 3 && month <= 5) {
         this.season = 0
-      } else if (this.date.start >= 6 && this.date.start <= 8) {
+      } else if (month >= 6 && month <= 8) {
         this.season = 1
-      } else if (this.date.start >= 9 && this.date.start <= 11) {
+      } else if (month >= 9 && month <= 11) {
         this.season = 2
       } else {
         this.season = 3

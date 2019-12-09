@@ -20,9 +20,9 @@
           <p class="w1">관광지</p>
         </div>
         <br>
-        <button v-on:click="cl1" class="btn"><img id="illu1" src="../assets/choose.png"></button>
+        <button v-on:click="cl1" class="btn"><img class="illu1" src="../assets/choose.png"></button>
         <div v-if="showM" @close="showM=false">
-          <select @change="selectCity($event)" name="city">
+          <select @change="selectCity($event)" name="city" style="margin-bottom: 2%">
             <!--      <option disabled value="">Select City</option>-->
             <option></option>
             <option v-for="city in cities" v-bind:key="city.id">{{city.city_name}}</option>
@@ -30,7 +30,7 @@
         </div>
         <br>
         <div v-for="idx in places" v-bind:key='idx.place_id'>
-          <button class="btn btn-outline-secondary" v-on:click="makeTour(idx)">{{idx.place_name}}</button>
+          <button class="btn btn-outline-secondary" v-on:click="makeTour(idx)" style="margin-bottom: 5%;">{{idx.place_name}}</button>
           <br>
         </div>
       </div>
@@ -44,8 +44,8 @@
           <div id="div_tour"> {{pl.place_name}}
           </div>
         </div>
-        <button class="btn" v-on:click="addTour"><img id="illu1" src="../assets/submit.png"></button>
-        <button class="btn" v-on:click="sendResult"><img id="illu2" src="../assets/totalSubmit.png"></button>
+        <button class="btn" v-on:click="addTour"><img class="illu1" src="../assets/submit.png"></button>
+        <button class="btn" v-on:click="sendResult"><img class="illu2" src="../assets/totalSubmit.png"></button>
       </div>
     </div>
   </div>
@@ -181,6 +181,7 @@ export default {
       }
       API.getCompletePlan(this.$http, this.$env.apiUrl, data).then(res => {
         if (res.data.success === true) {
+          this.$router.push('/mypage')
         }
       }).catch(err => {
         console.log(err)
@@ -193,7 +194,7 @@ export default {
 }
 </script>
 <style>
-  #illu1, #illu2 {
+  .illu1, .illu2 {
     width: 80px;
     height: 35px;
   }
