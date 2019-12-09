@@ -4,49 +4,49 @@
     <h1>Make Plan</h1>
     <div id="div0">
       <div v-for="item in Days" v-bind:key='item.idx'>
-          <button id="btnDay" v-on:click="showTour(item.idx)">
-            Day {{item.idx}}
-            <br>
-            {{item.st}}
-          </button>
+        <button id="btnDay" v-on:click="showTour(item.idx)">
+          Day {{item.idx}}
+          <br>
+          {{item.st}}
+        </button>
       </div>
-            <br><br>
+      <br><br>
       <button id="addBtn" v-on:click="newAdd">+</button>
 
     </div>
     <div>
-    <div id="div1">
-      <div class="tourList">
-        <p class="w1">관광지</p>
-      </div>
-      <br>
-      <button v-on:click="cl1" class="btn"><img id="illu1" src="../assets/choose.png"></button>
-      <div v-if="showM" @close="showM=false">
-        <select @change="selectCity($event)" name="city">
-          <!--      <option disabled value="">Select City</option>-->
-          <option></option>
-          <option v-for="city in cities" v-bind:key="city.id">{{city.city_name}}</option>
-        </select>
-      </div>
-      <br>
-      <div v-for="idx in places" v-bind:key='idx.place_id'>
-        <button class="btn btn-outline-secondary" v-on:click="makeTour(idx)">{{idx.place_name}}</button>
+      <div id="div1">
+        <div class="tourList">
+          <p class="w1">관광지</p>
+        </div>
         <br>
-      </div>
-    </div>
-    <mapping>
-    </mapping>
-    <div id="div2">
-      <div class="tourList">
-        <p class="w1"> 코스</p>
-      </div>
-      <div id="show" v-for="pl in placeNames" v-bind:key='pl.place_name'>
-        <div id="div_tour"> {{pl.place_name}}
+        <button v-on:click="cl1" class="btn"><img id="illu1" src="../assets/choose.png"></button>
+        <div v-if="showM" @close="showM=false">
+          <select @change="selectCity($event)" name="city">
+            <!--      <option disabled value="">Select City</option>-->
+            <option></option>
+            <option v-for="city in cities" v-bind:key="city.id">{{city.city_name}}</option>
+          </select>
+        </div>
+        <br>
+        <div v-for="idx in places" v-bind:key='idx.place_id'>
+          <button class="btn btn-outline-secondary" v-on:click="makeTour(idx)">{{idx.place_name}}</button>
+          <br>
         </div>
       </div>
-      <button class="btn" v-on:click="addTour"><img id="illu1" src="../assets/submit.png"></button>
-      <button class="btn" v-on:click="sendResult"><img id = "illu2" src="../assets/totalSubmit.png"></button>
-    </div>
+      <mapping>
+      </mapping>
+      <div id="div2">
+        <div class="tourList">
+          <p class="w1"> 코스</p>
+        </div>
+        <div id="show" v-for="pl in placeNames" v-bind:key='pl.place_name'>
+          <div id="div_tour"> {{pl.place_name}}
+          </div>
+        </div>
+        <button class="btn" v-on:click="addTour"><img id="illu1" src="../assets/submit.png"></button>
+        <button class="btn" v-on:click="sendResult"><img id="illu2" src="../assets/totalSubmit.png"></button>
+      </div>
     </div>
   </div>
 </template>
@@ -58,7 +58,6 @@ import API from '../components/API'
 var number = 1
 var dayNum = 0
 var cc = ''
-var clicked=''
 export default {
   name: 'makePlan',
   data () {
@@ -181,7 +180,8 @@ export default {
         dayplan: this.dayplan
       }
       API.getCompletePlan(this.$http, this.$env.apiUrl, data).then(res => {
-        if (res.data.success === true) {}
+        if (res.data.success === true) {
+        }
       }).catch(err => {
         console.log(err)
       })
@@ -193,19 +193,21 @@ export default {
 }
 </script>
 <style>
-#illu1, #illu2{
+  #illu1, #illu2 {
     width: 80px;
     height: 35px;
-}
-#btnDay{
-  float:left;
-  margin:0px 5px;
-  background-color: #ffffff;
-  border: 2px dashed  #FF6D6A;
-  bottom : 0%;
-}
- #btnDay:hover{
-   background-color: #FF6D6A
+  }
+
+  #btnDay {
+    float: left;
+    margin: 0px 5px;
+    background-color: #ffffff;
+    border: 2px dashed #FF6D6A;
+    bottom: 0%;
+  }
+
+  #btnDay:hover {
+    background-color: #FF6D6A
   }
 
   #div0 {
@@ -218,9 +220,11 @@ export default {
     height: 70vh;
     border: 4px solid #FF6D6A;
   }
-  #div1{
+
+  #div1 {
     margin: 0px 0px 0px 10px
   }
+
   h1 {
     size: 100px;
   }
