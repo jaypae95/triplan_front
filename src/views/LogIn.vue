@@ -1,10 +1,11 @@
 <template>
   <div id="LogIn">
-    <p>LogIn Page</p>
+    <h2 class="text-info">LogIn Page</h2>
+    <br>
     <input required v-model='user_id' placeholder="ID"><br><br>
     <input required v-model='user_password' placeholder="PASSWORD"><br><br>
-    <button v-on:click="login()" id="bu1">
-      <img id="illu1" src="../assets/login.png">
+    <button class="btn" v-on:click="login()">
+    <img id="illu1" src="../assets/login.png">
     </button>
     <br>
     <router-link to='/'>
@@ -45,13 +46,17 @@ export default {
 }
 </script>
 <style>
+h2{
+  font-weight: 2px
+}
   #illu, #illu1, #bu1 {
     width: 80px;
     height: 35px;
   }
 
-  #bu1 {
-    background-color: #ffffff
+  .btn {
+    background-color: none;
+    border : none;
   }
 
   #LogIn {

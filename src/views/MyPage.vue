@@ -94,6 +94,9 @@ export default {
   *{
     color:#000000;
   }
+  .btn{
+    padding: 1px 1px;
+  }
   #mypage {
     margin: 15% auto auto auto
   }

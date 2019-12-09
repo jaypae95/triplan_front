@@ -1,5 +1,6 @@
 <template>
   <div class="makePlan">
+    <br><br><br>
     <h1>Make Plan</h1>
     <div id="div0">
       <div v-for="item in Days" v-bind:key='item.idx'>
@@ -9,16 +10,17 @@
             {{item.st}}
           </button>
       </div>
+            <br><br>
       <button id="addBtn" v-on:click="newAdd">+</button>
-      <br>
+
     </div>
-    <br>
+    <div>
     <div id="div1">
       <div class="tourList">
         <p class="w1">관광지</p>
       </div>
       <br>
-      <button v-on:click="cl1">고르기</button>
+      <button v-on:click="cl1" class="btn"><img id="illu1" src="../assets/choose.png"></button>
       <div v-if="showM" @close="showM=false">
         <select @change="selectCity($event)" name="city">
           <!--      <option disabled value="">Select City</option>-->
@@ -26,7 +28,7 @@
           <option v-for="city in cities" v-bind:key="city.id">{{city.city_name}}</option>
         </select>
       </div>
-      <br><br>
+      <br>
       <div v-for="idx in places" v-bind:key='idx.place_id'>
         <button class="btn btn-outline-secondary" v-on:click="makeTour(idx)">{{idx.place_name}}</button>
         <br>
@@ -42,8 +44,9 @@
         <div id="div_tour"> {{pl.place_name}}
         </div>
       </div>
-      <button class="btn" v-on:click="addTour">저장</button>
-      <button class="btn" v-on:click="sendResult">최종 저장</button>
+      <button class="btn" v-on:click="addTour"><img id="illu1" src="../assets/submit.png"></button>
+      <button class="btn" v-on:click="sendResult"><img id = "illu2" src="../assets/totalSubmit.png"></button>
+    </div>
     </div>
   </div>
 </template>
@@ -55,6 +58,7 @@ import API from '../components/API'
 var number = 1
 var dayNum = 0
 var cc = ''
+var clicked=''
 export default {
   name: 'makePlan',
   data () {
@@ -189,14 +193,20 @@ export default {
 }
 </script>
 <style>
-
+#illu1, #illu2{
+    width: 80px;
+    height: 35px;
+}
 #btnDay{
   float:left;
   margin:0px 5px;
   background-color: #ffffff;
   border: 2px dashed  #FF6D6A;
-
+  bottom : 0%;
 }
+ #btnDay:hover{
+   background-color: #FF6D6A
+  }
 
   #div0 {
     text-align: right;
@@ -226,7 +236,7 @@ export default {
   }
 
   .btn {
-    position: relative;
+
     bottom: 0;
     /*background-color: #FF6D6A;*/
   }
@@ -241,9 +251,11 @@ export default {
     border: solid 3px #3d3b3b;
     border-radius: 7px;
     color: #ffffff;
+    bottom: 0%;
   }
 
   #div_tour {
     height: auto;
+    margin: 2px 0px
   }
 </style>
