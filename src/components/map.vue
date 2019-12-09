@@ -29,7 +29,6 @@ export default {
       const map = new google.maps.Map(this.$el)
       const newLat = this.$store.state.country.lat
       const newLog = this.$store.state.country.long
-      console.log(newLat)
       geocoder.geocode({location: new google.maps.LatLng(newLat, newLog)}, (results, status) => {
         if (status !== `OK` || !results[0]) {
           throw new Error(status)

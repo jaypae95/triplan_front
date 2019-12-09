@@ -29,7 +29,7 @@
         </div>
         <br>
         <div v-for="idx in places" v-bind:key='idx.place_id'>
-          <button class="btn btn-outline-secondary" v-on:click="makeTour(idx)">{{idx.place_name}}</button>
+          <button class="btn btn-outline-secondary" v-on:click="makeTour(idx)" style="margin-bottom: 5%;">{{idx.place_name}}</button>
           <br>
         </div>
       </div>
@@ -180,6 +180,8 @@ export default {
       }
       API.getCompletePlan(this.$http, this.$env.apiUrl, data).then(res => {
         if (res.data.success === true) {
+          alert('일정 만들기 성공 !')
+          this.$router.push('/mypage')
         }
       }).catch(err => {
         console.log(err)

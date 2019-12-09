@@ -3,7 +3,7 @@
     <h2 class="text-info">LogIn Page</h2>
     <br>
     <input required v-model='user_id' placeholder="ID"><br><br>
-    <input required v-model='user_password' placeholder="PASSWORD"><br><br>
+    <input required type="password" v-model='user_password' placeholder="PASSWORD"><br><br>
     <button class="btn" v-on:click="login()">
     <img id="illu1" src="../assets/login.png">
     </button>

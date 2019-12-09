@@ -81,7 +81,6 @@ export default {
   created () {
     API.getMyPlanAPI(this.$http, this.$env.apiUrl).then(res => {
       this.tours = res.data
-      console.log(this.tours)
     }).catch(err => {
       console.log(err)
     })
