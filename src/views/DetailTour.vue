@@ -59,10 +59,8 @@ export default {
   },
   created: function () {
     var data = this.$route.params.id
-    console.log(data)
     API.detailTourAPI(this.$http, this.$env.apiUrl, data).then(res => {
       this.tours = res.data
-      console.log(res.data)
       if (res.data.success === true) {
         this.$router.push('/')
       }
@@ -97,7 +95,6 @@ export default {
     },
     doMouseLeave (e) {
       var count = document.getElementById('app').childElementCount
-      console.log(count)
       for (var i = 0; i < count; i++) {
         document.getElementById('app').removeChild(document.getElementsByTagName('article')[i])
       }

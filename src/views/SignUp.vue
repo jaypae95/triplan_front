@@ -95,7 +95,6 @@ export default {
         user_id: this.user_id
       }
       API.checkingOverlap(this.$http, this.$env.apiUrl, data).then(res => {
-        console.log(res)
         if (res.data.is_exist === true) {
           this.user_id = ''
           alert('이미 있는 아이디 입니다.')

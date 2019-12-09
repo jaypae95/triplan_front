@@ -71,7 +71,6 @@ export default {
     async clickMakePlan () {
       const planDate = new Date(this.date.start)
       const month = planDate.getMonth() + 1
-      console.log(month)
       if (month >= 3 && month <= 5) {
         this.season = 0
       } else if (month >= 6 && month <= 8) {
