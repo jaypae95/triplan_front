@@ -12,11 +12,11 @@
     <input type="radio" v-model="user_gender" name="user_gender" value="0">Female<br><br>
     <input required v-model='user_phone' placeholder="PHONE"><br><br>
     <button v-on:click="register()" id="bu1">
-    <img id="illu" src="../assets/adding.png">
+    <img class="illu" src="../assets/adding.png">
     </button>
     <br>
     <router-link to='/'>
-    <img id="illu" src="../assets/gotoHome.png">
+    <img class="illu" src="../assets/gotoHome.png">
     </router-link>
   </div>
 </template>
@@ -106,7 +106,7 @@ export default {
 }
 </script>
 <style>
-  #illu, #illu1 {
+  .illu {
     width: 80px;
     height: 35px;
   }
