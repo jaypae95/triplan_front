@@ -4,7 +4,7 @@
   -o-background-size: cover;">
     <li class="triplan-li">
       <router-link to="/attractionlist" id="menu1">
-        <img id="illu1" src="../assets/menu1.png">
+        <img id="illu11" src="../assets/menu1.png">
       </router-link>
       <img id="illu2" src="../assets/menu2.png" @click="showModal = true">
       <modal v-if="showModal" @close="showModal = false">
@@ -62,7 +62,7 @@ export default {
     background-color: none;
   }
 
-  #illu1, #illu2, #illu3 {
+  #illu11, #illu2, #illu3 {
     width: 200px;
     height: 200px;
     cursor: pointer;

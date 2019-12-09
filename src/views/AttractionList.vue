@@ -62,7 +62,7 @@ export default {
     font-size: 26px;
   }
   #attractionlist {
-    margin: 15% auto auto auto;
+    margin: 10% auto auto auto;
   }
   hr{
     border: none;
@@ -74,6 +74,7 @@ export default {
     .illu{
       width: 80px;
       height: 35px;
+      margin: 4px 0px;
     }
 
     .img{
