@@ -1,6 +1,6 @@
 <template>
   <div id="LogIn">
-    <p>Sign Up</p>
+    <h2 class="text-info">Sign Up</h2>
     <input type="email" required v-model="user_email" placeholder="EMAIL"><br><br>
     <input required v-model='user_id' placeholder="ID">
     <button v-on:click="overlap()">중복확인</button>
@@ -12,11 +12,11 @@
     <input type="radio" v-model="user_gender" name="user_gender" value="0">Female<br><br>
     <input required v-model='user_phone' placeholder="PHONE"><br><br>
     <button v-on:click="register()" id="bu1">
-      가입
+    <img id="illu" src="../assets/adding.png">
     </button>
     <br>
     <router-link to='/'>
-      <img id="illu" src="../assets/gotoHome.png">
+    <img id="illu" src="../assets/gotoHome.png">
     </router-link>
   </div>
 </template>
@@ -108,13 +108,17 @@ export default {
 }
 </script>
 <style>
-  #illu, #illu1, #bu1 {
+  #illu, #illu1 {
     width: 80px;
     height: 35px;
   }
 
   #bu1 {
-    background-color: #ffffff
+    background-color: #ffffff;
+    border : none;
+    width: 80px;
+    height: 35px;
+    margin: 3px 0px;
   }
 
   #LogIn {

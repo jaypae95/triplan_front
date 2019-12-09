@@ -92,18 +92,21 @@ export default {
 
 <style>
 
+  .btn {
+    background: #ffffff
+  }
   h1 {
     size: 70px;
     margin: 50px;
   }
 
-  #illu {
+  #illu, .btn{
     width: 80px;
     height: 35px;
   }
 
   .example {
-    margin: 15% auto auto auto
+    margin: 10% auto auto auto
   }
 
   .example input {
