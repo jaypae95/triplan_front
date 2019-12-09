@@ -1,15 +1,15 @@
 <template>
   <div id="LogIn">
-    <h2 class="text-info">LogIn Page</h2>
+    <h2 class="text-info myfontlogin">LogIn Page</h2>
     <br>
     <input required v-model='user_id' placeholder="ID"><br><br>
     <input required type="password" v-model='user_password' placeholder="PASSWORD"><br><br>
-    <button class="btn" v-on:click="login()">
-    <img id="illu1" src="../assets/login.png">
+    <button class="btn btn-outline-success myfontlogin" v-on:click="login()">
+      로그인
     </button>
     <br>
-    <router-link to='/'>
-      <img id="illu" src="../assets/gotoHome.png">
+    <router-link class="btn btn-outline-success myfontlogin" to='/'>
+      홈으로
     </router-link>
   </div>
 </template>
@@ -46,17 +46,13 @@ export default {
 }
 </script>
 <style>
-h2{
-  font-weight: 2px
-}
-  #illu, #illu1, #bu1 {
-    width: 80px;
-    height: 35px;
-  }
 
   .btn {
-    background-color: none;
     border : none;
+  }
+
+  .myfontlogin {
+    font-family: 'Jeju Gothic', sans-serif !important;
   }
 
   #LogIn {
