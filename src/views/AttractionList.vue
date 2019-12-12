@@ -1,5 +1,5 @@
 <template>
-  <div id="attractionlist">
+  <div id="attractionlist" class="myfont">
     <h1>Attraction List Page</h1>
     <select-option
       :until-country=false
@@ -7,7 +7,8 @@
       @is-no-list="isNoList"/>
     <router-link to='/'>
       <img class="illu" src="../assets/gotoHome.png">
-    </router-link><br>
+    </router-link>
+    <br>
     <div v-if="checkCity">
       <div v-if="noList">
         <p id="noAttr">No Attraction!</p>
@@ -15,7 +16,8 @@
       <ul v-for="place in places" v-bind:key="place.place_name"><b>{{place.place_name}}</b><br>
         <img class="img" :src=place.place_img>
         <p>{{place.place_explanation}}</p>
-        <br><hr>
+        <br>
+        <hr>
       </ul>
     </div>
     <br>
@@ -50,7 +52,7 @@ export default {
 </script>
 
 <style>
-    .sel{
+  .sel {
     padding: 3px;
     font-size: 20px;
     color: #64b99f;
@@ -58,27 +60,36 @@ export default {
     border-radius: 6px;
     box-sizing: content-box;
   }
-  #noAttr{
+
+  #noAttr {
     font-size: 26px;
   }
+
   #attractionlist {
     margin: 10% auto auto auto;
   }
-  hr{
+
+  hr {
     border: none;
     border-top: 3px dotted #64b99f;
     color: #fff;
     height: 1px;
     width: 70%;
   }
-    .illu{
-      width: 80px;
-      height: 35px;
-      margin: 4px 0px;
-    }
 
-    .img{
+  .illu {
+    width: 80px;
+    height: 35px;
+    margin: 4px 0px;
+  }
+
+  .img {
     width: 550px;
     height: auto;
+  }
+
+  .myfont {
+    font-family: 'Nanum Pen Script', cursive !important;
+    font-size: 20px;
   }
 </style>
