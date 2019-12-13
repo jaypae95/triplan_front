@@ -1,15 +1,9 @@
-# TRIPLAN FRONT
+# TRIPLAN BACK
 
-## Project setup
+## in local (current working directory -> triplan_front/static)
+1. cp settings-local-sample.js settings-local.js
+1. npm install
+2. npm start
 
-### install dependency
-```
-npm install
-```
-
-### You should add "settings-local.js" file in /static directory
-
-### run
-```
-npm run dev
-```
+## website
+- http://triplan-vuejs.s3-website.ap-northeast-2.amazonaws.com/
